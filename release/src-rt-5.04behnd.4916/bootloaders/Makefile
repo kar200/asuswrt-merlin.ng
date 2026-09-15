@@ -422,8 +422,7 @@ endif
 
 ##############################################################################
 # UBOOT DEFAULT ENVIRONMENT GENERATION                                       #
-##############################################################################
-$(objdir)/binaries/$(bcm_uboot_spl_prefix)env.bin_headered:
+$(objdir)/binaries/$(bcm_uboot_spl_prefix)env.bin_headered: build/configs/$(bcm_uboot_env)
 	-rm -f $(objdir)/binaries/$(bcm_uboot_spl_prefix)env.bin_headered
 	@if [ ! -f "build/configs/${bcm_uboot_env}" ]; then \
 		echo "Error! Cannot find environment file build/configs/${bcm_uboot_env}!"; \
