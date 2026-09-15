@@ -46,7 +46,7 @@ def main():
         description="Interactive U-Boot NetConsole Client (Pure Python)",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-Exit hotkey: Ctrl+] or Ctrl+\\ or Ctrl+Q
+Exit hotkey: Ctrl+] or Ctrl+\\
 Interrupt (to U-Boot): Ctrl+C
 """
     )
@@ -57,11 +57,10 @@ Interrupt (to U-Boot): Ctrl+C
         help="U-Boot IP address (default: 192.168.1.1)"
     )
     parser.add_argument(
-        "port",
-        nargs="?",
+        "-p", "--port",
         type=int,
         default=6666,
-        help="Target port (default: 6666)"
+        help="U-Boot target port (default: 6666)"
     )
     parser.add_argument(
         "-l", "--listen-port",
@@ -210,3 +209,4 @@ Interrupt (to U-Boot): Ctrl+C
 
 if __name__ == "__main__":
     main()
+

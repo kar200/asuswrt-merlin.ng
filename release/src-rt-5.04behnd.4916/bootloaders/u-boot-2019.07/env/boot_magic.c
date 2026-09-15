@@ -19,6 +19,7 @@
 #include <search.h>
 #include <errno.h>
 #include <spl.h>
+#include <mtd.h>
 #include "bca_sdk.h"
 #include "bcm_strap_drv.h"
 #include "bca_common.h"
@@ -45,6 +46,10 @@ static int env_dev_read_spinor( int addr, size_t * len, char * buffer )
 	size_t retlen;	
 
 	mtd = get_mtd_device_nm(LOADER_PART);
+	if (IS_ERR_OR_NULL(mtd)) {
+		mtd_probe_devices();
+		mtd = get_mtd_device_nm(LOADER_PART);
+	}
 	if (IS_ERR_OR_NULL(mtd)){
 		debug("%s:MTD device %s not found, ret %ld\n",__func__, LOADER_PART,
 		   PTR_ERR(mtd));
@@ -67,6 +72,10 @@ static int env_dev_write_spinor( int addr, size_t * len, char * buffer )
 	u32 end_sector;
 	
 	mtd = get_mtd_device_nm(LOADER_PART);
+	if (IS_ERR_OR_NULL(mtd)) {
+		mtd_probe_devices();
+		mtd = get_mtd_device_nm(LOADER_PART);
+	}
 	if (IS_ERR_OR_NULL(mtd)){
 		debug("%s:MTD device %s not found, ret %ld\n",__func__, LOADER_PART,
 	   		PTR_ERR(mtd));
