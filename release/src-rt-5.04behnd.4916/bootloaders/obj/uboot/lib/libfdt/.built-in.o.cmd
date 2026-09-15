@@ -1,0 +1,1 @@
+cmd_lib/libfdt/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o lib/libfdt/built-in.o lib/libfdt/fdt.o lib/libfdt/fdt_wip.o lib/libfdt/fdt_strerror.o lib/libfdt/fdt_sw.o lib/libfdt/fdt_rw.o lib/libfdt/fdt_empty_tree.o lib/libfdt/fdt_addresses.o lib/libfdt/fdt_ro.o lib/libfdt/fdt_region.o 

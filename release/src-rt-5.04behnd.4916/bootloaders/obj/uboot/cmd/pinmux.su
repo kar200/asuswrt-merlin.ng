@@ -1,0 +1,5 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/pinmux.c:126:12:do_pinmux	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/pinmux.c:101:12:do_list	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/pinmux.c:42:12:show_pinmux	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/pinmux.c:77:12:do_status	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/pinmux.c:17:12:do_dev	32	static

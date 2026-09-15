@@ -1,0 +1,6 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/watchdog/wdt-uclass.c:92:12:wdt_post_bind	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/watchdog/wdt-uclass.c:15:5:wdt_start	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/watchdog/wdt-uclass.c:25:5:wdt_stop	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/watchdog/wdt-uclass.c:35:5:wdt_reset	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/watchdog/wdt-uclass.c:45:5:wdt_expire_now	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/watchdog/wdt-uclass.c:74:6:watchdog_reset	16	static

@@ -1,0 +1,9 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/core/fdtaddr.c:19:12:devfdt_get_addr_index	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/core/fdtaddr.c:94:12:devfdt_get_addr_size_index	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/core/fdtaddr.c:116:12:devfdt_get_addr_name	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/core/fdtaddr.c:132:12:devfdt_get_addr	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/core/fdtaddr.c:137:7:devfdt_get_addr_ptr	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/core/fdtaddr.c:142:7:devfdt_remap_addr_index	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/core/fdtaddr.c:152:7:devfdt_remap_addr_name	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/core/fdtaddr.c:162:7:devfdt_remap_addr	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/core/fdtaddr.c:167:7:devfdt_map_physmem	16	static

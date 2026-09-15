@@ -1,0 +1,4 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/itest.c:51:13:evalexp	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/itest.c:86:15:evalstr	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/itest.c:147:12:binary_test	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/itest.c:172:12:do_itest	32	static

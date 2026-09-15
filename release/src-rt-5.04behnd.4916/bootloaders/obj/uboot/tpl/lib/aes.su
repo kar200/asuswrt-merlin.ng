@@ -1,0 +1,7 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/aes.c:499:13:add_round_key	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/aes.c:536:6:aes_expand_key	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/aes.c:572:6:aes_encrypt	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/aes.c:595:6:aes_decrypt	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/aes.c:626:6:aes_apply_cbc_chain_data	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/aes.c:634:6:aes_cbc_encrypt_blocks	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/aes.c:660:6:aes_cbc_decrypt_blocks	128	static

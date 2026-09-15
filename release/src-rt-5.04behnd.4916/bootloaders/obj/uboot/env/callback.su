@@ -1,0 +1,5 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/env/callback.c:82:12:clear_callback	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/env/callback.c:17:29:find_env_callback	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/env/callback.c:122:12:on_callbacks	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/env/callback.c:92:12:set_callback	112	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/env/callback.c:45:6:env_callback_init	320	static

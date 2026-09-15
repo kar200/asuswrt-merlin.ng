@@ -1,0 +1,7 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/pmc/pmc_drv_dt.c:33:13:pmc_1_x_unmap	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/pmc/pmc_drv_dt.c:42:12:dt_parse_1_x	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/pmc/pmc_drv_dt.c:201:12:dt_parse_lite	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/pmc/pmc_drv_dt.c:104:12:dt_parse_3_x	112	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/pmc/pmc_drv_dt.c:195:13:pmc_lite_unmap	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/pmc/pmc_drv_dt.c:83:13:pmc_3_x_unmap	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/pmc/pmc_drv_dt.c:276:5:bcm_pmc_drv_reg	32	static

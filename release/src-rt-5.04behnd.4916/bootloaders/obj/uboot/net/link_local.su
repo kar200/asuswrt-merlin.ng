@@ -1,0 +1,5 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/net/link_local.c:67:23:pick	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/net/link_local.c:87:13:configure_wait	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/net/link_local.c:130:13:link_local_timeout	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/net/link_local.c:105:6:link_local_start	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/net/link_local.c:210:6:link_local_receive_arp	96	static

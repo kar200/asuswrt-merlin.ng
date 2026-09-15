@@ -1,0 +1,8 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/ubus/bcm_ubus4_dt.c:163:12:bcm_ubus4_dcm_probe	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/ubus/bcm_ubus4_dt.c:299:13:ubus_ucb_write.constprop	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/ubus/bcm_ubus4_dt.c:270:12:ubus_ucb_read.constprop	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/ubus/bcm_ubus4_dt.c:130:12:bcm_ubus4_probe	160	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/ubus/bcm_ubus4_dt.c:26:6:bcm_ubus4_dcm_clk_bypass	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/ubus/bcm_ubus4_dt.c:202:5:bcm_ubus_drv_init	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/ubus/bcm_ubus4_dt.c:323:6:ubus_deregister_port	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/ubus/bcm_ubus4_dt.c:341:6:ubus_register_port	32	static

@@ -1,0 +1,1 @@
+cmd_spl/lib/rsa/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o spl/lib/rsa/built-in.o spl/lib/rsa/rsa-mod-exp.o 

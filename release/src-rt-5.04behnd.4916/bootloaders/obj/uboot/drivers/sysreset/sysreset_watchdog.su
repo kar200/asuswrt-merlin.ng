@@ -1,0 +1,2 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/sysreset/sysreset_watchdog.c:32:5:wdt_reboot_probe	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/sysreset/sysreset_watchdog.c:16:12:wdt_reboot_request	16	static

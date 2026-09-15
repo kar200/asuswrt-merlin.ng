@@ -1,0 +1,8 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/net/eth_common.c:15:5:eth_env_get_enetaddr_by_index	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/net/eth_common.c:23:5:eth_env_set_enetaddr_by_index	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/net/eth_common.c:31:6:eth_common_init	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/net/eth_common.c:43:5:eth_mac_skip	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/net/eth_common.c:136:13:eth_get_name	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/net/eth_common.c:53:6:eth_current_changed	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/net/eth_common.c:80:6:eth_try_another	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/net/eth_common.c:107:6:eth_set_current	48	static

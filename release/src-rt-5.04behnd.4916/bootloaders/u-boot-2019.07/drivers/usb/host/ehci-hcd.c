@@ -585,6 +585,9 @@ ehci_submit_async(struct usb_device *dev, unsigned long pipe, void *buffer,
 		token = hc32_to_cpu(vtd->qt_token);
 		if (!(QT_TOKEN_GET_STATUS(token) & QT_TOKEN_STATUS_ACTIVE))
 			break;
+		if (QT_TOKEN_GET_STATUS(hc32_to_cpu(qh->qh_overlay.qt_token)) &
+		    QT_TOKEN_STATUS_HALTED)
+			break;
 		WATCHDOG_RESET();
 	} while (get_timer(ts) < timeout);
 
@@ -603,7 +606,8 @@ ehci_submit_async(struct usb_device *dev, unsigned long pipe, void *buffer,
 
 	/* Check that the TD processing happened */
 	if (QT_TOKEN_GET_STATUS(token) & QT_TOKEN_STATUS_ACTIVE)
-		printf("EHCI timed out on TD - token=%#x\n", token);
+		printf("EHCI timed out on TD - token=%#x (qh=%#x)\n",
+		       token, hc32_to_cpu(qh->qh_overlay.qt_token));
 
 	/* Disable async schedule. */
 	cmd = ehci_readl(&ctrl->hcor->or_usbcmd);
@@ -1608,10 +1612,11 @@ static int ehci_destroy_int_queue(struct udevice *dev, struct usb_device *udev,
 static int ehci_get_max_xfer_size(struct udevice *dev, size_t *size)
 {
 	/*
-	 * EHCD can handle any transfer length as long as there is enough
-	 * free heap space left, hence set the theoretical max number here.
+	 * Limit transfer size to 120 KiB (240 sectors of 512 bytes),
+	 * matching Linux USB mass storage standard limit (US_MAX_TRANSFER_SIZE).
+	 * USB storage devices choke on huge multi-megabyte transfers.
 	 */
-	*size = SIZE_MAX;
+	*size = 240 * 512;
 
 	return 0;
 }

@@ -102,6 +102,7 @@ static void _ag_drv_sbpm_regs_get_next_rply_get(
 	regs_get_next_rply->next_bn = (((get_next_rply) & 0x00007ffe) >> 1);
 	regs_get_next_rply->mcnt_val = (((get_next_rply) & 0x00ff0000) >> 16);
 	regs_get_next_rply->busy = (((get_next_rply) & 0x40000000) >> 30);
+	regs_get_next_rply->rdy = (((get_next_rply) & 0x80000000) >> 31);
 }
 
 int drv_sbpm_free_list(uint16_t head_bn)
@@ -109,6 +110,9 @@ int drv_sbpm_free_list(uint16_t head_bn)
 	int num_of_iters;
 	bdmf_boolean free_ack;
 	bdmf_boolean rdy;
+
+	if (head_bn >= SBPM_MAX_NUM_OF_BNS)
+		return -EFAULT;
 
 	_ag_drv_sbpm_regs_bn_free_without_contxt_set(head_bn, SBPM_FREE_SA, 1);
 	for (num_of_iters = 0; num_of_iters < SBPM_MAX_NUM_OF_ITERS;
@@ -119,14 +123,14 @@ int drv_sbpm_free_list(uint16_t head_bn)
 			break;
 	}
 
-	if (free_ack == 0) {
-		printf("Failed to release bn =%d free_ack=0\n", head_bn);
-		return EFAULT;
-	}
-
 	if (num_of_iters == SBPM_MAX_NUM_OF_ITERS) {
 		printf("Failed to release bn=%d max_iter\n", head_bn);
-		return EFAULT;
+		return -EFAULT;
+	}
+
+	if (free_ack == 0) {
+		printf("Failed to release bn =%d free_ack=0\n", head_bn);
+		return -EFAULT;
 	}
 
 	return 0;
@@ -159,7 +163,10 @@ static int drv_sbpm_alloc_single(uint32_t size, uint32_t headroom,
 	}
 
 	if (num_of_iters == SBPM_MAX_NUM_OF_ITERS) {
-		printf("%s: alloc single\n", __FUNCTION__);
+		uint32_t rply = readl(SBPM_ADDRS+SBPM_REGS_BN_ALLOC_RPLY_REG_OFFSET);
+		printf("%s: alloc single failed (sa=%d, rply=0x%08x: rdy=%d, nack=%d, ack=%d, valid=%d, bn=%d)\n",
+			__FUNCTION__, SBPM_ALLOC_SA, rply,
+			(rply >> 31) & 1, (rply >> 16) & 1, (rply >> 15) & 1, rply & 1, (rply >> 1) & 0x3fff);
 		rc = -EFAULT;
 		goto error;
 	}
@@ -261,12 +268,20 @@ uint16_t drv_sbpm_get_next_bn(int16_t bn)
 	int rc = 0;
 	struct sbpm_regs_get_next_rply next_rply = {};
 	uint32_t next_bn = SBPM_INVALID_BUFFER_NUMBER;
+	uint32_t iters = 0;
 
 	_ag_drv_sbpm_regs_get_next_set(bn);
 	while (1) {
 		_ag_drv_sbpm_regs_get_next_rply_get(&next_rply);
-		if (!next_rply.busy)
+		if (next_rply.rdy && !next_rply.busy)
 			break;
+		/* Do not spin forever if the SBPM never clears busy or sets rdy - that
+		 * would hang the CPU with no output at all. */
+		if (++iters > SBPM_MAX_NUM_OF_ITERS) {
+			debug("sbpm: get_next_bn(%d) stuck busy/not ready (rply=0x%08x)\n",
+				bn, readl(SBPM_ADDRS+0x00000028));
+			return SBPM_INVALID_BUFFER_NUMBER;
+		}
 	}
 
 	if (rc)
@@ -277,44 +292,69 @@ uint16_t drv_sbpm_get_next_bn(int16_t bn)
 			next_bn = next_rply.next_bn;
 	}
 	else
-		printf(" ### BN_NULL (0x%x)\n", next_rply.next_bn);
+		debug(" ### BN_NULL (0x%x)\n", next_rply.next_bn);
 
+	/* These used to be unconditional printfs.  This is the receive hot
+	 * path, so a single bad chain could print thousands of lines and
+	 * swamp the console (and the capture).  debug() only. */
 	if (next_rply.mcnt_val != 0)
-		printf("bn: %d, mcast value: %d\n", bn, next_rply.mcnt_val);
+		debug("bn: %d, mcast value: %d\n", bn, next_rply.mcnt_val);
 
 	return next_bn;
 }
 
-static void _drv_sbpm_copy_single(int bn, uint8_t **data, int skip)
+static int _drv_sbpm_copy_single(int bn, uint8_t **data, int skip, int max)
 {
 	void *foo = (void *)(unsigned long)(PSRAM_MEM_ADDRS + bn*SBPM_BUF_SIZE);
+	int n = SBPM_BUF_SIZE - skip;
 
-	memcpy(*data, foo + skip, SBPM_BUF_SIZE - skip);
-	*data += SBPM_BUF_SIZE - skip;
+	if (n > max)
+		n = max;
+	if (n <= 0)
+		return 0;
+
+	memcpy(*data, foo + skip, n);
+	*data += n;
+
+	return n;
 }
 
-/* this funnction copy list of sbpm to buffer */
-int drv_sbpm_copy_list(uint16_t bn, uint8_t *dest_buffer)
+/* this function copies a list of sbpm buffers to destination buffer
+ *
+ * max_len is the number of bytes actually available in dest_buffer (the
+ * caller passes the packet length from the RX descriptor). Never write more
+ * than max_len bytes to avoid DRAM buffer overflow.
+ */
+int drv_sbpm_copy_list(uint16_t bn, uint8_t *dest_buffer, int max_len, int *actual_len)
 {
 	uint16_t next_bn;
-	int i;
+	int i, copied = 0;
 
-	_drv_sbpm_copy_single(bn, &dest_buffer, HEADROOM_SIZE);
+	if (bn >= SBPM_MAX_NUM_OF_BNS)
+		return -EFAULT;
 
-	for (i = 0; i < SBPM_MAX_NUM_OF_BNS; i++) {
+	if (max_len <= 0 || max_len > SBPM_MAX_COPY_LEN)
+		max_len = SBPM_MAX_COPY_LEN;
+
+	copied += _drv_sbpm_copy_single(bn, &dest_buffer, HEADROOM_SIZE,
+			max_len - copied);
+
+	for (i = 0; i < SBPM_MAX_NUM_OF_BNS && copied < max_len; i++) {
 		next_bn = drv_sbpm_get_next_bn(bn);
-		if (next_bn == SBPM_INVALID_BUFFER_NUMBER)
+		if (next_bn == SBPM_INVALID_BUFFER_NUMBER ||
+		    next_bn >= SBPM_MAX_NUM_OF_BNS)
 			break;
 
 		bn = next_bn;
-		_drv_sbpm_copy_single(bn, &dest_buffer, 0);
+		copied += _drv_sbpm_copy_single(bn, &dest_buffer, 0,
+				max_len - copied);
 	}
 
-	if (i == SBPM_MAX_NUM_OF_BNS) {
-		printf("===== BAD LIST ALLOCATED, STOP SCANNING...., original "\
-			"bn is %d\n", bn);
+	if (actual_len)
+		*actual_len = copied;
+
+	if (copied <= 0)
 		return -EFAULT;
-	}
 
 	return 0;
 }

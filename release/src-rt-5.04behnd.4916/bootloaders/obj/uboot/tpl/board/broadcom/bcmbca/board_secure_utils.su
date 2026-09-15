@@ -1,0 +1,7 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_utils.c:48:5:bcm_util_hex2u32	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_utils.c:70:5:bcm_util_env_var2bin	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_utils.c:100:6:bcm_sec_aes_cbc	256	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_utils.c:112:6:bcm_sec_aes_cbc128	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_utils.c:179:6:bcm_sec_digest	160	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_utils.c:185:5:bcm_sec_rsa_verify	1136	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_utils.c:227:7:bcm_sec_get_reqd_load_size	0	static

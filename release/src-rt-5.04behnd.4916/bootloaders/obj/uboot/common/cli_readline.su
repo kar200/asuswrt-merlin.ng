@@ -1,0 +1,4 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/cli_readline.c:203:13:cread_add_char	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/cli_readline.c:25:14:delete_char	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/cli_readline.c:536:5:cli_readline_into_buffer	144	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/cli_readline.c:524:5:cli_readline	0	static

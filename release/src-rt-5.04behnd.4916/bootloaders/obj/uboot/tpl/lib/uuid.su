@@ -1,0 +1,7 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/uuid.c:58:5:uuid_str_valid	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/uuid.c:103:5:uuid_guid_get_bin	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/uuid.c:122:5:uuid_guid_get_str	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/uuid.c:144:5:uuid_str_to_bin	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/uuid.c:195:6:uuid_bin_to_str	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/uuid.c:241:6:gen_rand_uuid	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/uuid.c:271:6:gen_rand_uuid_str	64	static

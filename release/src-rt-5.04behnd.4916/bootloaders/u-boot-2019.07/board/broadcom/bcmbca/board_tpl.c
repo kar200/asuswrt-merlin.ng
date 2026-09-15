@@ -155,7 +155,7 @@ void spl_perform_fixups(struct spl_image_info *spl_image)
 #if defined(CONFIG_SUPPORT_EMMC_BOOT)
 u32 spl_boot_mode(const u32 boot_device)
 {
-	return MMCSD_MODE_RAW;
+	return MMCSD_MODE_EMMCBOOT;
 }
 #endif
 

@@ -1,0 +1,17 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:55:14:print_efiname	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:337:12:part_test_efi	48	dynamic
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:141:12:validate_gpt_entries	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:78:12:validate_gpt_header	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:936:12:is_gpt_valid	112	dynamic
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:1048:12:is_pte_valid	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:188:5:get_disk_guid	64	dynamic
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:217:6:part_print_efi	144	dynamic
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:274:5:part_get_info_efi	80	dynamic
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:390:5:write_gpt_table	96	dynamic
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:438:5:gpt_fill_pte	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:605:5:gpt_fill_header	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:629:5:gpt_restore	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:687:5:gpt_verify_headers	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:715:5:gpt_verify_partitions	144	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:793:5:is_valid_gpt_buf	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/disk/part_efi.c:814:5:write_mbr_and_gpt_partitions	96	static

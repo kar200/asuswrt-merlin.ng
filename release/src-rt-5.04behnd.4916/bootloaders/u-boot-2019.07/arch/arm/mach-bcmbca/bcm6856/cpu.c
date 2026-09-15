@@ -19,6 +19,7 @@
 #if defined(CONFIG_BCMBCA_UBUS4_DCM)
 #include "bcm_ubus4.h"
 #endif
+#include <sercomm_led.h>
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -174,6 +175,8 @@ void print_chipinfo(void)
 	unsigned int cpu_speed, rdp_speed, otp_cores;
 	unsigned int chipId = bcmbca_get_chipid();
 	unsigned int revId = bcmbca_get_chiprev();
+
+	sercomm_status_led_set(STATUS_LED_AMBER);
 
 	printf("Chip ID: BCM%X_%X\n",chipId,revId);
 

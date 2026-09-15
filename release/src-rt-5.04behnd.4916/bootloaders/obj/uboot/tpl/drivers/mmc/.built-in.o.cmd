@@ -1,0 +1,1 @@
+cmd_tpl/drivers/mmc/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o tpl/drivers/mmc/built-in.o tpl/drivers/mmc/mmc.o tpl/drivers/mmc/mmc-uclass.o tpl/drivers/mmc/mmc_boot.o tpl/drivers/mmc/bcmbca_sdhci_spl.o tpl/drivers/mmc/sdhci.o tpl/drivers/mmc/bcmbca_sdhci.o 

@@ -1,0 +1,5 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/phy_drv_sgmii_plus2.c:126:5:sgmii_read	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/phy_drv_sgmii_plus2.c:151:5:sgmii_write	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/phy_drv_sgmii_plus2.c:176:5:sgmii_read_status	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/phy_drv_sgmii_plus2.c:210:5:sgmii_refclk_init	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/phy_drv_sgmii_plus2.c:224:5:sgmii_speed_set	48	static

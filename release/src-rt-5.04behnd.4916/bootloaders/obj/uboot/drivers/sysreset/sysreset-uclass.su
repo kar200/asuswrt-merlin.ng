@@ -1,0 +1,9 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/sysreset/sysreset-uclass.c:126:12:sysreset_post_bind	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/sysreset/sysreset-uclass.c:19:5:sysreset_request	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/sysreset/sysreset-uclass.c:29:5:sysreset_get_status	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/sysreset/sysreset-uclass.c:39:5:sysreset_get_last	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/sysreset/sysreset-uclass.c:49:5:sysreset_walk	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/sysreset/sysreset-uclass.c:68:5:sysreset_get_last_walk	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/sysreset/sysreset-uclass.c:88:6:sysreset_walk_halt	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/sysreset/sysreset-uclass.c:111:6:reset_cpu	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/sysreset/sysreset-uclass.c:117:5:do_reset	16	static

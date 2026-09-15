@@ -1,0 +1,7 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4_write.c:66:13:ext4fs_update	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4_write.c:105:5:ext4fs_get_bgdtable	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4_write.c:692:6:ext4fs_deinit	192	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4_write.c:594:5:ext4fs_init	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4_write.c:841:5:ext4fs_write	672	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4_write.c:1036:5:ext4_write_file	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4_write.c:1062:5:ext4fs_create_link	32	static

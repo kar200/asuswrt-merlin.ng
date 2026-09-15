@@ -1,0 +1,6 @@
+.bcm96856.dtb.pre.o: arch/arm/dts/.bcm96856.dtb.pre.tmp \
+ /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/include/linux/kconfig.h \
+ include/generated/autoconf.h \
+ /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/dts/bcm6856.dtsi \
+ /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/dts/skeleton64.dtsi \
+ /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/dts/bcm6856-pinctrl.dtsi

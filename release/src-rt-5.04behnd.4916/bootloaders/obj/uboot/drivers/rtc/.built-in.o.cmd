@@ -1,0 +1,1 @@
+cmd_drivers/rtc/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o drivers/rtc/built-in.o drivers/rtc/date.o drivers/rtc/rtc-lib.o 

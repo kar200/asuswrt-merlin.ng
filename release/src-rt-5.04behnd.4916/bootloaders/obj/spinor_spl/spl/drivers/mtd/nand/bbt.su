@@ -1,0 +1,5 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/bbt.c:25:5:nanddev_bbt_init	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/bbt.c:46:6:nanddev_bbt_cleanup	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/bbt.c:61:5:nanddev_bbt_update	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/bbt.c:75:5:nanddev_bbt_get_block_status	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/bbt.c:108:5:nanddev_bbt_set_block_status	0	static

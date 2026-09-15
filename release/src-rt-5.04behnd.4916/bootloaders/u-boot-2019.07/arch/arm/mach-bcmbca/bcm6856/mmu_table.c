@@ -140,9 +140,25 @@ static struct mm_region broadcom_bcm96856_mem_map[] = {
 		.virt = 0x82000000UL,
 		.phys = 0x82000000UL,
 		.size = 0x1000000,
+		/*
+		 * PTE_BLOCK_PXN deliberately CLEARED (UXN kept).
+		 *
+		 * CONFIG_SPL_TEXT_BASE is 0x82612000, which this 16 MiB block
+		 * covers.  With PXN set, `go 0x82612000` can only ever raise an
+		 * Instruction Abort (ESR EC=0x21) because the CPU may not fetch
+		 * instructions there -- so chain-loading the eMMC SPL from U-Boot
+		 * is impossible.  The ROM can run the SPL there only because it
+		 * does not use these page tables.
+		 *
+		 * Clearing PXN alone is the minimum needed: U-Boot runs
+		 * privileged (EL1/EL2) and can then execute from this window,
+		 * while UXN still denies user mode.  This makes a slice of device
+		 * memory executable, which is acceptable for bring-up work but
+		 * should be revisited before anything permanent.
+		 */
 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
 			 PTE_BLOCK_NON_SHARE |
-			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+			 PTE_BLOCK_UXN
 	},
 #endif
 #endif

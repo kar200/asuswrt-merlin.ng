@@ -1,0 +1,14 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/pinctrl-uclass.c:112:12:pinconfig_post_bind	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/pinctrl-uclass.c:398:12:pinctrl_post_bind	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/pinctrl-uclass.c:176:1:pinctrl_gpio_get_pinctrl_and_offset.isra	144	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/pinctrl-uclass.c:18:5:pinctrl_decode_pin_config	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/pinctrl-uclass.c:226:5:pinctrl_gpio_request	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/pinctrl-uclass.c:252:5:pinctrl_gpio_free	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/pinctrl-uclass.c:304:5:pinctrl_select_state	112	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/pinctrl-uclass.c:322:5:pinctrl_request	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/pinctrl-uclass.c:332:5:pinctrl_request_noflags	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/pinctrl-uclass.c:337:5:pinctrl_get_periph_id	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/pinctrl-uclass.c:347:5:pinctrl_get_gpio_mux	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/pinctrl-uclass.c:357:5:pinctrl_get_pins_count	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/pinctrl-uclass.c:367:5:pinctrl_get_pin_name	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/pinctrl-uclass.c:380:5:pinctrl_get_pin_muxing	0	static

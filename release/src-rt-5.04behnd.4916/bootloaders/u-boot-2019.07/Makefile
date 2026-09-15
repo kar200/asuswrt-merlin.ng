@@ -395,7 +395,7 @@ KBUILD_CPPFLAGS := -D__KERNEL__ -D__UBOOT__
 KBUILD_CFLAGS   := -Wall -Wstrict-prototypes \
 		   -Wno-format-security \
 		   -fno-builtin -ffreestanding $(CSTD_FLAG)
-KBUILD_CFLAGS	+= -fshort-wchar -fno-strict-aliasing -D$(MODEL) -I../../router/shared
+KBUILD_CFLAGS	+= -fshort-wchar -fno-strict-aliasing $(if $(MODEL),-D$(MODEL)) -I../../router/shared
 KBUILD_AFLAGS   := -D__ASSEMBLY__
 
 # Don't generate position independent code
@@ -896,6 +896,12 @@ ALL-y += u-boot-with-dtb.bin
 endif
 
 LDFLAGS_u-boot += $(LDFLAGS_FINAL)
+
+# This SDK ships several drivers only as prebuilt objects that were built
+# from different Broadcom snapshots and define the same tentative globals
+# (e.g. active_port in common/autoboot.o and drivers/net/bcmbca/bcmbca_xrdp_eth.o).
+# Allow the first definition to win so the aarch64 image links.
+LDFLAGS_u-boot += --allow-multiple-definition
 
 # Avoid 'Not enough room for program headers' error on binutils 2.28 onwards.
 LDFLAGS_u-boot += $(call ld-option, --no-dynamic-linker)

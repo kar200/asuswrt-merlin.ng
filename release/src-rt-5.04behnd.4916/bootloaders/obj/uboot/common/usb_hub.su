@@ -1,0 +1,11 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/usb_hub.c:106:12:usb_set_port_feature	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/usb_hub.c:87:12:usb_get_hub_descriptor	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/usb_hub.c:99:12:usb_clear_port_feature.isra	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/usb_hub.c:57:13:usb_hub_reset_devices	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/usb_hub.c:68:6:usb_hub_is_root_hub	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/usb_hub.c:120:5:usb_get_port_status	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/usb_hub.c:334:5:usb_hub_port_connect_change	352	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/usb_hub.c:609:12:usb_hub_configure	864	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/usb_hub.c:914:5:usb_hub_probe	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/usb_hub.c:926:5:usb_hub_scan	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/usb_hub.c:933:12:usb_hub_post_probe	0	static

@@ -1,0 +1,1 @@
+cmd_tpl/disk/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o tpl/disk/built-in.o tpl/disk/part.o tpl/disk/part_efi.o 

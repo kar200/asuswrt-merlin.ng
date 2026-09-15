@@ -1,0 +1,5 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/cli_simple.c:23:5:cli_simple_parse_line	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/cli_simple.c:60:6:cli_simple_process_macros	1136	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/cli_simple.c:174:5:cli_simple_run_command	2640	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/cli_simple.c:259:6:cli_simple_loop	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/cli_simple.c:308:5:cli_simple_run_command_list	32	static

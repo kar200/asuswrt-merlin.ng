@@ -1,0 +1,6 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/spi/sf_probe.c:105:12:spi_flash_std_write	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/spi/sf_probe.c:95:12:spi_flash_std_read	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/spi/sf_probe.c:133:12:spi_flash_std_get_sw_write_prot	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/spi/sf_probe.c:115:12:spi_flash_std_erase	160	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/spi/sf_probe.c:153:12:spi_flash_std_remove	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/spi/sf_probe.c:140:12:spi_flash_std_probe	48	static

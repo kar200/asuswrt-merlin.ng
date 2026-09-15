@@ -1,0 +1,3 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/part.c:52:12:do_part_list	784	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/part.c:115:12:do_part_info	752	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/part.c:175:12:do_part	240	static

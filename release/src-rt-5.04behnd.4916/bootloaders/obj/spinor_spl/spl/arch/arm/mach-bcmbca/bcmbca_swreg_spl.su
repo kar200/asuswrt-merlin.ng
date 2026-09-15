@@ -1,0 +1,2 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/bcmbca_swreg_spl.c:17:13:sw_complete_wait.constprop	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/bcmbca_swreg_spl.c:28:6:swr_write	64	static

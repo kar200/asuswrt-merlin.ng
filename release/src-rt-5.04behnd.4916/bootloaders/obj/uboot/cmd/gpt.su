@@ -1,0 +1,9 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/gpt.c:178:13:del_gpt_info	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/gpt.c:95:14:extract_val	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/gpt.c:158:12:calc_parts_list_len	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/gpt.c:36:12:extract_env	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/gpt.c:306:12:get_gpt_info	240	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/gpt.c:265:12:create_gpt_partitions_list.constprop	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/gpt.c:398:12:set_gpt_info	176	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/gpt.c:227:13:print_gpt_info	112	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/gpt.c:842:12:do_gpt	192	dynamic

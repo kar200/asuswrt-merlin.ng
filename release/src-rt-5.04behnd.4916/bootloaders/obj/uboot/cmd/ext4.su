@@ -1,0 +1,4 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/ext4.c:44:5:do_ext4_size	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/ext4.c:50:5:do_ext4_load	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/ext4.c:56:5:do_ext4_ls	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/ext4.c:62:5:do_ext4_write	0	static

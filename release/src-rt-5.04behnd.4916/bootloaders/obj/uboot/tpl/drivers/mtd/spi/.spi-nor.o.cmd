@@ -1,0 +1,1 @@
+cmd_tpl/drivers/mtd/spi/spi-nor.o := /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o tpl/drivers/mtd/spi/spi-nor.o tpl/drivers/mtd/spi/sf_probe.o tpl/drivers/mtd/spi/spi-nor-ids.o tpl/drivers/mtd/spi/spi-nor-tiny.o 

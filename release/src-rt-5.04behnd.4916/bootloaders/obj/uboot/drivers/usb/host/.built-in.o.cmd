@@ -1,0 +1,1 @@
+cmd_drivers/usb/host/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o drivers/usb/host/built-in.o drivers/usb/host/usb-uclass.o drivers/usb/host/ohci-hcd.o drivers/usb/host/ohci-bcmbca.o drivers/usb/host/ehci-hcd.o drivers/usb/host/ehci-bcmbca.o 

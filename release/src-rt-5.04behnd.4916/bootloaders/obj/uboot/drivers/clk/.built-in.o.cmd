@@ -1,0 +1,1 @@
+cmd_drivers/clk/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o drivers/clk/built-in.o drivers/clk/clk-uclass.o drivers/clk/clk_fixed_rate.o drivers/clk/clk_fixed_factor.o drivers/clk/imx/built-in.o drivers/clk/tegra/built-in.o 

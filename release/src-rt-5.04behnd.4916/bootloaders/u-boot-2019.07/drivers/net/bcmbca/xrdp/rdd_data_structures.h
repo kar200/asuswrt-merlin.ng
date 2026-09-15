@@ -102,7 +102,8 @@ extern uintptr_t rdp_runner_core_addr[];
 #define RDD_BBH_TX_DESCRIPTOR_SOP_WRITE(v, p)                           RDP_FIELD_MWRITE_16((uint8_t *)p + 12, 2, 11, v)
 #define RDD_BBH_TX_DESCRIPTOR_BN0_FIRST_WRITE(v, p)                     RDP_FIELD_MWRITE_32((uint8_t *)p + 12, 0, 18, v)
 #define SBPM_ALLOC_SA   30
-#define SBPM_FREE_SA    HEADROOM_SIZE
+#define SBPM_FREE_SA    15
+#define SBPM_MAX_COPY_LEN 1536
 #endif
 
 #if (defined(GEN62) || defined(GEN45))

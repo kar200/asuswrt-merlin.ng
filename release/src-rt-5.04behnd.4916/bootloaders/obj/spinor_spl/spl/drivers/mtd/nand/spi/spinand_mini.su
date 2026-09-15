@@ -1,0 +1,14 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/spi/spinand_mini.c:474:12:spinandmini_select_target	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/spi/spinand_mini.c:277:12:spinandchip_select_target	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/spi/spinand_mini.c:305:12:spinandmini_write_reg_op.isra	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/spi/spinand_mini.c:346:12:spinandmini_upd_cfg.constprop	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/spi/spinand_mini.c:291:12:spinandmini_read_reg_op.isra	112	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/spi/spinand_mini.c:414:12:spinandmini_wait	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/spi/spinand_mini.c:737:12:spinandmini_probe	144	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/spi/spinand_mini.c:498:12:spinandmini_read_page	144	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/spi/spinand_mini.c:518:5:spinandmini_read_buf	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/spi/spinand_mini.c:564:5:spinandmini_is_bad_block	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/spi/spinand_mini.c:748:6:spinandmini_init	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/spi/spinand_mini.c:775:5:spinandmini_get_block_size	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/spi/spinand_mini.c:780:5:spinandmini_get_page_size	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/nand/spi/spinand_mini.c:785:5:spinandmini_get_total_size	0	static

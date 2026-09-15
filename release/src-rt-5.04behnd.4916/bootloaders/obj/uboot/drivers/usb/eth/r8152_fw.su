@@ -1,0 +1,7 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/r8152_fw.c:801:13:r8153_wdt1_end	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/r8152_fw.c:723:13:rtl_clear_bp	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/r8152_fw.c:740:13:r8153_clear_bp	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/r8152_fw.c:780:12:r8153_post_ram_code.isra	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/r8152_fw.c:760:12:r8153_pre_ram_code.isra	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/r8152_fw.c:812:6:r8152b_firmware	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/r8152_fw.c:855:6:r8153_firmware	48	static

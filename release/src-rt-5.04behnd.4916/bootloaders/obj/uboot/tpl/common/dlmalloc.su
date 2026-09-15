@@ -1,0 +1,14 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/dlmalloc.c:581:7:sbrk	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/dlmalloc.c:601:6:mem_malloc_init	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/dlmalloc.c:2163:5:malloc_trim	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/dlmalloc.c:1509:6:fREe	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/dlmalloc.c:1237:9:mALLOc	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/dlmalloc.c:2061:9:cALLOc	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/dlmalloc.c:1647:9:rEALLOc	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/dlmalloc.c:1877:9:mEMALIGn	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/dlmalloc.c:2030:9:vALLOc	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/dlmalloc.c:2045:9:pvALLOc	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/dlmalloc.c:2128:6:cfree	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/dlmalloc.c:2232:8:malloc_usable_size	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/dlmalloc.c:2361:5:mALLOPt	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/dlmalloc.c:2386:5:initf_malloc	0	static

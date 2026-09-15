@@ -1,0 +1,5 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/xrdp/rdp_drv_sbpm.c:147:12:drv_sbpm_alloc_single	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/xrdp/rdp_drv_sbpm.c:108:5:drv_sbpm_free_list	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/xrdp/rdp_drv_sbpm.c:202:5:drv_sbpm_alloc_list	112	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/xrdp/rdp_drv_sbpm.c:266:10:drv_sbpm_get_next_bn	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/xrdp/rdp_drv_sbpm.c:328:5:drv_sbpm_copy_list	96	static

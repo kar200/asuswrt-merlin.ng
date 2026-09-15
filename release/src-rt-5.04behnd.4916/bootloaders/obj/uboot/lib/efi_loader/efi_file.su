@@ -1,0 +1,15 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:702:28:efi_file_flush	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:475:28:efi_file_getpos	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:50:12:set_blk_dev.isra	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:169:32:file_open	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:780:1:efi_open_volume	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:240:28:efi_file_open	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:303:28:efi_file_delete	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:404:28:efi_file_read	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:437:28:efi_file_write	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:503:28:efi_file_setpos	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:629:28:efi_file_setinfo	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:296:28:efi_file_close	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:542:28:efi_file_getinfo	256	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:732:25:efi_file_from_path	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_file.c:793:1:efi_simple_file_system	48	static

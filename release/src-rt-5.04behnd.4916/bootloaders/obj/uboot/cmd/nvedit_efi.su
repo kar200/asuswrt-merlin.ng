@@ -1,0 +1,3 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/nvedit_efi.c:44:13:efi_dump_single_var	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/nvedit_efi.c:195:5:do_env_print_efi	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/cmd/nvedit_efi.c:345:5:do_env_set_efi	176	static

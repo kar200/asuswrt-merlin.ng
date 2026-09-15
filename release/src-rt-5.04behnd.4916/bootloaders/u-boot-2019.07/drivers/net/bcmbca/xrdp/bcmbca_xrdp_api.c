@@ -9,7 +9,14 @@
 #include "rdd_data_structures.h"
 
 #ifdef XRDP_SBPM
-extern int drv_sbpm_copy_list(uint16_t bn, uint8_t *dest_buffer);
+/*
+ * Upper bound on the linear packet we will assemble out of the SBPM buffer
+ * chain.  U-Boot's receive path hands us a net_rx_packets[] buffer of
+ * PKTSIZE_ALIGN bytes (1518 rounded up to the DMA alignment = 1536), so a
+ * longer packet must be dropped rather than copied into it.
+ */
+#define SBPM_MAX_COPY_LEN	1536
+extern int drv_sbpm_copy_list(uint16_t bn, uint8_t *dest_buffer, int max_len, int *actual_len);
 extern int drv_sbpm_free_list(uint16_t head_bn);
 extern int drv_sbpm_alloc_list(uint32_t size, uint32_t headroom, uint8_t *data,
 	uint16_t *bn0, uint16_t *bn1, uint8_t *bns_num);
@@ -17,6 +24,8 @@ extern int drv_sbpm_alloc_list(uint32_t size, uint32_t headroom, uint8_t *data,
 
 #define cfe_core_runner_image 0
 #define IMAGE_0_CFE_CORE_CPU_TX_THREAD_NUMBER 1
+
+extern int pmc_xrdp_init(void);
 
 // #define DEBUG_DUMP_PACKET
 
@@ -120,7 +129,8 @@ static int GetPdFromRamFifo(uint32_t *word0, uint32_t *word1, uint32_t *word2,
 	uint32_t *desc_addr = (uint32_t *)RDD_SRAM_PD_FIFO_PTR(0);
 	static int idx;
 
-	INV_RANGE((uintptr_t)desc_addr, (64 * 16));
+	if (!rdp_runner_core_addr[0])
+		return -1;
 
 	desc_addr += idx;
 	*word1 = swap4bytes(readl(desc_addr + 1));
@@ -155,6 +165,8 @@ static int cpu_ring_read_packet(uint32_t ring_id,
 	struct cpu_rx_params *rx_params)
 {
 	CPU_RX_DESCRIPTOR rx_desc;
+	int len, copied = 0;
+	int copy_rc, free_rc;
 
 	rx_params->reason = 0;
 	rx_params->packet_size = 0;
@@ -171,16 +183,33 @@ static int cpu_ring_read_packet(uint32_t ring_id,
 	rx_params->src_bridge_port = rx_desc.lan.source_port;
 	rx_params->reason = (uint16_t)rx_desc.lan.reason;
 
-	if (drv_sbpm_copy_list(rx_desc.sbpm.bn0, rx_params->data_ptr)) {
-		printf("copy sbpm failed\n");
+	/*
+	 * Copy only as many bytes as the descriptor says the packet holds, and
+	 * never more than the destination buffer can take.  This is what keeps
+	 * a bad SBPM chain from walking off the end of the RX buffer.
+	 */
+	len = rx_params->packet_size;
+	if (len <= 0 || len > SBPM_MAX_COPY_LEN)
+		len = SBPM_MAX_COPY_LEN;
+
+	copy_rc = drv_sbpm_copy_list(rx_desc.sbpm.bn0, rx_params->data_ptr, len, &copied);
+
+	/* CRITICAL: Always release the SBPM buffer chain back to hardware,
+	 * even if the copy failed. Otherwise every dropped packet permanently
+	 * leaks buffers, starving the 2048-buffer pool and killing TX. */
+	free_rc = drv_sbpm_free_list(rx_desc.sbpm.bn0);
+	if (free_rc) {
+		debug("free sbpm failed: bn0=%d rc=%d\n", rx_desc.sbpm.bn0, free_rc);
 		return -ENOSR;
 	}
 
-	if (drv_sbpm_free_list(rx_desc.sbpm.bn0)) {
-		printf("free sbpm failed\n");
+	if (copy_rc || copied <= 0) {
+		debug("copy sbpm failed: bn0=%d rc=%d copied=%d\n",
+			rx_desc.sbpm.bn0, copy_rc, copied);
 		return -ENOSR;
 	}
 
+	rx_params->packet_size = copied;
 	fix_bbh_rx_index(rx_params);
 
 	return 0;
@@ -446,7 +475,7 @@ static int rdd_cpu_tx_sbpm(uint32_t length, uint16_t bn0, uint16_t bn1,
 	RDD_BBH_TX_DESCRIPTOR_PACKET_LENGTH_WRITE(length, tx_pd);
 
 	bbh_ingress_counter[tx_port] += 1;
-
+	WMB();
 	rnr_regs_cfg_cpu_wakeup_set(cfe_core_runner_image,
 		IMAGE_0_CFE_CORE_CPU_TX_THREAD_NUMBER);
 
@@ -473,9 +502,38 @@ int bcmbca_xrdp_init(void)
 {
 	int rc = 0;
 
+	printf("%s: Powering on XRDP via PMC...\n", __func__);
+	rc = pmc_xrdp_init();
+	if (rc) {
+		printf("%s: pmc_xrdp_init failed: %d\n", __func__, rc);
+		return rc;
+	}
+
 	printf("%s: Restore HW configuration\n", __func__);
 	rc = xrdp_data_path_init();
 	printf("%s: Restore HW configuration done. rc=%d\n", __func__, rc);
+
+#ifdef XRDP_SBPM
+	/* Ensure SBPM free list initialization is complete */
+	{
+		int iters = 10000;
+		while (!(readl(SBPM_ADDRS + 0x00000000) & 0x80000000) && --iters)
+			udelay(10);
+		if (!iters)
+			printf("%s: SBPM free list init timed out!\n", __func__);
+	}
+
+	/*
+	 * Enable CPU TX (SA 30) and Free (SA 15) in the Runner Source Port mask.
+	 * Without these bits set in SBPM_SP_RNR_LOW, SBPM buffer allocation
+	 * and buffer free operations are rejected by SBPM hardware credit check.
+	 */
+	{
+		uint32_t sp_rnr = readl(SBPM_ADDRS + 0x184);
+		sp_rnr |= (1 << SBPM_ALLOC_SA) | (1 << SBPM_FREE_SA) | 0xffff;
+		writel(sp_rnr, SBPM_ADDRS + 0x184);
+	}
+#endif
 
 	return rc;
 }
@@ -499,8 +557,20 @@ static void dump_packet(uint8_t *data_ptr, uint16_t size)
 }
 #endif
 
+extern int bcmbca_xrdp_eth_init(void);
+static int bcmbca_xrdp_initialized = 0;
+
+static void ensure_xrdp_init(void)
+{
+	if (!bcmbca_xrdp_initialized) {
+		bcmbca_xrdp_initialized = 1;
+		bcmbca_xrdp_eth_init();
+	}
+}
+
 int bcmbca_xrdp_send(void *buffer, uint16_t length, uint8_t tx_port)
 {
+	ensure_xrdp_init();
 #ifdef DEBUG_DUMP_PACKET
 	printf("%s:%d:send to port %d, buffer is @0x%p, size = %d\n", __func__,
 		__LINE__, tx_port, buffer, length);
@@ -514,6 +584,8 @@ int bcmbca_xrdp_recv(uint8_t **buffer, uint16_t *length, uint8_t *rx_port)
 {
 	int rc;
 	struct cpu_rx_params rx_params;
+
+	ensure_xrdp_init();
 
 	rx_params.data_ptr = *buffer;
 	rc = cpu_ring_read_packet(0, &rx_params);
@@ -541,4 +613,8 @@ int bcmbca_xrdp_recv(uint8_t **buffer, uint16_t *length, uint8_t *rx_port)
 	*length = rx_params.packet_size;
 
 	return 0;
+}
+
+__attribute__((weak)) void rtl8372_init_asus(void)
+{
 }

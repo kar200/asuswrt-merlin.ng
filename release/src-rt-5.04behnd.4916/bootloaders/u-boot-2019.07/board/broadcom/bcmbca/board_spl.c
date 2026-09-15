@@ -83,12 +83,18 @@ __weak void start_tpl(tpl_params *parms)
 
 	memcpy(new_params, parms, sizeof(tpl_params));
 
+	printf("SPL: loading TPL (magic 0x%x) to 0x%x\n",
+		TPL_TABLE_MAGIC, (unsigned int)CONFIG_TPL_TEXT_BASE);
+
 	if (load_boot_blob(TPL_TABLE_MAGIC, 0x0, (void *)CONFIG_TPL_TEXT_BASE,
 		&size) == 0) {
+		printf("SPL: TPL loaded (%d bytes), jumping\n", size);
 		decrypt_tpl((void *)CONFIG_TPL_TEXT_BASE, size);
 		spl_board_deinit();
 		image_entry((void *)new_params);
 	}
+
+	printf("SPL: TPL load FAILED\n");
 
 #if !defined(CONFIG_BCMBCA_IKOS) 
 	bcm_sec_abort();		
@@ -655,6 +661,8 @@ void spl_board_init(void)
 	printf("WARNING -- JTAG UNLOCK IS ENABLED\n");
 #endif
 	spl_board_ddrinit(ea_info);
+	printf("SPL: DDR init returned, ddr_size=%u MB\n",
+		(unsigned int)(get_ddr_size() >> 20));
 
 	if ((ea_info->status&(SPL_EA_IMAGE_FB))) {
 		tplparams.early_flags = SPL_EA_IMAGE_FB;

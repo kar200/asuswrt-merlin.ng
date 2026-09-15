@@ -1,0 +1,1 @@
+cmd_spl/drivers/mmc/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o spl/drivers/mmc/built-in.o spl/drivers/mmc/mmc.o spl/drivers/mmc/mmc-uclass.o spl/drivers/mmc/mmc_boot.o spl/drivers/mmc/bcmbca_sdhci_spl.o spl/drivers/mmc/sdhci.o spl/drivers/mmc/bcmbca_sdhci.o 

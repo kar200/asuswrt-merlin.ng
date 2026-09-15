@@ -1,0 +1,11 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/libfdt/../../scripts/dtc/libfdt/fdt_sw.c:58:12:fdt_sw_check_header_	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/libfdt/../../scripts/dtc/libfdt/fdt_sw.c:73:14:fdt_grab_space_	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/libfdt/../../scripts/dtc/libfdt/fdt_sw.c:88:5:fdt_create	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/libfdt/../../scripts/dtc/libfdt/fdt_sw.c:110:5:fdt_resize	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/libfdt/../../scripts/dtc/libfdt/fdt_sw.c:142:5:fdt_add_reservemap_entry	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/libfdt/../../scripts/dtc/libfdt/fdt_sw.c:165:5:fdt_finish_reservemap	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/libfdt/../../scripts/dtc/libfdt/fdt_sw.c:170:5:fdt_begin_node	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/libfdt/../../scripts/dtc/libfdt/fdt_sw.c:186:5:fdt_end_node	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/libfdt/../../scripts/dtc/libfdt/fdt_sw.c:223:5:fdt_property_placeholder	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/libfdt/../../scripts/dtc/libfdt/fdt_sw.c:245:5:fdt_property	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/libfdt/../../scripts/dtc/libfdt/fdt_sw.c:257:5:fdt_finish	64	static

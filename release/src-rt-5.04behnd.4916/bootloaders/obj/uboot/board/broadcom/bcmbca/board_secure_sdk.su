@@ -1,0 +1,3 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_sdk.c:46:12:sec_key_ctrl	224	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_sdk.c:24:5:bcm_sec_boot_state	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_sdk.c:161:6:bcm_sec_cb_init	0	static

@@ -1,0 +1,8 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_disk.c:165:28:efi_disk_flush_blocks	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_disk.c:44:28:efi_disk_reset	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_disk.c:231:21:efi_disk_add_dev.part.0	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_disk.c:95:28:efi_disk_read_blocks	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_disk.c:130:28:efi_disk_write_blocks	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_disk.c:190:1:efi_fs_from_path	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_disk.c:312:5:efi_disk_create_partitions	320	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_disk.c:358:14:efi_disk_register	112	static

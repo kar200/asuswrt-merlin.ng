@@ -1,0 +1,1 @@
+cmd_env/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o env/built-in.o env/common.o env/env.o env/attr.o env/callback.o env/flags.o env/boot_magic.o 

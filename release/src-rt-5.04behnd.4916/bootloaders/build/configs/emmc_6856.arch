@@ -1,0 +1,76 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use FindBin qw($Bin);
+use lib "$Bin/../../../hostTools/PerlLib";
+use BRCM::GenConfig;
+
+my $c = new BRCM::GenConfig( shift);
+
+######   Any config changes start here #####
+
+# BCM6856 eMMC U-Boot proper configuration.
+
+# ---- loader (TPL/SPL): no NAND ----
+$c->unset('CONFIG_NAND');
+$c->unset('CONFIG_SPL_NAND_SUPPORT');
+$c->unset('CONFIG_TPL_NAND_SUPPORT');
+$c->unset('CONFIG_CMD_NAND');
+$c->unset('CONFIG_CMD_UBI');
+$c->unset('CONFIG_NAND_BRCMNAND');
+$c->unset('CONFIG_MTD_SPI_NAND');
+$c->unset('CONFIG_BCM_THERMAL');
+
+# ---- loader (TPL/SPL): eMMC loader settings ----
+$c->unset('CONFIG_SPL_FS_EXT4');
+$c->unset('CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION');
+$c->set('CONFIG_SUPPORT_EMMC_BOOT','y');
+$c->set('CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR','y');
+$c->set('CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR','0x1000');
+
+# ---- eMMC / MMC stack in U-Boot proper ----
+$c->set('CONFIG_MMC','y');
+$c->set('CONFIG_DM_MMC','y');
+$c->set('CONFIG_MMC_WRITE','y');
+$c->set('CONFIG_MMC_HW_PARTITIONING','y');
+$c->set('CONFIG_MMC_VERBOSE','y');
+$c->set('CONFIG_PARTITIONS','y');
+$c->set('CONFIG_DOS_PARTITION','y');
+$c->set('CONFIG_EFI_PARTITION','y');
+$c->set('CONFIG_CMD_MMC','y');
+$c->set('CONFIG_CMD_PART','y');
+$c->set('CONFIG_CMD_GPT','y');
+$c->set('CONFIG_CMD_EXT4','y');
+$c->set('CONFIG_CMD_EXT4_WRITE','y');
+$c->set('CONFIG_FAT_WRITE','y');
+
+# ---- SPI NOR stack (allow accessing SPI NOR from eMMC U-Boot too) ----
+$c->set('CONFIG_DM_SPI_FLASH','y');
+$c->set('CONFIG_SPI_FLASH','y');
+$c->set('CONFIG_SPI_FLASH_MACRONIX','y');
+$c->set('CONFIG_SPI_FLASH_WINBOND','y');
+$c->set('CONFIG_SPI_FLASH_GIGADEVICE','y');
+$c->set('CONFIG_SPI_FLASH_SPANSION','y');
+$c->set('CONFIG_SPI_FLASH_STMICRO','y');
+$c->set('CONFIG_SPI_FLASH_XMC','y');
+$c->set('CONFIG_SPI_FLASH_MTD','y');
+$c->set('CONFIG_CMD_SF','y');
+$c->set('CONFIG_CMD_SF_TEST','y');
+$c->set('CONFIG_CMD_SPI','y');
+$c->set('CONFIG_SPL_WATCHDOG_SUPPORT','y');
+
+# ---- networking: DHCP + TFTP + NetConsole in U-Boot proper ----
+$c->set('CONFIG_CMD_DHCP','y');
+$c->set('CONFIG_CMD_HOSTNAME','y');
+$c->set('CONFIG_CMD_LINK_LOCAL','y');
+$c->set('CONFIG_NETCONSOLE','y');
+$c->set('CONFIG_CONSOLE_MUX','y');
+$c->set('CONFIG_SYS_CONSOLE_IS_IN_ENV','y');
+
+# ---- hash commands ----
+$c->set('CONFIG_CMD_HASH','y');
+$c->set('CONFIG_HASH_VERIFY','y');
+
+#####   End of config changes #####
+$c->write();
+

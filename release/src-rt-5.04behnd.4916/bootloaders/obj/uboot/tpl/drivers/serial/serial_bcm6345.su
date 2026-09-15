@@ -1,0 +1,6 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/serial/serial_bcm6345.c:114:12:bcm6345_serial_init	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/serial/serial_bcm6345.c:175:12:bcm6345_serial_pending	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/serial/serial_bcm6345.c:193:12:bcm6345_serial_putc	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/serial/serial_bcm6345.c:207:12:bcm6345_serial_getc	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/serial/serial_bcm6345.c:186:12:bcm6345_serial_setbrg	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/serial/serial_bcm6345.c:225:12:bcm6345_serial_probe	64	static

@@ -1,0 +1,3 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/broadcom/pinctrl-bcmbca.c:17:5:bcmbca_pinctrl_probe	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/broadcom/pinctrl-bcmbca.c:100:12:bcmbca_gpio_request	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/pinctrl/broadcom/pinctrl-bcmbca.c:34:12:bcmbca_pinctrl_set_state_simple	304	static

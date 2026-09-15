@@ -1,0 +1,15 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:749:6:asix_eth_stop	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:466:12:asix_send_common	1664	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:754:5:asix_eth_send	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:761:5:asix_eth_recv	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:812:12:asix_free_pkt	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:136:12:asix_read_cmd.isra	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:253:12:asix_read_rx_ctl.isra	160	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:114:12:asix_write_cmd.isra	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:207:12:asix_sw_reset.isra	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:177:12:asix_mdio_read	192	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:192:1:asix_mdio_write	192	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:834:12:asix_eth_probe	208	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:295:12:asix_write_hwaddr_common	176	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:823:5:asix_write_hwaddr	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix.c:741:12:asix_eth_start	48	static

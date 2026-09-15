@@ -60,6 +60,9 @@ static int ohci_usb_remove(struct udevice *dev)
 
 
 static const struct udevice_id ohci_usb_ids[] = {
+	/* See ehci-bcmbca.c: the BCMBCA DTS files say
+	 * compatible = "brcm,bcmbca-ohci", which no driver matched. */
+	{ .compatible = "brcm,bcmbca-ohci" },
 	{ .compatible = "generic-ohci" },
 	{ }
 };

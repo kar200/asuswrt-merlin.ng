@@ -1,0 +1,15 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:63:13:cled_sw_led_set	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:69:12:cled_sw_led_get	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:78:13:cled_sw_led_clr	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:84:13:cled_legacy_sw_led_set	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:90:12:cled_legacy_sw_led_get	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:99:13:cled_legacy_sw_led_clr	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:464:12:setup_crossbar	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:366:12:bca_cled_ctrl_bind	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:241:12:bca_cled_ctrl_probe	176	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:496:5:bca_cled_setup_serial	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:584:5:bca_cled_setup_parallel	176	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:645:5:bca_cled_get_value	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:660:5:bca_cled_set_value	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:679:5:bca_cled_set_brightness	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/led/bcm_bca_cled_ctrl.c:702:5:bca_cled_set_flash_rate	16	static

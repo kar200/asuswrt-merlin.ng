@@ -1,0 +1,2 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/core/util.c:23:5:list_count_items	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/core/util.c:34:6:dm_ofnode_pre_reloc	0	static

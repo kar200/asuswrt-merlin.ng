@@ -1,0 +1,2 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/bus_drv.c:25:12:bus_drv_get	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/bus_drv.c:81:12:bus_drv_get_by_str	32	static

@@ -1,0 +1,2 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mmc/bcmbca_sdhci.c:36:12:sdhci_bcmbca_probe	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mmc/bcmbca_sdhci.c:29:12:sdhci_bcmbca_bind	32	static

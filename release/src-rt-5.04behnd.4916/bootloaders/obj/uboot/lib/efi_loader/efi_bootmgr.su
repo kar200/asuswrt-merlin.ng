@@ -1,0 +1,5 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_bootmgr.c:96:14:get_var.constprop	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_bootmgr.c:31:6:efi_deserialize_load_option	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_bootmgr.c:124:21:try_load_entry	176	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_bootmgr.c:54:15:efi_serialize_load_option	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_bootmgr.c:188:14:efi_bootmgr_load	96	static

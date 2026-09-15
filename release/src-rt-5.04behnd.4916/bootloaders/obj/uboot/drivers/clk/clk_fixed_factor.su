@@ -1,0 +1,2 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk_fixed_factor.c:22:14:clk_fixed_factor_get_rate	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk_fixed_factor.c:43:12:clk_fixed_factor_ofdata_to_platdata	48	static

@@ -1,0 +1,6 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_variable.c:66:21:efi_to_native	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_variable.c:93:20:prefix	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_variable.c:111:20:parse_attr	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_variable.c:165:21:efi_get_variable	112	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_variable.c:330:21:efi_get_next_variable_name	400	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_variable.c:421:21:efi_set_variable	128	static

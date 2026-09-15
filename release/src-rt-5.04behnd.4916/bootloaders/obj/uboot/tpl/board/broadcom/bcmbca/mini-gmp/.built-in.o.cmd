@@ -1,0 +1,1 @@
+cmd_tpl/board/broadcom/bcmbca/mini-gmp/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o tpl/board/broadcom/bcmbca/mini-gmp/built-in.o tpl/board/broadcom/bcmbca/mini-gmp/mini-gmp.o tpl/board/broadcom/bcmbca/mini-gmp/mini-mpq.o 

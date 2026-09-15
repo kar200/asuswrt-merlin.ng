@@ -1,0 +1,1 @@
+cmd_drivers/led/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o drivers/led/built-in.o drivers/led/led-uclass.o drivers/led/bcm_bca_led_ctrl.o drivers/led/bcm_bca_cled_ctrl.o drivers/led/bcm_bca_leds.o 

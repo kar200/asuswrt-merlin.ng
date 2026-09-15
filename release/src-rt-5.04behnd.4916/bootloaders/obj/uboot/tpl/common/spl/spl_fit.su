@@ -1,0 +1,8 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/spl/spl_fit.c:44:12:spl_fit_get_image_name.constprop	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/spl/spl_fit.c:98:12:spl_fit_get_image_node	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/spl/spl_fit.c:175:12:spl_load_fit_image	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/spl/spl_fit.c:281:12:spl_fit_append_fdt.isra	144	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/spl/spl_fit.c:18:13:board_spl_fit_post_load	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/spl/spl_fit.c:22:14:board_spl_fit_size_align	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/spl/spl_fit.c:27:13:board_spl_fit_pre_load	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/spl/spl_fit.c:348:5:spl_load_simple_fit	256	static

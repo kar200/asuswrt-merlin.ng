@@ -1,0 +1,3 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_fit.c:28:5:bcm_tag_fit_hdr_validate	752	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_fit.c:152:5:bcm_sec_validate_fit	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_fit.c:210:5:bcm_util_get_fdt_prop_data	48	static

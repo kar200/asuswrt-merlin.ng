@@ -1,0 +1,2 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_setup.c:21:13:allow_unaligned	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/efi_loader/efi_setup.c:90:14:efi_init_obj_list	96	static

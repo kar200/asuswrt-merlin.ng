@@ -1,0 +1,13 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4fs.c:32:24:get_fs	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4fs.c:37:6:ext4fs_free_node	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4fs.c:177:5:ext4fs_ls	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4fs.c:200:5:ext4fs_exists	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4fs.c:209:5:ext4fs_size	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4fs.c:222:5:ext4fs_probe	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4fs.c:253:5:ext4fs_uuid	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4fs.c:268:6:ext_cache_init	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4fs.c:273:6:ext_cache_fini	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4fs.c:48:5:ext4fs_read_file	224	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4fs.c:214:5:ext4fs_read	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4fs.c:235:5:ext4_read_file	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/fs/ext4/ext4fs.c:279:5:ext_cache_read	48	static

@@ -1,0 +1,1 @@
+cmd_drivers/crypto/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o drivers/crypto/built-in.o drivers/crypto/rsa_mod_exp/built-in.o drivers/crypto/fsl/built-in.o 

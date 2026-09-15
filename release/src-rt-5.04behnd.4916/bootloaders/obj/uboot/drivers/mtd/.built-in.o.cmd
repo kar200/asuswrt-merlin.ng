@@ -1,0 +1,1 @@
+cmd_drivers/mtd/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o drivers/mtd/built-in.o drivers/mtd/mtdcore.o drivers/mtd/mtd_uboot.o drivers/mtd/mtd-uclass.o drivers/mtd/mtdpart.o drivers/mtd/nand/built-in.o 

@@ -1,0 +1,2 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/otp/otp_hw_ecc.c:24:18:otp_hw_set_ecc	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/otp/otp_hw_ecc.c:33:18:otp_hw_get_ecc	0	static

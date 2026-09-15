@@ -1,0 +1,1 @@
+cmd_drivers/spi/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o drivers/spi/built-in.o drivers/spi/spi-uclass.o drivers/spi/spi-mem.o drivers/spi/bcm63xx_hsspi.o 

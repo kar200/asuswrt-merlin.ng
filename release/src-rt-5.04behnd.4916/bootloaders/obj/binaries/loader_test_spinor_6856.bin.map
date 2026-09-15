@@ -1,0 +1,23 @@
+loader layout map file: offset, Binary, (size)
+----------------------------------------------
+Pad by 0 bytes
+0x00000000 spinor_u-boot-spl.bin_headered (95652 bytes)
+Pad by 32768 bytes
+0x00020000 DDR3_bcm_ddr.bin_headered (59900 bytes)
+Pad by 69632 bytes
+0x00040000 spinor_env.bin_headered (16392 bytes)
+0x00045000 mcbs.bin_headered (18252 bytes)
+0x0004a000 spinor_u-boot-spl.bin_headered (95652 bytes)
+0x00062000 DDR3_bcm_ddr.bin_headered (59900 bytes)
+Pad by 61440 bytes
+0x00080000 u-boot-tpl.bin_headered (161456 bytes)
+0x000a8000 mcbs.bin_headered (18252 bytes)
+0x000ad000 spinor_env.bin_headered (16392 bytes)
+0x000b2000 mcbs.bin_headered (18252 bytes)
+0x000b7000 spinor_u-boot-spl.bin_headered (95652 bytes)
+0x000cf000 u-boot-tpl.bin_headered (161456 bytes)
+Pad by 36864 bytes
+0x00100000 u-boot-tpl.bin_headered (161456 bytes)
+0x00128000 DDR3_bcm_ddr.bin_headered (59900 bytes)
+Pad by 299008 bytes
+end at 0x00180000

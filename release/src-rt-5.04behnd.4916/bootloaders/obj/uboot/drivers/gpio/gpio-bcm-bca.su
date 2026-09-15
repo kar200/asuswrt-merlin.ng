@@ -1,0 +1,7 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/gpio/gpio-bcm-bca.c:29:12:bcmbca_gpio_direction_input	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/gpio/gpio-bcm-bca.c:43:12:bcmbca_gpio_direction_output	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/gpio/gpio-bcm-bca.c:64:12:bcmbca_gpio_get_direction	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/gpio/gpio-bcm-bca.c:78:12:bcmbca_gpio_get	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/gpio/gpio-bcm-bca.c:92:12:bcmbca_gpio_set	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/gpio/gpio-bcm-bca.c:108:12:bcmbca_gpio_request	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/gpio/gpio-bcm-bca.c:127:12:bcmbca_gpio_probe	80	static

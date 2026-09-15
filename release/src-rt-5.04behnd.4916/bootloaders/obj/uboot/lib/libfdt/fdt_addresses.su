@@ -1,0 +1,2 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/libfdt/../../scripts/dtc/libfdt/fdt_addresses.c:58:5:fdt_address_cells	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/lib/libfdt/../../scripts/dtc/libfdt/fdt_addresses.c:78:5:fdt_size_cells	32	static

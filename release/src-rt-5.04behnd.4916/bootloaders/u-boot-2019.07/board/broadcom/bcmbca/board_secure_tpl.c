@@ -1205,7 +1205,7 @@ static int bcm_sec_auth_dbg_cert( char * certp, uint8_t* auth_key )
 	return rc;
 }
 
-#if defined(CONFIG_MMC)
+#if defined(CONFIG_MMC) && defined(CONFIG_TPL_MMC_SUPPORT)
 #define DBG_GRP_CERT_GPT_PREFIX "gpt:"
 static int bcm_sec_get_mmc_dbg_cert( char * group_cert, char ** certp, uint32_t * cert_size)
 {
@@ -1261,6 +1261,7 @@ static int bcm_sec_get_mmc_dbg_cert( char * group_cert, char ** certp, uint32_t 
 		return -1;
 	}
 
+#if CONFIG_IS_ENABLED(FS_EXT4)
 	/* Read file from ext4 partition */
 	ext4fs_set_blk_dev(block_dev, &part_info);
 	ret = ext4fs_mount(0);
@@ -1283,6 +1284,9 @@ static int bcm_sec_get_mmc_dbg_cert( char * group_cert, char ** certp, uint32_t 
 		printf("ERROR: reading file /%s/%s, ret - %d\n", gpt_part, file, ret);
 		return ret;
 	}
+#else
+	ret = -1;
+#endif
 	
 	return 0;
 }
@@ -1407,7 +1411,7 @@ static int bcm_sec_get_dbg_cert( u8* loaded_fit_hdr, char * group_cert, char ** 
 			ret = bcm_sec_get_nand_dbg_cert( group_cert, certp, cert_size);
 		}
 #endif
-#if defined(CONFIG_MMC)
+#if defined(CONFIG_MMC) && defined(CONFIG_TPL_MMC_SUPPORT)
 		if (strcmp(imgdev_name,"EMMC") == 0)
 			ret = bcm_sec_get_mmc_dbg_cert( group_cert, certp, cert_size);
 #endif
@@ -1462,7 +1466,7 @@ static int bcm_sec_process_dbg_cert(char * certp, char * group_name, u8* sec_pol
 	}
 
 	/* Cleanup memory as eneded */
-#if defined(CONFIG_MMC)
+#if defined(CONFIG_MMC) && defined(CONFIG_TPL_MMC_SUPPORT)
 	{
 		char * imgdev_name = tpl_get_imgdev_name();
 		if (imgdev_name && (strcmp(imgdev_name,"EMMC") == 0))

@@ -1,0 +1,8 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/bus_drv_mdio_v1.c:58:12:bus_mdio_v1_int_c45_write	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/bus_drv_mdio_v1.c:53:12:bus_mdio_v1_int_c45_read	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/bus_drv_mdio_v1.c:48:12:bus_mdio_v1_int_c22_write	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/bus_drv_mdio_v1.c:43:12:bus_mdio_v1_int_c22_read	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/bus_drv_mdio_v1.c:88:12:bus_mdio_v1_ext_c45_write	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/bus_drv_mdio_v1.c:73:12:bus_mdio_v1_ext_c22_read	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/bus_drv_mdio_v1.c:78:12:bus_mdio_v1_ext_c22_write	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/bus_drv_mdio_v1.c:83:12:bus_mdio_v1_ext_c45_read	0	static

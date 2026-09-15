@@ -1,0 +1,5 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/watchdog/bcm6345_wdt.c:33:12:bcm6345_wdt_reset	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/watchdog/bcm6345_wdt.c:61:12:bcm6345_wdt_stop	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/watchdog/bcm6345_wdt.c:43:12:bcm6345_wdt_start	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/watchdog/bcm6345_wdt.c:71:12:bcm6345_wdt_expire_now	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/watchdog/bcm6345_wdt.c:91:12:bcm6345_wdt_probe	80	static

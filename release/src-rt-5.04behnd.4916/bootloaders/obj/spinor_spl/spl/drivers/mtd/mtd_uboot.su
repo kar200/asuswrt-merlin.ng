@@ -1,0 +1,5 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/mtd_uboot.c:18:20:get_mtdids	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/mtd_uboot.c:54:5:mtd_search_alternate_name	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/mtd_uboot.c:197:5:mtd_probe_devices	144	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/mtd_uboot.c:395:5:mtd_arg_off	112	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/mtd/mtd_uboot.c:411:5:mtd_arg_off_size	80	static

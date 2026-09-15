@@ -1,0 +1,1 @@
+cmd_spl/env/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o spl/env/built-in.o spl/env/common.o spl/env/env.o spl/env/attr.o spl/env/flags.o spl/env/callback.o 

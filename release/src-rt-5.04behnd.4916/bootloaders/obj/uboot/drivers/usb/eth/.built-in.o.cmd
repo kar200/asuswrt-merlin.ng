@@ -1,0 +1,1 @@
+cmd_drivers/usb/eth/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o drivers/usb/eth/built-in.o drivers/usb/eth/usb_ether.o drivers/usb/eth/asix.o drivers/usb/eth/asix88179.o drivers/usb/eth/mcs7830.o drivers/usb/eth/smsc95xx.o drivers/usb/eth/r8152.o drivers/usb/eth/r8152_fw.o 

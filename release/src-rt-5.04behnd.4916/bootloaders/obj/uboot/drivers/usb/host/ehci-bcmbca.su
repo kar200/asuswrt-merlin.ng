@@ -1,0 +1,4 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ehci-bcmbca.c:125:12:ehci_usb_probe	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ehci-bcmbca.c:267:12:bcmbca_usb_ctrl_remove	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ehci-bcmbca.c:195:12:bcmbca_usb_ctrl_probe	112	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ehci-bcmbca.c:143:12:ehci_usb_remove	64	static

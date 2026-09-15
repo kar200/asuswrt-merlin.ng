@@ -1,0 +1,5 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/spi/spi-mem.c:105:12:spi_check_buswidth_req.isra	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/spi/spi-mem.c:134:6:spi_mem_default_supports_op	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/spi/spi-mem.c:172:6:spi_mem_supports_op	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/spi/spi-mem.c:197:5:spi_mem_exec_op	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/spi/spi-mem.c:431:5:spi_mem_adjust_op_size	0	static

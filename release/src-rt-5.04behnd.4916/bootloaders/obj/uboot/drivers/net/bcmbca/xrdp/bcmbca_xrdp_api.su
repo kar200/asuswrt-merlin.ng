@@ -1,0 +1,4 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/xrdp/bcmbca_xrdp_api.c:501:5:bcmbca_xrdp_init	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/xrdp/bcmbca_xrdp_api.c:571:5:bcmbca_xrdp_send	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/xrdp/bcmbca_xrdp_api.c:583:5:bcmbca_xrdp_recv	112	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/xrdp/bcmbca_xrdp_api.c:618:28:rtl8372_init_asus	0	static

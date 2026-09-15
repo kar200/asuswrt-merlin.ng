@@ -1,0 +1,1 @@
+cmd_arch/arm/mach-bcmbca/ubus/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o arch/arm/mach-bcmbca/ubus/built-in.o arch/arm/mach-bcmbca/ubus/bcm_ubus4_preb.o arch/arm/mach-bcmbca/ubus/bcm_ubus4_dt.o arch/arm/mach-bcmbca/ubus/6856/bcm_ubus_tbl.o 

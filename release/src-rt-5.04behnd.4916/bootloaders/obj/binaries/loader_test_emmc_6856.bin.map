@@ -1,0 +1,23 @@
+loader layout map file: offset, Binary, (size)
+----------------------------------------------
+Pad by 0 bytes
+0x00000000 emmc_u-boot-spl.bin_headered (99468 bytes)
+Pad by 28672 bytes
+0x00020000 DDR3_bcm_ddr.bin_headered (59900 bytes)
+Pad by 69632 bytes
+0x00040000 emmc_env.bin_headered (16392 bytes)
+0x00045000 mcbs.bin_headered (18252 bytes)
+0x0004a000 emmc_u-boot-spl.bin_headered (99468 bytes)
+0x00063000 DDR3_bcm_ddr.bin_headered (59900 bytes)
+Pad by 57344 bytes
+0x00080000 u-boot-tpl.bin_headered (166416 bytes)
+0x000a9000 mcbs.bin_headered (18252 bytes)
+0x000ae000 emmc_env.bin_headered (16392 bytes)
+0x000b3000 mcbs.bin_headered (18252 bytes)
+0x000b8000 emmc_u-boot-spl.bin_headered (99468 bytes)
+0x000d1000 u-boot-tpl.bin_headered (166416 bytes)
+Pad by 24576 bytes
+0x00100000 u-boot-tpl.bin_headered (166416 bytes)
+0x00129000 DDR3_bcm_ddr.bin_headered (59900 bytes)
+Pad by 294912 bytes
+end at 0x00180000

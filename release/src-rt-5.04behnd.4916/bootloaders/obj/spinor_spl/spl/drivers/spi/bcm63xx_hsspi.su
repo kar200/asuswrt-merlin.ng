@@ -1,0 +1,7 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/spi/bcm63xx_hsspi.c:150:13:bcm63xx_hsspi_activate_cs	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/spi/bcm63xx_hsspi.c:125:12:bcm63xx_hsspi_set_mode	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/spi/bcm63xx_hsspi.c:138:12:bcm63xx_hsspi_set_speed	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/spi/bcm63xx_hsspi.c:112:12:bcm63xx_hsspi_cs_info	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/spi/bcm63xx_hsspi.c:462:12:bcm63xx_hsspi_child_pre_probe	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/spi/bcm63xx_hsspi.c:492:12:bcm63xx_hsspi_probe	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/spi/bcm63xx_hsspi.c:354:12:bcm63xx_hsspi_xfer	112	static

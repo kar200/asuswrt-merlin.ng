@@ -70,7 +70,7 @@ endif
 
 -include build/configs/$(OPTIONS).conf
 
-KCFL="KCFLAGS=-Werror"
+KCFL ?= "KCFLAGS=-fcommon -Wno-error=unused-but-set-variable -Wno-error=discarded-qualifiers -Wno-error=int-conversion"
 
 ifeq ($(strip $(findstring smc,$(bcm_uboot_spl_prefix))),smc)
 FSBL_FINAL_BASE	= $(objdir)/binaries/u-boot-tpl
@@ -263,7 +263,11 @@ gen_html_headers:
 	cp $(ubootobjdir)/include/generated/404.h $(splobjdir)/include/generated/404.h
 
 rt_ver:
-	cp $(mdir)/../router/shared/version.h $(mdir)/$(UB)/include/rt_version.h
+	@if [ -f $(mdir)/../router/shared/version.h ]; then \
+		cp $(mdir)/../router/shared/version.h $(mdir)/$(UB)/include/rt_version.h; \
+	elif [ ! -f $(mdir)/$(UB)/include/rt_version.h ]; then \
+		printf '#ifndef _VERSION_H_\n#define _VERSION_H_\n#define RT_BUILD_NAME "BCM6856"\n#define RT_BUILD_INFO "U-Boot 2019.07"\n#define RT_SERIALNO "00000000"\n#define RT_EXTENDNO "0"\n#define RT_SWPID "0"\n#endif\n' > $(mdir)/$(UB)/include/rt_version.h; \
+	fi
 
 tools: configure
 	$(MAKE) -C $(UB) O=$(ubootobjdir) CROSS_COMPILE=$(UBOOT_CROSS_COMPILE) HOSTCC="$(HOSTCC)" tools
@@ -272,8 +276,7 @@ configure: $(ubootobjdir)/.config gen_html_headers rt_ver
 ifeq ($(strip $(BLD_COMMON)),y)
 	-rm -f $(ubootobjdir)/include/generated/hashtable.h
 endif
-#	@cp -ar $(objdir).$(shell echo $(BUILD_NAME) | tr A-Z a-z)/* $(objdir)/
-	@cp -ar $(objdir).$(shell echo $(BUILD_NAME) | tr A-Z a-z)/* $(UB)/
+	@if [ -n "$(BUILD_NAME)" ] && [ -d "$(objdir).$(shell echo $(BUILD_NAME) | tr A-Z a-z)" ]; then cp -ar $(objdir).$(shell echo $(BUILD_NAME) | tr A-Z a-z)/* $(UB)/; fi
 
 configure_spl: $(splobjdir)/.config
 	-rm -f $(splobjdir)/include/generated/hashtable.h

@@ -1,0 +1,1 @@
+cmd_drivers/mtd/spi/spi-nor.o := /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o drivers/mtd/spi/spi-nor.o drivers/mtd/spi/sf_probe.o drivers/mtd/spi/spi-nor-ids.o drivers/mtd/spi/spi-nor-core.o 

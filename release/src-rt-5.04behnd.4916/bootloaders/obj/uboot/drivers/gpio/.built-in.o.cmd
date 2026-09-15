@@ -1,0 +1,1 @@
+cmd_drivers/gpio/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o drivers/gpio/built-in.o drivers/gpio/gpio-uclass.o drivers/gpio/gpio-bcm-bca.o 

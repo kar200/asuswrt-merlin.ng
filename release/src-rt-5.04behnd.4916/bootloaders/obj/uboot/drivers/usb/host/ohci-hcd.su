@@ -1,0 +1,17 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:648:12:ep_rev	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:249:13:urb_free_priv	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:1764:12:hc_reset	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:1465:20:ohci_get_ohci_dev	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:2178:12:ohci_destroy_int_queue	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:893:13:td_fill.constprop	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:1899:12:hc_interrupt	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:2170:14:ohci_poll_int_queue	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:508:5:sohci_submit_job	160	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:2160:26:ohci_create_int_queue	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:1512:12:submit_common_msg	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:2150:12:ohci_submit_int_msg	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:2142:12:ohci_submit_bulk_msg	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:2132:12:ohci_submit_control_msg	112	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:1217:5:rh_check_port_status	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:2186:5:ohci_register	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/host/ohci-hcd.c:2213:5:ohci_deregister	32	static

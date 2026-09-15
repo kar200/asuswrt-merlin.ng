@@ -1,0 +1,11 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix88179.c:756:6:ax88179_eth_stop	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix88179.c:845:12:ax88179_free_pkt	16	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix88179.c:466:12:asix_send_common	1696	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix88179.c:769:5:ax88179_eth_send	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix88179.c:776:5:ax88179_eth_recv	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix88179.c:220:12:asix_write_cmd	224	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix88179.c:856:5:ax88179_write_hwaddr	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix88179.c:245:12:asix_read_cmd	208	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix88179.c:363:12:asix_wait_link	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix88179.c:865:12:ax88179_eth_probe	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/usb/eth/asix88179.c:749:12:ax88179_eth_start	80	static

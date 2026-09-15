@@ -1,0 +1,1 @@
+cmd_spl/arch/arm/mach-bcmbca/bcm6856/built-in.o :=  /opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux-ld.bfd     -r -o spl/arch/arm/mach-bcmbca/bcm6856/built-in.o spl/arch/arm/mach-bcmbca/bcm6856/mmu_table.o spl/arch/arm/mach-bcmbca/bcm6856/cpu.o spl/arch/arm/mach-bcmbca/bcm6856/sercomm_led.o 

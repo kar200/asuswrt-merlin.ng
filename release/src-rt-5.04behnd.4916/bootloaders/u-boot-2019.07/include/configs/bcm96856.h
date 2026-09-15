@@ -26,6 +26,33 @@
 
 #define CONFIG_ENV_CALLBACK_LIST_STATIC "boardid:boardid,active_port:active_port,voiceboardid:voiceboardid,"
 
+#define CONFIG_EXTRA_ENV_SETTINGS \
+	"IMAGE=SPINOR:2M,6M\0" \
+	"MCB=1527\0" \
+	"boardid=96856\0" \
+	"nummacaddrs=10\0" \
+	"ethaddr=02:10:18:00:00:01\0" \
+	"mtdids=nor0=spi-nor.0\0" \
+	"mtdparts=spi-nor.0:2M(loader),4M(bootfs),10M(rootfs)\0" \
+	"ipaddr=192.168.1.1\0" \
+	"serverip=192.168.1.100\0" \
+	"bootdelay=3\0" \
+	"baudrate=115200\0" \
+	"bootcmd=echo BCM6856 SPI-NOR U-Boot;sf probe 0:0;mmc rescan;run boot_default\0" \
+	"boot_default=echo No boot target configured - load with tftpboot/loadb or run boot_emmc\0" \
+	"env_boot_magic=16384@0x40000,0xad000\0" \
+	"ncip=255.255.255.255\0" \
+	"netconsole=echo Enabling NetConsole on UDP broadcast 255.255.255.255:6666...; setenv stdout serial,nc; setenv stderr serial,nc; setenv stdin serial,nc\0" \
+	"boot_emmc=run boot_cfe\0" \
+	"boot_cfe=echo Booting stock CFE from eMMC bootfs1 ...; " \
+		"mmc dev 0 0; " \
+		"mmc read 0x04000000 0x1000 0x900; " \
+		"cp.b 0x040012a1 0x01000000 0x1008d8; " \
+		"mw.b 0x011008d8 0 0x00200000; " \
+		"mw.l 0x0101f2e0 0x14000004 1; " \
+		"dcache off; icache off; " \
+		"go 0x01000000\0"
+
 /*
  * 6856
  */

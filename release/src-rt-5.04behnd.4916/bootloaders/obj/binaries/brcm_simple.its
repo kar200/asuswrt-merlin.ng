@@ -1,0 +1,55 @@
+
+/*
+ * Copyright (C) 2017 Rockchip Electronic Co.,Ltd
+ * Copyright (C) 2019 Broadcom
+ *
+ * Simple U-boot fit source file containing U-Boot, dtb and optee
+ */
+
+/dts-v1/;
+
+/ {
+	description = "Simple image with ATF and optional OP-TEE support";
+	#address-cells = <1>;
+
+
+	images {
+
+		uboot {
+			description = "U-Boot";
+			data = /incbin/("../../obj/uboot/u-boot-nodtb.bin");
+			os = "U-Boot";
+			arch = "arm64";
+			compression = "none";
+			load = <0x1000000>;
+			entry = <0x1000000>;
+			
+			hash-1 {
+				algo = "sha256";
+			};
+
+		};
+		fdt_uboot {
+			description = "dtb";
+			data = /incbin/("../../obj/uboot/dts/dt.dtb");
+			type = "flat_dt";
+			compression = "none";
+			
+			hash-1 {
+				algo = "sha256";
+			};
+
+		};
+
+	};
+	configurations {
+		default = "conf_uboot";
+		conf_uboot {
+			description = "BRCM 63xxx with uboot";
+			fdt = "fdt_uboot";
+			loadables = "uboot";
+		};
+	
+
+	};
+};

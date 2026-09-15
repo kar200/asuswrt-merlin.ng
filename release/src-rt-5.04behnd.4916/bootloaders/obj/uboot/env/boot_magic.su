@@ -1,0 +1,6 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/env/boot_magic.c:191:12:env_dev_read_write_mmc	96	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/env/boot_magic.c:407:12:env_boot_magic_save	256	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/env/boot_magic.c:267:12:env_dev_read.isra	80	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/env/boot_magic.c:30:17:env_boot_magic_search_size	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/env/boot_magic.c:35:12:env_override_import	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/env/boot_magic.c:329:12:env_boot_magic_load	480	static

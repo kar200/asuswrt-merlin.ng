@@ -1,0 +1,17 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:344:5:clk_request	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:57:12:clk_get_by_index_tail.part.0	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:121:5:clk_get_by_index	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:303:5:clk_get_by_name	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:133:5:clk_get_by_index_nodev	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:97:12:clk_get_by_indexed_prop	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:358:5:clk_free	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:370:7:clk_get_rate	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:382:7:clk_set_rate	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:394:5:clk_set_parent	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:281:5:clk_set_defaults	128	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:406:5:clk_enable	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:418:5:clk_enable_bulk	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:431:5:clk_disable	0	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:319:5:clk_release_all	48	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:145:5:clk_get_bulk	64	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/clk/clk-uclass.c:443:5:clk_disable_bulk	48	static
