@@ -38,13 +38,13 @@
 	"serverip=192.168.1.100\0" \
 	"bootdelay=3\0" \
 	"baudrate=115200\0" \
-	"bootcmd=echo BCM6856 SPI-NOR U-Boot;sf probe 0:0;mmc rescan;run boot_default\0" \
+	"bootcmd=echo BCM6856 SPI-NOR U-Boot;sf probe 0:0;mmc rescan;run netconsole;run boot_default\0" \
 	"boot_default=echo No boot target configured - load with tftpboot/loadb or run boot_emmc\0" \
 	"env_boot_magic=16384@0x40000,0xad000\0" \
 	"ncip=255.255.255.255\0" \
 	"netconsole=echo Enabling NetConsole on UDP broadcast 255.255.255.255:6666...; setenv stdout serial,nc; setenv stderr serial; setenv stdin serial,nc\0" \
-	"stdin=serial,nc\0" \
-	"stdout=serial,nc\0" \
+	"stdin=serial\0" \
+	"stdout=serial\0" \
 	"stderr=serial\0" \
 	"boot_emmc=run boot_cfe\0" \
 	"boot_cfe=echo Booting stock CFE from eMMC bootfs1 ...; " \
