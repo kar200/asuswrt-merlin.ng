@@ -172,3 +172,4 @@ Macro definition:
 boot_cfe=echo Booting stock CFE from eMMC bootfs1 ...; mmc dev 0 0; mmc read 0x04000000 0x1000 0x900; cp.b 0x040012a1 0x01000000 0x1008d8; mw.b 0x011008d8 0 0x00200000; mw.l 0x0101f2e0 0x14000004 1; dcache off; icache off; go 0x01000000
 ```
 This reads `bootfs1` (LBA `0x1000`), extracts `cferam.000` at `+0x12a1`, patches CFE's interactive prompt delay, clears BSS, and executes stock Linux without touching factory flash partitions.
+

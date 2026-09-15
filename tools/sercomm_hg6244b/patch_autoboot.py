@@ -73,3 +73,4 @@ if __name__ == "__main__":
     target = sys.argv[1] if len(sys.argv) > 1 else AUTOBOOT_O
     if not patch_file(target):
         sys.exit(1)
+

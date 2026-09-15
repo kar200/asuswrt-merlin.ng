@@ -10,3 +10,4 @@ This directory contains standalone tools, build scripts, and guides for the Serc
 - [`assemble_and_verify.py`](assemble_and_verify.py): Checks SBI/COT/FIT headers, validates CRCs, and generates final flash images.
 - [`patch_autoboot.py`](patch_autoboot.py): Binary patch utility for Broadcom `autoboot.o` to map Sercomm PB_RESET (GPIO 26) and disable ASUS Aura RGB overrides.
 - `deliverables/`: Output directory where packaged bootloader binaries and checksums are placed.
+

@@ -20,3 +20,4 @@ echo "# Deliverables staged in: ${SCRIPT_DIR}/deliverables       #"
 echo "############################################################"
 ls -la "${SCRIPT_DIR}/deliverables"
 cat "${SCRIPT_DIR}/deliverables/checksums.sha256"
+
