@@ -16,7 +16,7 @@ TARGET_PORT = 8888
 IMG_PATH = "/home/karim/github/asuswrt-merlin.ng/tools/sercomm_hg6244b/deliverables/bootstrap_image_spinor.bin"
 FLASH_OFFSET = 0x0
 LOAD_ADDR = 0x04000000
-READBACK_ADDR = 0x08000000
+READBACK_ADDR = 0x01000000
 
 SOH = 0x01
 STX = 0x02
@@ -304,3 +304,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
