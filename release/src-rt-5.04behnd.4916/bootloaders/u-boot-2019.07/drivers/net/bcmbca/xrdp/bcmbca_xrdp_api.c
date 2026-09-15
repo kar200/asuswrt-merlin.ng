@@ -350,7 +350,6 @@ static int __rdd_cpu_tx_poll(uint8_t tx_port)
 	counter_id = get_bbh_tx_counter_id(tx_port);
 	if (!counter_id)
 	{
-		printf("ERR: poll with non supported port\n");
 		return -1;
 	}
 
@@ -371,10 +370,6 @@ static int __rdd_cpu_tx_poll(uint8_t tx_port)
 			counter_id);
 	}
 	if (iter == RDD_CPU_TX_MAX_ITERS) {
-		printf("non empty at bbh full(ingress=%d,egress=%d,diff=%d)\n",
-			bbh_ingress_counter[tx_port],
-			egress_counter_val,
-			bbh_ingress_counter[tx_port] - egress_counter_val);
 		return -1;
 	}
 
@@ -391,8 +386,6 @@ static int rdd_cpu_tx(uint8_t *buffer, uint32_t length, uint8_t tx_port)
 	int rc;
 
 	if (length >= RDD_CPU_TX_MAX_BUF_SIZE) {
-		printf("ERR: can't transmit buffer with length %u longer "
-			"than %d\n", length, RDD_CPU_TX_MAX_BUF_SIZE);
 		return -1;
 	}
 
@@ -577,7 +570,13 @@ int bcmbca_xrdp_send(void *buffer, uint16_t length, uint8_t tx_port)
 	dump_packet((uint8_t *)buffer, length);
 #endif
 
-	return rdd_cpu_tx(buffer, length, tx_port);
+	/* If no active port detected (e.g. 0xff / disconnected), drop silently */
+	if (tx_port >= 16)
+		return 0;
+
+	/* Attempt transmission. If BBH FIFO is full or link not ready, drop silently */
+	rdd_cpu_tx(buffer, length, tx_port);
+	return 0;
 }
 
 int bcmbca_xrdp_recv(uint8_t **buffer, uint16_t *length, uint8_t *rx_port)
