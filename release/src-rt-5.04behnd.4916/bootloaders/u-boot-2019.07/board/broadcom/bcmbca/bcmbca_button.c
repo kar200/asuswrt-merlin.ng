@@ -18,6 +18,14 @@ DECLARE_GLOBAL_DATA_PTR;
 #define PRINT_ACT_NAME          "print"
 #define PRINT_ACT_NAME_UBOOT    "print_uboot"
 
+/*
+ * Action name used by the generic command hook: a button node carries
+ *	hook	  = <0>;
+ *	hook_cmd  = "run <env-var>";
+ * and the string is run on that event.
+ */
+#define HOOK_ACT_NAME           "hook"
+
 #define PRESS_EVENT             "press"
 #define HOLD_EVENT              "hold"
 #define RELEASE_EVENT           "release"
@@ -693,10 +701,43 @@ U_BOOT_DRIVER(bcmbca_button) = {
 	.probe = bcmbca_button_probe,
 };
 
+/*
+ * Generic button hook: run whatever command string the DTS supplied in the
+ * "<action>_cmd" property.  Keep that string pointing at an environment
+ * variable (e.g. "run btn_wps") so a button's behaviour can be changed at
+ * runtime with setenv/saveenv, with no rebuild.
+ */
+static void btn_hook_run_cmd(unsigned long timeInMs, void *param)
+{
+	if (param)
+		run_command((char *)param, 0);
+}
+
 void bcmbca_button_init(void)
 {
 	struct udevice *dev;
+	ofnode btn_np;
 
 	uclass_get_device_by_driver(UCLASS_NOP, DM_GET_DRIVER(bcmbca_button),
 						&dev);
+
+	/*
+	 * reset_button already registers its own release hook in
+	 * reset_button.c.  Every OTHER button node gets the generic command
+	 * hook for both its "press" and "release" nodes.  Only the explicitly
+	 * named "hook"/"hook_cmd" action is registered, so the "print"
+	 * property in the same node still goes to btn_hook_print instead of
+	 * being executed as a command.
+	 */
+	ofnode_for_each_subnode(btn_np, dev_ofnode(dev)) {
+		const char *name = ofnode_get_name(btn_np);
+
+		if (!strcmp(name, "reset_button"))
+			continue;
+
+		register_button_action_for_event(name, PRESS_EVENT, HOOK_ACT_NAME,
+						btn_hook_run_cmd);
+		register_button_action_for_event(name, RELEASE_EVENT, HOOK_ACT_NAME,
+						btn_hook_run_cmd);
+	}
 }

@@ -28,6 +28,16 @@ $c->set('CONFIG_SUPPORT_EMMC_BOOT','y');
 $c->set('CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR','y');
 $c->set('CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR','0x1000');
 
+# The TPL must carry the eMMC image loader (BOOT_DEVICE_MMC1), because the
+# loader env sets IMAGE=EMMC.  These two lines are explicit on purpose:
+# obj/uboot/.config is shared with the SPI-NOR build and spinor.arch unsets
+# CONFIG_TPL_MMC_SUPPORT, so leaving it to the Kconfig default makes the
+# eMMC TPL depend on build order - and it then links only the NOR loader,
+# which cannot satisfy IMAGE=EMMC ("TPL: Unsupported Boot Device!").
+$c->set('CONFIG_TPL_MMC_SUPPORT','y');
+$c->set('CONFIG_SPL_MMC_SUPPORT','y');
+$c->unset('CONFIG_TPL_SPI_FLASH_SUPPORT');
+
 # ---- eMMC / MMC stack in U-Boot proper ----
 $c->set('CONFIG_MMC','y');
 $c->set('CONFIG_DM_MMC','y');

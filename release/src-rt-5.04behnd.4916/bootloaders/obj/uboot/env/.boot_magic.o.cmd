@@ -481,6 +481,7 @@ deps_env/boot_magic.o := \
     $(wildcard include/config/arch/k3.h) \
   /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/include/handoff.h \
     $(wildcard include/config/handoff.h) \
+  /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/include/mtd.h \
   /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/include/bca_sdk.h \
   /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/include/boot_flash.h \
   /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/arch/arm/mach-bcmbca/include/bcm_strap_drv.h \

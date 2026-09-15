@@ -1096,7 +1096,7 @@ Discarded input sections
  .rodata.env_complete.str1.1
                 0x0000000000000000       0x10 env/built-in.o
  .rodata.default_environment
-                0x0000000000000000      0x3ca env/built-in.o
+                0x0000000000000000      0x3ff env/built-in.o
  .rodata.env_load.str1.1
                 0x0000000000000000       0x24 env/built-in.o
  .rodata.env_save.str1.1
