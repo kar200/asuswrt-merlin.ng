@@ -55,6 +55,7 @@ cd '${BLDIR}'
 # Clean previous target configs to prevent stale configs
 rm -f u-boot-2019.07/configs/tmp_*bcm96856_defconfig
 rm -f obj/uboot/.config
+rm -f obj/binaries/*env.bin_headered
 
 MK='make OPTIONS=${OPTIONS} BRCM_CHIP=${CHIP}'
 
