@@ -154,7 +154,21 @@ setenv stderr serial
 > Keep `stderr=serial`! Never route `stderr` to `nc` persistently during cold boot. If network transmission experiences a packet drop, an error printed to `stderr` would recursively attempt network transmission, causing Broadcom buffer queue exhaustion (`bbh full`).
 
 ### Connecting from Host
-Using `socat` (Full duplex interactive shell):
+**Recommended: Pure-Python Client** (Zero dependencies, bidirectional, raw TTY):
+```bash
+tools/sercomm_hg6244b/netconsole.py 192.168.1.1
+```
+Or in Fish shell:
+```fish
+netconsole 192.168.1.1
+```
+
+*Hotkeys:*
+- `Ctrl+]` or `Ctrl+\` or `Ctrl+Q`: Exit console
+- `Ctrl+C`: Send interrupt/break to U-Boot
+- Pipe input supported: `echo "version" | tools/sercomm_hg6244b/netconsole.py 192.168.1.1`
+
+Alternatively using `socat`:
 ```bash
 socat file:$(tty),raw,echo=0 udp-datagram:192.168.1.1:6666,bind=:6666
 ```
