@@ -10,5 +10,7 @@ This directory contains standalone tools, build scripts, and guides for the Serc
 - [`assemble_and_verify.py`](assemble_and_verify.py): Checks SBI/COT/FIT headers, validates CRCs, and generates final flash images.
 - [`patch_autoboot.py`](patch_autoboot.py): Binary patch utility for Broadcom `autoboot.o` to map Sercomm PB_RESET (GPIO 26) and disable ASUS Aura RGB overrides.
 - [`netconsole.py`](netconsole.py): Standalone pure-Python interactive NetConsole client (handles raw terminal mode, broadcast reception, and automation).
+- [`flash_spinor_ymodem.py`](flash_spinor_ymodem.py): Automated tool to stream and flash the verified SPI-NOR bootstrap image over serial YMODEM with dual CRC32 verification.
 - `deliverables/`: Output directory where packaged bootloader binaries and checksums are placed.
+
 

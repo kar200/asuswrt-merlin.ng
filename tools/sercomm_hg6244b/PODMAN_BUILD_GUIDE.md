@@ -93,6 +93,14 @@ Artifacts are verified and staged in `tools/sercomm_hg6244b/deliverables/`:
 ## 5. Flashing Procedures
 
 ### 5.1 Flashing SPI-NOR Flash from U-Boot Shell
+#### Option A: Automated One-Command Flash via Serial Bridge (Recommended)
+Connect PC to the same network as the UART bridge (`172.16.1.110:8888`), then run:
+```bash
+tools/sercomm_hg6244b/flash_spinor_ymodem.py
+```
+This automatically streams `bootstrap_image_spinor.bin` over YMODEM, verifies RAM CRC32, updates SPI-NOR via `sf update`, and verifies readback CRC32 against the hardware flash.
+
+#### Option B: Manual Network TFTP Flash
 1. Host PC connected to router LAN port at `192.168.1.100`.
 2. Router boots to U-Boot prompt `=> ` at `192.168.1.1`.
 3. In U-Boot:
@@ -104,6 +112,7 @@ Artifacts are verified and staged in `tools/sercomm_hg6244b/deliverables/`:
    sf read 0x06000000 0 ${filesize}
    cmp.b 0x05000000 0x06000000 ${filesize}
    ```
+
 
 ### 5.2 Flashing eMMC Hardware Boot Partition (`mmcblk0boot0`)
 #### Option A: From U-Boot Shell
