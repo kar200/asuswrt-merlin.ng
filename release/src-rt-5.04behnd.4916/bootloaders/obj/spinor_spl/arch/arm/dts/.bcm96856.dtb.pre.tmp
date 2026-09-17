@@ -50,19 +50,6 @@
 				stop_boot_cmd = "echo Boot interrupted by Reset Button; run btn_reset; setenv bootdelay -1";
 			};
 		};
-		wps_button {
-			ext_irq = <&gpioc 28 1 0>;
-			press {
-				print = "WPS Button Pressed";
-				/*
-				 * WPS button held at power-on turns on
-				 * netconsole. Change the action at runtime
-				 * with: setenv btn_wps "<cmd>"; saveenv
-				 */
-				hook = <0>;
-				hook_cmd = "run btn_wps";
-			};
-		};
 		wifi_button {
 			ext_irq = <&gpioc 81 1 0>;
 			press {

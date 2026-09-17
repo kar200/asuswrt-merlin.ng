@@ -18,7 +18,7 @@
 /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_tpl.c:723:20:bcm_sec_get_delg_cfg	16	static
 /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_tpl.c:1584:12:bcm_sec_delg_process_required_images	192	static
 /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_tpl.c:1745:5:bcm_sec_delg_post_process_sw_restrictions	0	static
-/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_tpl.c:1751:5:bcm_sec_delg_pre_process_sw_restrictions	448	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_tpl.c:1751:5:bcm_sec_delg_pre_process_sw_restrictions	256	static
 /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_tpl.c:2077:5:bcm_sec_delg_process_sec_node	224	static
 /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_tpl.c:2149:5:bcm_sec_delg_process_sdr	208	static
 /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_secure_tpl.c:2428:6:bcm_sec_delg_on_post_load	32	static

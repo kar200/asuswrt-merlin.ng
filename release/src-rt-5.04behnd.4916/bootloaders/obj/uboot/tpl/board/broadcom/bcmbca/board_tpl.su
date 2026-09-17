@@ -1,3 +1,5 @@
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_tpl.c:1011:14:spl_spi_fit_read	32	static
+/build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_tpl.c:1025:12:tpl_spinor_load_image	176	static
 /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_tpl.c:110:13:boost_cpu_clock	0	static
 /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_tpl.c:116:6:save_boot_params	0	static
 /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/board_tpl.c:131:6:board_spl_fit_post_load	0	static

@@ -381,19 +381,6 @@
     stop_boot_cmd = "echo Boot interrupted by Reset Button; run btn_reset; setenv bootdelay -1";
    };
   };
-  wps_button {
-   ext_irq = <&gpioc 28 1 0>;
-   press {
-    print = "WPS Button Pressed";
-
-
-
-
-
-    hook = <0>;
-    hook_cmd = "run btn_wps";
-   };
-  };
   wifi_button {
    ext_irq = <&gpioc 81 1 0>;
    press {
@@ -408,7 +395,7 @@
    };
   };
  };
-# 105 "arch/arm/dts/.bcm96856.dtb.pre.tmp"
+# 92 "arch/arm/dts/.bcm96856.dtb.pre.tmp"
  unimac: unimac {
   compatible = "brcm,unimac";
   reg = <0x0 0x82da0000 0x0 0x6000>,
@@ -417,7 +404,7 @@
   conf_offset = <0x1000>;
   mib_offset = <0x400>;
   top_offset = <0x400>;
-# 136 "arch/arm/dts/.bcm96856.dtb.pre.tmp"
+# 123 "arch/arm/dts/.bcm96856.dtb.pre.tmp"
   mib_step = <0x1>;
  };
 
@@ -465,7 +452,7 @@
    reg = <4>;
    status = "okay";
   };
-# 221 "arch/arm/dts/.bcm96856.dtb.pre.tmp"
+# 208 "arch/arm/dts/.bcm96856.dtb.pre.tmp"
   phy_ext3_5: phy@5 {
    compatible = "brcm,bcaphy";
    phy-type = "EXT3";
@@ -531,7 +518,7 @@
     gmii-direct;
     status = "okay";
    };
-# 307 "arch/arm/dts/.bcm96856.dtb.pre.tmp"
+# 294 "arch/arm/dts/.bcm96856.dtb.pre.tmp"
    port_2p5g0 {
     reg = <5>;
     mac-type = "UNIMAC";
