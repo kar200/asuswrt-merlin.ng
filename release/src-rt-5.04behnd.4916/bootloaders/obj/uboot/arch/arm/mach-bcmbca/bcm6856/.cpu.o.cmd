@@ -11,6 +11,7 @@ deps_arch/arm/mach-bcmbca/bcm6856/cpu.o := \
     $(wildcard include/config/disable/console.h) \
     $(wildcard include/config/silent/console.h) \
     $(wildcard include/config/tpl/atf.h) \
+    $(wildcard include/config/hotplug/cpu.h) \
   /build/asuswrt-merlin/release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/include/common.h \
     $(wildcard include/config/sys/support/64bit/data.h) \
     $(wildcard include/config/env/is/embedded.h) \

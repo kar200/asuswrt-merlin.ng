@@ -1,5 +1,5 @@
-#define U_BOOT_DATE "Sep 15 2026"
-#define U_BOOT_TIME "06:52:21"
+#define U_BOOT_DATE "Sep 17 2026"
+#define U_BOOT_TIME "04:25:20"
 #define U_BOOT_TZ "+0000"
-#define U_BOOT_DMI_DATE "09/15/2026"
-#define U_BOOT_BUILD_DATE 0x20260915
+#define U_BOOT_DMI_DATE "09/17/2026"
+#define U_BOOT_BUILD_DATE 0x20260917

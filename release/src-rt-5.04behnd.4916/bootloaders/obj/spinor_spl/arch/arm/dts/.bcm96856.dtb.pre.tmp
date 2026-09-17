@@ -26,22 +26,54 @@
 		reg = <0x0 0x0 0x0 0x08000000>;
 	};
 
+	/*
+	 * Button pins come from the board's own GPIO map, dumped from stock
+	 * CFE with "sc_gpio d":
+	 *
+	 *	PB_RESET  100   26
+	 *	PB_WPS    101   28
+	 *	PB_WIFI   102   81
+	 *
+	 * U-Boot's "gpioc N" numbering is the same space: gpioc13/8/9/10/7/62/
+	 * 1/27/59/22 carry the LED names CFE lists against 13/8/9/10/7/62/1/
+	 * 27/59/22.  We only wire RESET and WIFI here.
+	 */
 	buttons {
 		compatible = "brcm,buttons";
 		reset_button {
-			ext_irq = <&gpioc 82 1 0>;
+			ext_irq = <&gpioc 26 1 0>;
 			press {
 				print = "Reset Button Pressed";
 			};
 			release {
 				stop_boot = <0>;
-				stop_boot_cmd = "echo Boot interrupted by Reset Button; setenv bootdelay -1";
+				stop_boot_cmd = "echo Boot interrupted by Reset Button; run btn_reset; setenv bootdelay -1";
 			};
 		};
-		ses_button {
-			ext_irq = <&gpioc 83 1 0>;
+		wps_button {
+			ext_irq = <&gpioc 28 1 0>;
 			press {
 				print = "WPS Button Pressed";
+				/*
+				 * WPS button held at power-on turns on
+				 * netconsole. Change the action at runtime
+				 * with: setenv btn_wps "<cmd>"; saveenv
+				 */
+				hook = <0>;
+				hook_cmd = "run btn_wps";
+			};
+		};
+		wifi_button {
+			ext_irq = <&gpioc 81 1 0>;
+			press {
+				print = "WiFi Button Pressed";
+				/*
+				 * WiFi button held at power-on turns on
+				 * netconsole.  Change the action at runtime
+				 * with: setenv btn_wifi "<cmd>"; saveenv
+				 */
+				hook = <0>;
+				hook_cmd = "run btn_wifi";
 			};
 		};
 	};
