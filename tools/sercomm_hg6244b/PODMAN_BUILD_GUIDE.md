@@ -11,6 +11,11 @@ Board identity: `Chip ID: BCM68360_B1` (= BCM6856), CFE boardtype `968360BG`,
 
 ## 0. TL;DR
 
+**Current eMMC update:** use the dated FIT-only release in §5.2 and §6.3.
+Do not rebuild or flash the loader to install it. The commands immediately below
+are the **legacy full-image workflow**, not the September 22 update procedure.
+The port-6969 example requires a different build with `CONFIG_TFTP_PORT=y`.
+
 ```bash
 # 1. build both bootloaders (SPI-NOR + eMMC), from the repo root
 tools/sercomm_hg6244b/build_all.sh
@@ -37,7 +42,7 @@ Then cold power-cycle by hand. **Never issue the software `reset`.**
 | `…/bootloaders/obj/` | Build output. `obj/binaries/` holds the assembled stage-1 loader, the env blob and the FIT. Pre-existing objects are committed by the vendor; **never `make clean`** (it deletes `obj/binaries/`). |
 | `tools/sercomm_hg6244b/` | This directory: build scripts, flash/test tools, guides, and the packaged `deliverables/`. |
 | `tools/sercomm_hg6244b/GPIO_MAP.md` | Authoritative GPIO map (LEDs, buttons) dumped from the stock CFE. |
-| `tools/sercomm_hg6244b/deliverables/` | The final, verified images (and their checksums) exactly as flashed. |
+| `tools/sercomm_hg6244b/deliverables/` | Dated tested release, configuration snapshot, and retained historical images; see §5 for provenance and hashes. |
 
 ---
 
@@ -61,6 +66,10 @@ writable). The scripts also create the `/opt/toolchains` symlink and the
 ## 3. Building
 
 ### 3.1 Turnkey
+
+These scripts rebuild loaders and overwrite generic deliverable names. Keep the
+archived v4 rollback and dated release safe before using them. For the isolated
+proper-U-Boot build used by the current release, see §5.2 instead.
 
 ```bash
 tools/sercomm_hg6244b/build_all.sh     # runs both targets, then assembles deliverables
@@ -231,34 +240,32 @@ touches the network stack.
 
 ## 5. Deliverables
 
-All files below are in `tools/sercomm_hg6244b/deliverables/` and are exactly what was
-flashed and verified on the router.
+All files below are in `tools/sercomm_hg6244b/deliverables/`. Verify them from
+that directory with `sha256sum -c checksums.sha256`.
 
-> [!NOTE]
-> **Provenance.** These images were built from a working tree whose
-> `include/configs/bcm96856.h` still carried `stdin`/`stdout` = `serial,nc` as the
-> compiled-in default, and whose `bcmbca_xrdp_api.c` did not yet have the silent-drop
-> patch (the `non empty at bbh full` string is still present in both images). The
-> committed tree now has the serial-only header and the patch, so a rebuild from this
-> repository produces a **different** FIT: the behaviour driven by the env blob is
-> identical, the compiled-in defaults are not. Rebuild and re-verify the CRCs above
-> before flashing if the images must match bit for bit.
+Only the dated eMMC FIT was newly flashed and cold-booted for this release.
+Existing generic artifacts are retained, not rebuilt or newly certified. In
+particular, `brcm_simple.itb` is the September 17 SMP-capable v4 rollback from
+commit `b805d76fbf`, not the September 15 single-CPU image described by older
+versions of this guide. Shared `obj/binaries/` at the parent commit `abbb619468`
+contains later SPI-NOR output and is **not** the source of this eMMC release.
 
 ### 5.1 SPI NOR (XM25QH128C-class, 16 MiB)
 
 | File | Size | CRC32 | MD5 | Description |
 |---|---|---|---|---|
-| `spinor_16MB_full.bin` | 16777216 | `0e751af1` | `7677d87d6d582649787e57b4730c2848` | Full 16 MiB chip image (loader + FIT + 0xFF). For an external programmer. |
-| `bootstrap_image_spinor.bin` | 3014656 | `e1410197` | `617876cee31c458b812e8b652f2612ce` | The first `0x2E0000` bytes of the above: loader + FIT padded to a block boundary. This is the payload for `sf update`. |
+| `spinor_16MB_full.bin` | 16777216 | `7d1e1c4c` | `f58201bce3e9e2a6ddc8492c0f2d652f` | Retained full 16 MiB chip image. |
+| `bootstrap_image_spinor.bin` | 2998461 | `bc63450e` | `de3788586fa8a5235b745e8f5f556096` | Retained loader + FIT; not the old `0x2E0000`-byte padded file. |
 | `spinor_4MB_W25Q32JV.bin` | 4194304 | `09af12fa` | `f54619894c76d1ccfb85c717e4c91d28` | Full image for the 4 MiB W25Q32JV replacement parts. |
-| `loader_spinor.bin` | 2097152 | `d68e84c5` | `c2c2d203bd1a44ba9b94b549894260b3` | Stage-1 TPL/SPL loader alone. |
+| `loader_spinor.bin` | 2097152 | `5585dd9a` | `86b4e778fcfcfa385ee52e5a876a4808` | Retained stage-1 TPL/SPL loader alone. |
 
-U-Boot build stamp for the SPI images: `U-Boot 2019.07 (Sep 15 2026 - 12:54:45 +0000)`.
+These are metadata checks of retained files, not new SPI-NOR hardware tests.
+They do not all represent the same build; the eMMC release does not update them.
+Use the manifest for exact identity, not the older guide's September 15 stamp.
 
-`spinor_4MB_W25Q32JV.bin` is byte-for-byte the first 4 MiB of `spinor_16MB_full.bin`
-(verified), so it is produced by truncation rather than by a separate build — the
-loader and FIT both fit well inside 4 MiB. Note that 4 MiB parts therefore leave no
-room for the `bootfs`/`rootfs` `mtdparts` regions the 16 MiB env assumes.
+The retained 4 MiB image is an older artifact: do not assume it matches the
+current 16 MiB image's prefix. Also, 4 MiB parts leave no room for the
+`bootfs`/`rootfs` `mtdparts` regions assumed by the 16 MiB environment.
 
 Layout, identical on SPI NOR and inside the eMMC boot partition:
 
@@ -267,32 +274,107 @@ offset 0x000000  (2 MiB)   stage-1 loader (TPL + SPL + env blob)
 offset 0x200000            U-Boot proper as a FIT (brcm_simple.itb)
 ```
 
-### 5.2 eMMC boot0 (our U-Boot)
+### 5.2 Current eMMC FIT-only release
 
-| File | Size | CRC32 | MD5 | Written to |
-|---|---|---|---|---|
-| `bootstrap_image_emmc_boot_part.bin` | 2097152 | `cd6bd371` | `54e1f4f0c0ebab2334f22c3d196bbb54` | the 2 MiB stage-1 loader → boot0 block `0x0` |
-| `brcm_simple.itb` | 898621 | `b4cb9cb5` | `cc260ec3d595c16c5560ab13e1a2a37f` | the U-Boot FIT → boot0 block `0x1000` |
-| `emmc_boot0_custom.bin` | 4194304 | `a1801fc3` | `99572b0d77b87e11e2f90ca8422a692b` | the whole boot0 via a single `mmc write 0x… 0 0x2000` |
-| `emmc_boot0_stock.bin` | 4194304 | `2d64be07` | `1ad513ecf34b811556fbc35343888b76` | the **factory** boot-partition image (stock CFE), written to boot1 |
+Banner: `U-Boot 2019.07 (Sep 22 2026 - 04:24:51 +0000)`,
+`Build: sercomm-ramopts-20260922`.
 
-`emmc_boot0_custom.bin` is assembled from the two files above (loader at 0x0, FIT at
-0x200000, 0xFF tail) — see `assemble_and_verify.py`. The staged names are unchanged
-from the build pipeline output on purpose: `bootstrap_image_emmc_boot_part.bin` simply
-is the 2 MiB loader, despite the generic name.
+| Artifact | Bytes | CRC32 | Use |
+|---|---:|---|---|
+| `emmc_brcm_simple_ramopts_20260922.itb` | 921853 | `be7a45cf` | Signed FIT before sector padding |
+| `emmc_brcm_simple_ramopts_20260922_padded.itb` | 922112 | `83fc2934` | Flash **boot0 LBA 0x1000**, **0x709 blocks** |
+| `uboot_emmc_ramopts.bin` | 916863 | `b009a790` | Raw U-Boot + control DTB; **not directly flashable** |
 
-The FIT is written as 1756 blocks (`0x6DC`) = 899072 bytes, i.e. padded with 0xFF to
-a 512-byte boundary; CRC32 of that padded region is `9d9e9043`.
+SHA256 of the padded FIT:
+`a0413201603a6212d2f579eb4c1a5f3423e2820d00170d7e127c2b2fb7b56549`.
+All artifact hashes, including `ramopts_20260922.config`, are in the manifest.
 
-U-Boot build stamp for the eMMC FIT: `U-Boot 2019.07 (Sep 15 2026 - 14:19:57 +0000)`.
+#### Configuration and isolated build
 
-> [!NOTE]
-> The flasher writes **only** the loader range and the FIT range. The remaining
-> ~1.2 MiB tail of boot0 is deliberately left untouched, so a CRC32 of the whole
-> 4 MiB partition is *not* a stable identifier for a device that was flashed in
-> place (it still contains whatever the partition held before). Compare the two
-> ranges individually, or flash `emmc_boot0_custom.bin` if you want the whole
-> partition deterministic.
+Source: `release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07`, base target
+`bcm96856_defconfig`, `OPTIONS=options_6856_emmc`, `BRCM_CHIP=6856`.
+The durable change is in `build/configs/emmc_6856.arch`, not generated `.config`:
+`CONFIG_CMD_TFTPPUT`, `CONFIG_CMD_BOOTMENU`, `CONFIG_CMD_PXE`,
+`CONFIG_CMD_MEMINFO`, `CONFIG_CMD_LOG`, `CONFIG_CMD_TIME`, `CONFIG_CMD_GETTIME`,
+and `CONFIG_CMD_FS_UUID`. Kconfig also enables `CONFIG_MENU`, `CONFIG_BOOTP_PXE`,
+and PXE client architecture `0x16`. DHCP and Broadcom HTTP recovery were already on.
+
+The release was built in `sercomm-toolchain`, with this repository mounted at
+`/build/asuswrt-merlin`. From its `release/src-rt-5.04behnd.4916/bootloaders`
+directory, the isolated build recipe is:
+
+```bash
+MK='make OPTIONS=options_6856_emmc BRCM_CHIP=6856 bcm_uboot_uboot_prefix=ramopts_ BLD_COMMON=n UBOOT_BUILD_TAG=sercomm-ramopts-20260922 -o rt_ver'
+$MK configure
+make -C u-boot-2019.07 O=../obj/ramopts_uboot -j8 \
+  CROSS_COMPILE=/opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin/aarch64-linux- \
+  BLD_COMMON=y tools
+$MK -j8 uboot
+```
+
+Use a fresh isolated output/config for future builds; the stale-config warning
+in §3.3 applies to the prefixed temporary defconfig too. No `make clean`,
+`common`, `spl`, or `loaderimage` was run for this release. Required prebuilt
+vendor artifacts were retained. The host-tools step supplies `fdtgrep`, `mkimage`,
+and `scripts/dtc/dtc`. GCC was 10.3.0 / binutils 2.36.1 / Buildroot 2021.02.4.
+
+`package_emmc_ramopts.py` preserves the tested payload identity and never flashes.
+It requires the exact `obj/ramopts_uboot` output and a running, correctly mounted
+container; it intentionally rejects a newly compiled binary with a different
+hash. It is an archival packaging recipe, not automatic qualification of future
+builds. On the host, with Python 3, Podman, and `fdtget` available:
+
+```bash
+python3 tools/sercomm_hg6244b/package_emmc_ramopts.py --output-dir /tmp/sercomm-fit-check
+```
+
+The output directory must not contain either output FIT. The script checks raw
+payload and v4 identities, uses the SDK's existing GEN3 demo signing key, and
+verifies both v4 and new RSA-PSS/SHA256 header signatures. No private key is
+copied into this tools directory. Vendor packaging uses two external-data nodes,
+a 4096-byte header reserve, `conf_uboot`, and load/entry `0x01000000`. The vendor
+U-Boot node displays `Unknown Image` in `iminfo`, as v4 does; its hashes must pass.
+FIT timestamps and randomized signatures can change when repackaging, even when
+the payload is identical. Use the archived files for the exact tested release.
+
+#### Verification and limitations
+
+- RAM command tests: TFTP upload of 4097 synthetic bytes matched its host hash;
+  interactive bootmenu selection executed the expected echo; PXE fetched a
+  controlled config and dispatched a harmless local command; meminfo, logging,
+  gettime, and `time sleep 1` passed. `fsuuid mmc 0:f` matched p15's ext4 UUID.
+  Partition numbers in U-Boot are hexadecimal (`f` = decimal 15).
+- RAM chain-loading must preserve the **live loader-patched control DTB**. The
+  packaged DTB describes only 128 MiB; the loader supplies 1 GiB and
+  `/chosen/boot_device = "EMMC"`. The raw executable is `0xddb30` bytes, so this
+  build's appended-DTB address at load `0x01000000` is `0x010ddb30`. Recalculate
+  that offset for any other binary. Never boot Linux with the unpatched 128 MiB map.
+- Flash read-back compared all 922112 bytes; SHA256, CRC32, and both FIT payload
+  hashes passed. All 2097152 prefix bytes and 1175040 tail bytes matched before
+  and after. Loader, saved environment, kernel, and rootfs were not flashed.
+- Cold activation on September 22 confirmed the new banner, 1 GiB DRAM,
+  `/chosen/boot_device = "EMMC"`, and the existing saved boot macros.
+- Custom p15 Linux: CPU online `0-1`, MemTotal `983888 kB`, writable ext4 root,
+  and a responsive shell. No new cntfrq warning, oops, panic, or call trace was
+  observed. `CloseKernelHWWD` remains in use without `StopKick`. These are smoke
+  tests, not a long-term stability guarantee.
+- Linux `br0` still has RX=0 and no IPv4 lease; only the `udhcpc` client was seen.
+  LAN forwarding and full V1 startup-chain alignment remain unfinished.
+- Full PXE kernel/netboot, HTTP reachability/uploads, and peripheral features
+  such as USB Ethernet have not been qualified by these tests.
+
+#### Retained rollback and legacy whole-partition images
+
+`brcm_simple.itb` remains the v4 rollback:
+SHA256 `1e5b3a0cc83bf9ceb5d451d8e64de398a76e186098af8fb9a56decf313a9a859`.
+Its 0xFF-padded 512-byte representation occupies `0x6e1` blocks, CRC32 `990f203c`,
+SHA256 `ca2264c5d89a464854308735d13ccf94eb88b96e7cf4136f5558015959b375a9`.
+Rollback requires that separate padding/count, not the new release's `0x709`.
+
+`bootstrap_image_emmc_boot_part.bin`, `emmc_boot0_custom.bin`, and
+`emmc_boot0_stock.bin` are retained historical files. The whole-boot0 image is
+**not** a backup of the currently flashed board: it can overwrite saved
+configuration and the loader. Do not install it as this FIT-only update.
 
 ---
 
@@ -300,19 +382,32 @@ U-Boot build stamp for the eMMC FIT: `U-Boot 2019.07 (Sep 15 2026 - 14:19:57 +00
 
 ### 6.1 TFTP server
 
-U-Boot pulls images with `tftpboot`. Port 69 needs root, so the helper server runs on
-**6969** and U-Boot is pointed at it per transfer:
+The current eMMC build uses standard TFTP **UDP port 69**. `CONFIG_TFTP_PORT`
+is not enabled, so `setenv tftpdstp 6969` does not redirect it to the bundled
+port-6969 helper. Use an existing trusted TFTP service rooted at the directory
+containing the release file. Bind it only to the intended LAN interface; do not
+start a DHCP server on a connected home LAN.
 
-```bash
-tools/sercomm_hg6244b/tftp_server.py [directory]   # defaults to deliverables/
-```
+For a DHCP lease without automatic image download:
 
 ```text
-setenv tftpdstp 6969      # set for this transfer only — never saveenv this
+setenv autoload no
+dhcp
 ```
 
-`CONFIG_CMD_TFTPPUT is not set`, so U-Boot cannot upload. Host side is expected at
-`192.168.1.100` (`serverip`).
+Set a reachable `serverip` explicitly afterward; a DHCP server is not necessarily
+your TFTP server. An IP-qualified filename avoids ambiguity. These are session
+settings; no `saveenv` is required. TFTP has no authentication: verify the file's
+local manifest and its downloaded hash before writing. TFTP upload is enabled;
+the server may require a precreated writable destination file.
+
+`sdk httpd_start` enables Broadcom's HTTP recovery endpoint (TCP 80). Uploading
+firmware can flash storage and reboot, even when U-Boot runs from RAM or
+`no_commit_image` is set. This is not a read-only HTTP test. It has not been
+live-tested for this release; use only an isolated, trusted recovery network.
+
+The following SPI-NOR procedure is historical and requires its stated features;
+it was not revalidated as part of the eMMC update.
 
 ### 6.2 SPI NOR — network flash (recommended)
 
@@ -344,28 +439,90 @@ needed, ~9.6 KB/s instead of ~5 MB/s).
 
 This path issues **no `mmc` command at all** — the eMMC is not touched.
 
-### 6.3 eMMC boot0 — network flash
+### 6.3 eMMC boot0 — current FIT-only update
 
-```bash
-tools/sercomm_hg6244b/flash_emmc_uboot.py            # over the UART TCP bridge
-tools/sercomm_hg6244b/flash_emmc_netconsole.py       # same, over UDP 6666 (no UART needed)
-```
+Requires the already-working compatible eMMC loader, **1 GiB** DRAM, backups,
+and a local UART recovery path. Do not run `flash_emmc_uboot.py` or
+`flash_emmc_netconsole.py` for this release: they are legacy full-loader
+flashers with older fixed counts and would not preserve the saved environment.
 
-Both write **boot0 (hwpart 1) only**:
+Run each phase separately and **stop on any error or mismatch**. Do not paste
+all phases as an unattended script. Adapt the addresses below to your trusted
+LAN; `172.16.1.110` / `172.16.1.114` were the client/server during validation.
+Do not duplicate another device's address. Intercept autoboot; the saved
+`bootcmd` on the development board includes a stock-CFE fallback.
 
 ```text
-tftpboot 0x04000000 bootstrap_image_emmc_boot_part.bin
-mmc dev 0 1
-mmc write 0x04000000 0x0 0x1000            # loader -> block 0x0
-tftpboot 0x04000000 brcm_simple.itb
-mw.b <end> 0xff <pad>                      # pad the tail of the last block
-mmc write 0x04000000 0x1000 0x6DC          # FIT -> block 0x1000
-# read both ranges back and compare CRC32
+setenv bootcmd true
+setenv bootdelay -1
+setenv autostart no
+setenv autoload no
+setenv ipaddr 172.16.1.110
+setenv serverip 172.16.1.114
+setenv netmask 255.255.255.0
+setenv netretry no
+tftpboot 0x10000000 172.16.1.114:emmc_brcm_simple_ramopts_20260922_padded.itb
+crc32 0x10000000 0xe1200
+hash sha256 0x10000000 0xe1200
+iminfo 0x10000000
 ```
 
-Every write is verified by reading the blocks back and comparing CRC32 against the
-local file. `hwpart 0` (the user area, its GPT and every partition) is **never**
-written.
+Require `922112 (e1200 hex)` bytes, CRC `83fc2934`, the padded SHA256 from §5.2,
+and both FIT hashes OK. Preserve both untouched ranges in RAM before the write:
+
+```text
+mmc dev 0 1
+mmc read 0x22000000 0 0x1000
+mmc read 0x24000000 0x1709 0x8f7
+```
+
+Require both reads to succeed. Then write **only** the FIT and compare it:
+
+```text
+mmc dev 0 1 && mmc write 0x10000000 0x1000 0x709
+mmc read 0x20000000 0x1000 0x709 && cmp.b 0x10000000 0x20000000 0xe1200
+crc32 0x20000000 0xe1200
+hash sha256 0x20000000 0xe1200
+iminfo 0x20000000
+```
+
+Require 1801 blocks written/read, all 922112 bytes identical, the expected
+CRC/SHA256, and both FIT hashes OK. Verify the untouched loader/environment and
+tail, then restore the user-area selection without writing it:
+
+```text
+mmc read 0x23000000 0 0x1000 && cmp.b 0x22000000 0x23000000 0x200000
+mmc read 0x25000000 0x1709 0x8f7 && cmp.b 0x24000000 0x25000000 0x11ee00
+mmc dev 0 0
+```
+
+Require all prefix/tail bytes identical. No `saveenv`, loader write, kernel/rootfs
+write, or software reset. If UART execution is ambiguous, inspect console replay
+and read storage before retrying; a bare newline can repeat the previous command.
+Cold power-cycle by hand, intercept autoboot, and verify the banner and DRAM.
+
+For the development board's existing custom p15 installation only, read the
+kernel and DTB and check their CRCs before booting; these locations are **not** a
+universal partition layout or an installer:
+
+```text
+mmc dev 0 0
+mmc read 0x00080000 0x3000 0x4428
+crc32 0x00080000 0x885000
+mmc read 0x06000000 0x8000 0x10
+crc32 0x06000000 0x2000
+```
+
+Expected CRCs: kernel `92509926`, DTB `8cc340c0`. Only after both match:
+
+```text
+setenv bootargs console=ttyS0,115200 root=/dev/mmcblk0p15 rw rootwait
+booti 0x00080000 - 0x06000000
+```
+
+This avoids executing the stock fallback. Check CPU online `0-1`, memory, and
+client-only DHCP in Linux. Do not boot stock firmware on the home LAN: it may
+start a DHCP server and update storage.
 
 ### 6.4 eMMC boot1 — stock CFE, and the boot-partition switch
 
@@ -413,9 +570,11 @@ boot_cfe=echo Booting stock CFE from eMMC bootfs1 ...; mmc dev 0 0; mmc read 0x0
 
 ### 7.1 Serial
 
-The default and always-available console. 115200 8N1. On the development unit it is
-reached through a TCP-UART bridge; the tools default to `172.16.1.110:8888` and
-accept a host argument where it matters.
+The default console is 115200 8N1. The current development bridge is
+`172.16.1.109:8888`; some legacy tools still hardcode `.110`, so check their
+configuration before use. The bridge is effectively single-client and replays
+buffered output on connection. Quiet-drain helpers can return before long MMC
+operations finish; require a fresh, attributable response before continuing.
 
 ### 7.2 NetConsole (opt-in)
 
@@ -457,6 +616,10 @@ runs `btn_wifi` → `run netconsole`.
    /var/ft -r`) and never let that script see a failure.
 5. `mmc partconf` writes only EXT_CSD and is reversible; `mmc rst-function` and
    `mmc hwpartition … complete` are **write-once** — do not touch them.
+6. Do not start a DHCP server on a connected home LAN. The custom p15 system
+   uses an `udhcpc` client on `br0`; never run the stock fallback casually.
+7. FIT-only updates preserve the loader and saved environment. Never substitute
+   a whole-boot0 image or invoke HTTP firmware upload as a diagnostic check.
 
 ---
 

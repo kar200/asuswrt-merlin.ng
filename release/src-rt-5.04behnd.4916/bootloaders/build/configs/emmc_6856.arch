@@ -81,6 +81,16 @@ $c->set('CONFIG_SYS_CONSOLE_IS_IN_ENV','y');
 $c->set('CONFIG_CMD_HASH','y');
 $c->set('CONFIG_HASH_VERIFY','y');
 
+# ---- optional boot and diagnostic commands ----
+$c->set('CONFIG_CMD_TFTPPUT','y');
+$c->set('CONFIG_CMD_BOOTMENU','y');
+$c->set('CONFIG_CMD_PXE','y');
+$c->set('CONFIG_CMD_MEMINFO','y');
+$c->set('CONFIG_CMD_LOG','y');
+$c->set('CONFIG_CMD_TIME','y');
+$c->set('CONFIG_CMD_GETTIME','y');
+$c->set('CONFIG_CMD_FS_UUID','y');
+
 #####   End of config changes #####
 $c->write();
 
