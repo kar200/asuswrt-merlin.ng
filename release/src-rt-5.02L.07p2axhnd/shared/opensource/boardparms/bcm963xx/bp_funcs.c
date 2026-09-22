@@ -17,6 +17,7 @@
 #endif
 
 bp_elem_t * g_pCurrentBp = 0; 
+static bp_elem_t bp_null_elem = { bp_last };
 
 
 /* Externs */
@@ -388,6 +389,11 @@ bp_elem_t * BpGetElem(enum bp_id id, bp_elem_t **pstartElem, enum bp_id stopAtId
     if ( 0 == *pstartElem )
         *pstartElem = g_pCurrentBp;
 
+    if ( 0 == *pstartElem ) {
+        *pstartElem = &bp_null_elem;
+        return &bp_null_elem;
+    }
+
     pelem = *pstartElem;
     while(1) 
     {
@@ -474,6 +480,11 @@ bp_elem_t * BpGetElemIntf(enum bp_id id, bp_elem_t **pstartElem, enum bp_id stop
     // when compiling CFE, it does not like 'NULL' hence using 0
     if ( 0 == *pstartElem )
         *pstartElem = g_pCurrentBp;
+
+    if ( 0 == *pstartElem ) {
+        *pstartElem = &bp_null_elem;
+        return &bp_null_elem;
+    }
 
     for (pelem = *pstartElem; 
          pelem->id != bp_last && pelem->id != id && pelem->id != stopAtId; 

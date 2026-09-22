@@ -9,7 +9,7 @@ obj-y		+=  bp_funcs.o boardparms_chip.o
 obj-y		+= pinmux_table_$(BRCM_CHIP).o
 obj-y		+= boardparms_$(BRCM_CHIP).o
 
-ifneq ($(strip $(BRCM_VOICE_SUPPORT)),)
+ifneq ($(strip $(CONFIG_BCM_VOICE_SUPPORT)$(BRCM_VOICE_SUPPORT)),)
 obj-y		+= boardparms_voice.o
 EXTRA_CFLAGS += -DCONFIG_BOARDPARMS_VOICE
 endif

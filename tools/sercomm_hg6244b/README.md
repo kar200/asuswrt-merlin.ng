@@ -39,6 +39,7 @@ for artifact hashes, test scope, build/packaging provenance, and safe flashing.
 |---|---|
 | [`build_all.sh`](build_all.sh) | Turnkey: builds both targets and packages the deliverables. |
 | [`build_spinor.sh`](build_spinor.sh) / [`build_emmc.sh`](build_emmc.sh) | Individual SPI-NOR / eMMC builds. |
+| [`build_kernel_4.1.sh`](build_kernel_4.1.sh) | Compiles the Broadcom BCM6856 Linux 4.1.52 kernel inside Podman and stages deliverables. |
 | [`assemble_and_verify.py`](assemble_and_verify.py) | Legacy full-image assembler; overwrites generic deliverable names. Do not run it to publish the dated FIT-only release. |
 | [`package_emmc_ramopts.py`](package_emmc_ramopts.py) | Packages only the exact RAM-tested payload into a separate output directory, verifies vendor signatures and payload identity, and never flashes. |
 | [`patch_autoboot.py`](patch_autoboot.py) | Binary patch utility for the Broadcom `autoboot.o` blob (button mapping / ASUS Aura RGB overrides). |
@@ -64,6 +65,7 @@ for artifact hashes, test scope, build/packaging provenance, and safe flashing.
 * **Current eMMC FIT-only update:** `emmc_brcm_simple_ramopts_20260922.itb` and
   `emmc_brcm_simple_ramopts_20260922_padded.itb`.
 * **RAM-test input (not directly flashable):** `uboot_emmc_ramopts.bin`.
+* **Linux 4.1.52 Kernel (BCM6856):** `deliverables/kernel/Image`, `System.map`, and `kernel.config`.
 
 * **SPI NOR (16 MiB):** `spinor_16MB_full.bin`, `bootstrap_image_spinor.bin`, `loader_spinor.bin`
 * **SPI NOR (4 MiB W25Q32JV):** `spinor_4MB_W25Q32JV.bin`
