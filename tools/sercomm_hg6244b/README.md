@@ -41,6 +41,14 @@ running Linux on the router** — stock firmware (TR-069 unlock root) or the
 custom rootfs — using `dd` on `/dev/mmcblk0boot0` with `force_ro` unlock and
 mandatory read-back verification.
 
+**Complete prebuilt SPI NOR image:** [`spinor_image_20260930/`](spinor_image_20260930/)
+is the same `rescuecli2` feature set for the soldered 16 MiB NOR flash — early
+amber LED, reset → blue NetConsole CLI, and a `bootcmd` that auto-chains CFE
+from eMMC so the NOR is a fully independent boot path. `FLASHING_NOR.md`
+covers the R18 boot strap and in-system flashing via the `snor_flash.ko`
+`/dev/snor` module (plus CH341A and FIT-only update paths). The image was
+verified as a consistent SPL/TPL SHA-256 set before publishing.
+
 > **Loader-set rule (do not learn this the hard way):** the 2 MiB eMMC-boot0
 > loader is a cryptographically-coupled set. The SPL carries a baked-in
 > SHA-256 table (~offset 0x16000) covering env, MCBs, DDR3 and the TPL;
