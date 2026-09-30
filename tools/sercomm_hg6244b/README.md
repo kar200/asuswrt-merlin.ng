@@ -34,6 +34,13 @@ FIT-only update path to boot0 LBA `0x1000`) and
 `loader_recovery_20260930.bin` (full 2 MiB loader + env splice, see the
 loader-set rule below). SHA-256 in `checksums.sha256`.
 
+**Complete prebuilt boot0 image:** [`emmc_boot0_image_20260930/`](emmc_boot0_image_20260930/)
+holds the finished 4 MiB eMMC boot0 image (loader + env + FIT, SHA-256-coupled
+set, nothing to rebuild) with a step-by-step guide for flashing it **from a
+running Linux on the router** — stock firmware (TR-069 unlock root) or the
+custom rootfs — using `dd` on `/dev/mmcblk0boot0` with `force_ro` unlock and
+mandatory read-back verification.
+
 > **Loader-set rule (do not learn this the hard way):** the 2 MiB eMMC-boot0
 > loader is a cryptographically-coupled set. The SPL carries a baked-in
 > SHA-256 table (~offset 0x16000) covering env, MCBs, DDR3 and the TPL;
