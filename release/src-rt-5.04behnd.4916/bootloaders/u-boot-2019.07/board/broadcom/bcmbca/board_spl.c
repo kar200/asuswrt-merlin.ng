@@ -646,9 +646,43 @@ void spl_board_ddrinit(early_abort_t* ea_info)
 	return;
 }
 
+/*
+ * Light the front-panel status RGB (AMBER) from raw registers so it comes on
+ * within ~1 s of power-on, before the long DDR training inside
+ * spl_board_ddrinit().  Same wiring as sercomm_led.c STATUS_LED_AMBER:
+ * EN=GPIO2(0) R=GPIO27(0) G=GPIO59(0) B=GPIO22(1), all active low.
+ * GPIO func via the pinmux test port (see arch/arm/mach-bcmbca/pinmux.c),
+ * dir block @0xff800500, data block @0xff800520, word per 32 pins.
+ */
+static void spl_status_led_early(void)
+{
+	volatile uint32_t *tp_msb = (volatile uint32_t *)0xff800554;
+	volatile uint32_t *tp_lsb = (volatile uint32_t *)0xff800558;
+	volatile uint32_t *tp_cmd = (volatile uint32_t *)0xff80055c;
+	volatile uint32_t *dir    = (volatile uint32_t *)0xff800500;
+	volatile uint32_t *data   = (volatile uint32_t *)0xff800520;
+	const int pins[4] = {2, 27, 59, 22};
+	int i;
+
+	for (i = 0; i < 4; i++) {
+		*tp_msb = 0;
+		*tp_lsb = pins[i] | (4 << 12);   /* 4 = gpio-mux */
+		*tp_cmd = 0x21;                  /* LOAD_MUX_REG_CMD */
+	}
+
+	dir[0] |= (1 << 2) | (1 << 27);
+	dir[1] |= (1 << (59 - 32)) | (1 << (22 - 32));
+
+	data[0] &= ~((1 << 2) | (1 << 27));            /* enable + red   */
+	data[1] = (data[1] | (1 << (22 - 32)))         /* blue off       */
+		& ~(1 << (59 - 32));                   /* green on       */
+}
+
 void spl_board_init(void)
 {
 	early_abort_t* ea_info;
+
+	spl_status_led_early();
 
 #ifdef CONFIG_BCMBCA_LDO_TRIM
 	bcmbca_set_ldo_trim();

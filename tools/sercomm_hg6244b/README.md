@@ -3,7 +3,47 @@
 Standalone tools, build scripts and guides for the Sercomm HG6244B v2
 (Broadcom BCM68360_B1 / BCM6856) U-Boot 2019.07 port, for both SPI NOR and eMMC.
 
-### Current eMMC release — September 22, 2026
+### Current eMMC release — September 30, 2026 (`rescuecli2`)
+
+`50404p3@533676`, banner `U-Boot 2019.07 (Sep 30 2026 - 06:23:18)`. Cold-boot
+and netconsole-verified on hardware; supersedes the 20260922 FIT-only release
+(kept below as rollback).
+
+New in this release:
+
+- **Early status LED** — the front-panel status RGB turns **amber ~1 s after
+  power-on**, before DDR training (`spl_status_led_early()` raw-register hook
+  in `board_spl.c`, called before `spl_board_ddrinit`). Confirmed on hardware.
+- **Reset button = recovery CLI** — pressing/releasing RESET during the boot
+  window runs `reset_cli`: drops to the U-Boot prompt with **NetConsole
+  enabled** (UDP 6666, bidirectional — remote U-Boot flashing verified, no
+  UART needed) and turns the status LED **blue** for the whole CLI session.
+  Normal boot (`run bootcmd`) returns the LED to green. The old
+  `btn_reset=env default -a;saveenv` behaviour (which wiped the saved
+  environment) is gone.
+- **Boot chain decoupled from slot 0** — `boot_cfe` now chainloads the
+  stage-2 CFE from `p6`/`bootfs2` (LBA `0x3E000`) instead of `p2`, so
+  flashing firmware slot 0 no longer touches the boot chain. The p2 path is
+  kept as `boot_cfe_p2`.
+- **`boot_factory`** (experimental, untested): chainloads the factory stage-1
+  CFE (`cfe-v 5.0207p1`) preserved in eMMC **boot1** @ block `0x80` — boot1
+  is never selected by the BootROM strap and serves as a factory reserve.
+
+Deliverables: `emmc_brcm_rescuecli2_20260930_padded.itb` (`0x6E1` blocks,
+FIT-only update path to boot0 LBA `0x1000`) and
+`loader_recovery_20260930.bin` (full 2 MiB loader + env splice, see the
+loader-set rule below). SHA-256 in `checksums.sha256`.
+
+> **Loader-set rule (do not learn this the hard way):** the 2 MiB eMMC-boot0
+> loader is a cryptographically-coupled set. The SPL carries a baked-in
+> SHA-256 table (~offset 0x16000) covering env, MCBs, DDR3 and the TPL;
+> flashing a new SPL without the matching TPL boot-loops with
+> `digest sha256 mismatch` and leaves **no** prompt/netconsole (the reset
+> rescue lives in U-Boot proper, which never runs). Update the loader only
+> as the whole 2 MiB with the environment re-spliced into both slots
+> (`0x40000` and `0xae000`) in a single `mmc write` of `0x1000` blocks.
+
+### Previous eMMC release — September 22, 2026
 
 `sercomm-ramopts-20260922` adds TFTP upload, bootmenu, PXE, meminfo, log,
 time, gettime, and fsuuid to the working SMP-capable eMMC build.
