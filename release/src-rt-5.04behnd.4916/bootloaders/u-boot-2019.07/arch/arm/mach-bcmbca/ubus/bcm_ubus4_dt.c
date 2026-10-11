@@ -249,3 +249,109 @@ U_BOOT_DRIVER(bcm_ubus4_dcm_drv) = {
 	.probe = bcm_ubus4_dcm_probe,
 };
 #endif
+
+/*
+ * UBUS port registration.
+ *
+ * bcm_ubus4.c is only shipped as a prebuilt object in this SDK and that
+ * build does not export the two helpers that
+ * arch/arm/mach-bcmbca/pmc/pmc_usb.c calls when powering the USB block up
+ * and down.  Without them the USB controller is powered but its UBUS
+ * master/slave ports are never registered, so USB host enumeration is
+ * unreliable.
+ *
+ * The routines below are ported verbatim from the matching kernel driver
+ * (bcmdrivers/opensource/misc/ubus/impl1/bcm_ubus.c), using the U-Boot
+ * Ubus4SysModuleTop layout from bcm_ubus_internal.h.  The polling loops
+ * are bounded so a dead UBUS can never hang the bootloader.
+ */
+#define UBUS_UCB_TIMEOUT	1000000
+
+static int ubus_ucb_read(uint32_t ucbid, uint32_t addr, uint32_t *data)
+{
+	volatile Ubus4SysModuleTop *systop;
+	uint32_t timeout;
+
+	if (!ubus_sys || !ubus_sys->systop)
+		return -1;
+	systop = (volatile Ubus4SysModuleTop *)ubus_sys->systop;
+
+	/* wait for the response fifo to drain */
+	for (timeout = UBUS_UCB_TIMEOUT;
+	     (systop->ReadUcbStatus & 0x40000000) && timeout; timeout--)
+		;
+
+	systop->UcbHdr = (addr / 4) | (UCB_CMD_RD << 12) |
+			 (ucbid << 16) | (0x1 << 24);
+
+	/* wait for the response */
+	for (timeout = UBUS_UCB_TIMEOUT;
+	     !(systop->ReadUcbStatus & 0x80000000) && timeout; timeout--)
+		;
+	if (!timeout)
+		return -1;
+
+	(void)systop->ReadUcbHdr;
+	*data = systop->ReadUcbData;
+	return 0;
+}
+
+static void ubus_ucb_write(uint32_t ucbid, uint32_t addr, uint32_t data)
+{
+	volatile Ubus4SysModuleTop *systop;
+	uint32_t timeout;
+
+	if (!ubus_sys || !ubus_sys->systop)
+		return;
+	systop = (volatile Ubus4SysModuleTop *)ubus_sys->systop;
+
+	for (timeout = UBUS_UCB_TIMEOUT;
+	     (systop->ReadUcbStatus & 0x40000000) && timeout; timeout--)
+		;
+
+	systop->UcbData = data;
+	systop->UcbHdr = (addr / 4) | (UCB_CMD_WR << 12) |
+			 (ucbid << 16) | (0x1 << 24);
+
+	for (timeout = UBUS_UCB_TIMEOUT;
+	     !(systop->ReadUcbStatus & 0x80000000) && timeout; timeout--)
+		;
+
+	(void)systop->ReadUcbHdr;
+}
+
+void ubus_deregister_port(int ucbid)
+{
+	uint32_t data;
+	uint32_t timeout;
+
+	/* never touch an invalid ubus id */
+	if (ucbid < 0)
+		return;
+
+	ubus_ucb_write(ucbid, 0x1c, 0x1);
+
+	/* poll status bit for port unregistered */
+	for (timeout = UBUS_UCB_TIMEOUT; timeout; timeout--) {
+		if (ubus_ucb_read(ucbid, 0x1c, &data) != 0 || data == 0x1)
+			break;
+	}
+}
+
+void ubus_register_port(int ucbid)
+{
+	uint32_t data;
+	uint32_t timeout;
+
+	/* never touch an invalid ubus id */
+	if (ucbid < 0)
+		return;
+
+	ubus_ucb_write(ucbid, 0x1c, 0x0);
+
+	/* poll status bit for port registered */
+	for (timeout = UBUS_UCB_TIMEOUT; timeout; timeout--) {
+		if (ubus_ucb_read(ucbid, 0x1c, &data) != 0 || data == 0x2)
+			break;
+	}
+}

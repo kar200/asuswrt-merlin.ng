@@ -353,7 +353,11 @@ static int __net_init synproxy_net_init(struct net *net)
 	int err = -ENOMEM;
 
 	memset(&t, 0, sizeof(t));
+#if defined(CONFIG_BCM_KF_NETFILTER)
+	ct = nf_conntrack_alloc(net, 0, NULL, &t, &t, GFP_KERNEL);
+#else
 	ct = nf_conntrack_alloc(net, 0, &t, &t, GFP_KERNEL);
+#endif
 	if (IS_ERR(ct)) {
 		err = PTR_ERR(ct);
 		goto err1;

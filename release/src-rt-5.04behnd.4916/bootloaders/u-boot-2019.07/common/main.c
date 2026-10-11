@@ -14,6 +14,7 @@
 #if defined(CONFIG_BCMBCA_BUTTON)
 #include "bcmbca_button.h"
 #endif
+#include <sercomm_led.h>
 
 /*
  * Board-specific Platform code can reimplement show_boot_progress () if needed
@@ -44,6 +45,8 @@ static void run_preboot_environment_command(void)
 void main_loop(void)
 {
 	const char *s;
+
+	sercomm_status_led_set(STATUS_LED_AMBER);
 
 	bootstage_mark_name(BOOTSTAGE_ID_MAIN_LOOP, "main_loop");
 

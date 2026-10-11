@@ -1,0 +1,3 @@
+# Ignore build object directories and temporary configs
+obj/
+u-boot-2019.07/configs/tmp_*

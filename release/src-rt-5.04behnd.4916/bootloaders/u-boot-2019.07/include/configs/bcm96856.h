@@ -26,6 +26,55 @@
 
 #define CONFIG_ENV_CALLBACK_LIST_STATIC "boardid:boardid,active_port:active_port,voiceboardid:voiceboardid,"
 
+#define CONFIG_EXTRA_ENV_SETTINGS \
+	"IMAGE=SPINOR:2M,6M\0" \
+	"MCB=1527\0" \
+	"boardid=96856\0" \
+	"nummacaddrs=10\0" \
+	"ethaddr=02:10:18:00:00:01\0" \
+	"mtdids=nor0=spi-nor.0\0" \
+	"mtdparts=spi-nor.0:2M(loader),4M(bootfs),10M(rootfs)\0" \
+	"ipaddr=192.168.1.1\0" \
+	"serverip=192.168.1.100\0" \
+	"bootdelay=3\0" \
+	"baudrate=115200\0" \
+	"bootcmd=run init_leds; sf probe 0:0; mmc rescan; run boot_cfe\0" \
+	"boot_default=echo No boot target configured - load with tftpboot/loadb or run boot_emmc\0" \
+	"env_boot_magic=16384@0x40000,0xad000\0" \
+	"ncip=255.255.255.255\0" \
+	"netconsole=echo Enabling NetConsole...; setenv stdout serial,nc; setenv stderr serial; setenv stdin serial,nc\0" \
+	"btn_reset=echo btn_reset: use reset_cli / bootcmd\0" \
+	"btn_wifi=run netconsole\0" \
+	"reset_cli=setenv bootdelay -1; run netconsole; gpio set 27; gpio set 59; gpio clear 22; gpio clear 2; echo === U-Boot CLI (reset button, netconsole UDP 6666, status LED = BLUE) ===; echo run bootcmd for normal boot (LED back to green)\0" \
+	"init_leds=gpio set 1; gpio set 22; gpio set 27; gpio clear 59\0" \
+	"stdin=serial\0" \
+	"stdout=serial\0" \
+	"stderr=serial\0" \
+	"boot_emmc=run boot_cfe\0" \
+	"boot_cfe=echo Chainloading stock stage-2 CFE from p6 (bootfs2) ...; " \
+		"mmc dev 0 0; " \
+		"mmc read 0x04000000 0x3E000 0x900; " \
+		"cp.b 0x040012a1 0x01000000 0x1008d8; " \
+		"mw.b 0x011008d8 0 0x00200000; " \
+		"mw.l 0x0101f2e0 0x14000004 1; " \
+		"dcache off; icache off; " \
+		"go 0x01000000\0" \
+	"boot_cfe_p2=echo Chainloading stock stage-2 CFE from p2 (bootfs1) ...; " \
+		"mmc dev 0 0; " \
+		"mmc read 0x04000000 0x1000 0x900; " \
+		"cp.b 0x040012a1 0x01000000 0x1008d8; " \
+		"mw.b 0x011008d8 0 0x00200000; " \
+		"mw.l 0x0101f2e0 0x14000004 1; " \
+		"dcache off; icache off; " \
+		"go 0x01000000\0" \
+	"boot_factory=echo Chainloading FACTORY stage-1 CFE from boot1 (cfe-v 5.0207p1) ...; " \
+		"mmc dev 0 2; " \
+		"mmc read 0x04000000 0x80 0xE2; " \
+		"cp.b 0x0400001C 0x01000000 0x1B200; " \
+		"mw.b 0x0110B200 0 0x00100000; " \
+		"dcache off; icache off; " \
+		"go 0x01000000\0"
+
 /*
  * 6856
  */

@@ -45,6 +45,7 @@ typedef struct usb_ctrl{
 	uint32_t utmi_ctl_2;
 	uint32_t usb_pm;
 #define XHC_SOFT_RESETB         (1<<22)
+#define BOND_DIS_USB30          (3<<24)
 #define USB_PWRDWN              (1<<31)
 	uint32_t usb_pm_status;
 	uint32_t spare3;
@@ -165,6 +166,16 @@ static int ehci_usb_remove(struct udevice *dev)
 
 
 static const struct udevice_id ehci_usb_ids[] = {
+	/*
+	 * Every BCMBCA DTS in this tree (bcm6856.dtsi, bcm4908.dtsi,
+	 * bcm47622.dtsi, ...) describes the two USB 2.0 host ports as
+	 * compatible = "brcm,bcmbca-ehci".  That string appeared in no
+	 * driver and in no compiled object, so nothing ever matched and
+	 * the controllers were never probed - `usb start` reported no
+	 * devices.  Keep "generic-ehci" for any external users and add the
+	 * BCMBCA name the device tree actually uses.
+	 */
+	{ .compatible = "brcm,bcmbca-ehci" },
 	{ .compatible = "generic-ehci" },
 	{ }
 };
@@ -236,6 +247,7 @@ static int bcmbca_usb_ctrl_probe (struct udevice *dev)
 	regp->usb_pm &= ~(USB_PWRDWN);
 	mdelay(300);
 	regp->usb_pm &= ~XHC_SOFT_RESETB;
+	regp->usb_pm |= BOND_DIS_USB30;
 	/*adjust the default AFE settings for better eye diagrams */
 	usb2_eye_fix(regp);
 

@@ -64,7 +64,7 @@ int reset_button_init(void)
 			btn_hook_reset_release);
 	/* if board does not use release event for the reset button, fallback
 	   default hold event */
-	if (ret <= 1) {
+	if (ret <= 0) {
 		ret = register_button_action("reset_button", "rst_to_dflt",
 			btn_hook_rst_to_dflt);
 		if (ret < 0 && ret != -ENODEV) {

@@ -25,6 +25,282 @@
 		device_type = "memory";
 		reg = <0x0 0x0 0x0 0x08000000>;
 	};
+
+	/*
+	 * Button pins come from the board's own GPIO map, dumped from stock
+	 * CFE with "sc_gpio d":
+	 *
+	 *	PB_RESET  100   26
+	 *	PB_WPS    101   28
+	 *	PB_WIFI   102   81
+	 *
+	 * U-Boot's "gpioc N" numbering is the same space: gpioc13/8/9/10/7/62/
+	 * 1/27/59/22 carry the LED names CFE lists against 13/8/9/10/7/62/1/
+	 * 27/59/22.  We only wire RESET and WIFI here.
+	 */
+	buttons {
+		compatible = "brcm,buttons";
+		reset_button {
+			ext_irq = <&gpioc 26 1 0>;
+			press {
+				print = "Reset Button Pressed";
+			};
+			release {
+				stop_boot = <0>;
+				stop_boot_cmd = "run reset_cli";
+			};
+		};
+		wifi_button {
+			ext_irq = <&gpioc 81 1 0>;
+			press {
+				print = "WiFi Button Pressed";
+				/*
+				 * WiFi button held at power-on turns on
+				 * netconsole.  Change the action at runtime
+				 * with: setenv btn_wifi "<cmd>"; saveenv
+				 */
+				hook = <0>;
+				hook_cmd = "run btn_wifi";
+			};
+		};
+	};
+
+	/*
+	 * ------------------------------------------------------------------
+	 * Ethernet - BCM68360/6856 internal XRDP switch ("RUNNER_SW").
+	 *
+	 * The Sercomm HG6244B (CFE boardtype 968360BG) wires only the
+	 * switch's two internal EGPHY ports to the two 1 GbE RJ45 jacks:
+	 *
+	 *     switch port 0 -> EGPHY mdio addr 1 -> RJ45 (1G)
+	 *     switch port 1 -> EGPHY mdio addr 2 -> RJ45 (1G)
+	 *
+	 * The two 2.5G jacks hang off Realtek RTL8221B PHYs on the switch's
+	 * GMII ports.  U-Boot 2019.07 in this SDK has NO Realtek PHY driver
+	 * linked for BRCM_CHIP=6856 (no object under obj/uboot/drivers/net
+	 * contains any RTL8221B code), so those two ports are deliberately
+	 * left out of this description.  The internal GPHYs are enough for
+	 * TFTP.  The GPON serdes WAN port is likewise not described.
+	 *
+	 * Node shape and register values come from the vendor kernel tree,
+	 * kernel/dts/6856/inc/6856.dtsi, which describes the same hardware
+	 * with the same property vocabulary that the U-Boot
+	 * drivers/net/bcmbca/phy framework parses: brcm,egphy / brcm,mdio1 /
+	 * bus-type = "MDIO_V1" / brcm,bcaphy / brcm,enet + ports.
+	 * ------------------------------------------------------------------
+	 */
+	unimac: unimac {
+		compatible = "brcm,unimac";
+		reg = <0x0 0x82da0000 0x0 0x6000>,
+		      <0x0 0x82da8000 0x0 0x1800>,
+		      <0x0 0x82daa000 0x0 0x1800>;
+		conf_offset = <0x1000>;
+		mib_offset = <0x400>;
+		top_offset = <0x400>;
+		/*
+		 * REQUIRED by the U-Boot driver, even though the vendor kernel
+		 * dtsi (kernel/dts/6856/inc/6856.dtsi) this node was copied
+		 * from does not carry it.
+		 *
+		 * unimac_drv_impl1.c does:
+		 *     mib_step = dt_property_read_u32(node, "mib_step");
+		 *     if (mib_step == (uint32_t)(-1)) { ...; goto Exit; }
+		 * so with the property absent the probe bails out with
+		 * "Missing mib_step entry" before it ever computes
+		 * conf_offset/mib_offset/top_offset.  The observable damage is
+		 * that the switch port enumeration right after
+		 * "Found root switch, looking for ports:" finds no usable MACs,
+		 * so the Runner has no egress port and TX fills the BBH FIFO
+		 * and never drains:
+		 *     non empty at bbh full(ingress=8,egress=0,diff=8)
+		 *     bcmbca_eth_send:Failed to send packet len 42: error = -1
+		 * It is also why xrdpeth_status crashes in
+		 * mac_hwapi_get_rx_counters (half-initialised MAC state).
+		 * mib_step is the stride for the MIB counter registers.
+		 * On BCM6856, UniMAC MIB counters are 32-bit (stride 1 word = 4 bytes)
+		 * fitting in the 0x180-byte hardware window.
+		 */
+		mib_step = <0x1>;
+	};
+
+	egphy: egphy {
+		compatible = "brcm,egphy";
+		reg = <0x0 0x82db2204 0x0 0x0c>;
+		base-addr = <1>;
+	};
+
+	mdio1: mdio1 {
+		compatible = "brcm,mdio1";
+		reg = <0x0 0xff802060 0x0 0x10>;
+	};
+
+	mdio: mdio {
+		compatible = "simple-bus";
+		bus-type = "MDIO_V1_INT";
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		phy1: phy@1 {
+			compatible = "brcm,bcaphy";
+			phy-type = "EGPHY";
+			reg = <1>;
+			status = "okay";
+		};
+
+		phy2: phy@2 {
+			compatible = "brcm,bcaphy";
+			phy-type = "EGPHY";
+			reg = <2>;
+			status = "okay";
+		};
+
+		phy3: phy@3 {
+			compatible = "brcm,bcaphy";
+			phy-type = "EGPHY";
+			reg = <3>;
+			status = "okay";
+		};
+
+		phy4: phy@4 {
+			compatible = "brcm,bcaphy";
+			phy-type = "EGPHY";
+			reg = <4>;
+			status = "okay";
+		};
+
+		/*
+		 * Realtek RTL8221B, the two 2.5G jacks.
+		 *
+		 * MDIO addresses 5 and 7, and CLAUSE 45 ONLY -- they do not
+		 * answer clause-22 reads, which is exactly why an earlier
+		 * clause-22-only scan of this bus reported every address
+		 * except 1..4 as dead.  Proven from the running stock
+		 * firmware (ethctl takes a CL45 address as <dev><reg>):
+		 *
+		 *   ethctl phy int 5 0x10002 -> 0x001c
+		 *   ethctl phy int 5 0x10003 -> 0xc848
+		 *   ethctl phy int 7 0x10002 -> 0x001c
+		 *   ethctl phy int 7 0x10003 -> 0xc848
+		 *
+		 * 0x001c is the Realtek OUI and 0xc848 the RTL8221B model,
+		 * so the PHY ID is 0x001c:c848.  `ethctl phy-map` names them
+		 * "External Auto EXT3" (addr 5) and "External Cascaded Auto
+		 * EXT3" (addr 7).
+		 *
+		 * No new bus driver is required: bus_mdio_v1_int_drv already
+		 * provides c45_read/c45_write, and phy_drv_ext3 (compiled via
+		 * -DPHY_EXT3) reaches PHYs through exactly that path.
+		 *
+		 * NOTE: the *switch-port* side of these two is NOT described
+		 * here yet.  The vendor kernel dtsi only defines ports up to
+		 * port_hsgmii/port_wan and never wires up these parts, and
+		 * stock takes the wiring from hardcoded driver data, so there
+		 * is no template for it.  Add the ports only once the boot log
+		 * shows how these PHYs are enumerated -- guessing a port with
+		 * the wrong phy-mode risks hanging the switch init.
+		 */
+		/*
+		 * DISABLED: no RTL8221B driver exists in this U-Boot tree, so
+		 * binding these only produces failed clause-45 probes and can
+		 * stall switch init.  Left here as documentation; re-enable
+		 * only together with a real Realtek phy_desc[]/firmware_t pair.
+		 */
+		phy_ext3_5: phy@5 {
+			compatible = "brcm,bcaphy";
+			phy-type = "EXT3";
+			reg = <5>;
+			caps-no-hdx;
+			caps-no-5000;
+			caps-no-10000;
+			status = "disabled";
+		};
+
+		phy_ext3_7: phy@7 {
+			compatible = "brcm,bcaphy";
+			phy-type = "EXT3";
+			reg = <7>;
+			caps-no-hdx;
+			caps-no-5000;
+			caps-no-10000;
+			status = "disabled";
+		};
+	};
+
+	switch0: switch0 {
+		compatible = "brcm,enet";
+		label = "bcmsw";
+		sw-type = "RUNNER_SW";
+
+		ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			port_gphy0 {
+				reg = <0>;
+				mac-type = "UNIMAC";
+				phy-handle = <&phy1>;
+				phy-mode = "gmii";
+				gmii-direct;
+				status = "okay";
+			};
+
+			port_gphy1 {
+				reg = <1>;
+				mac-type = "UNIMAC";
+				phy-handle = <&phy2>;
+				phy-mode = "gmii";
+				gmii-direct;
+				status = "okay";
+			};
+
+			port_gphy2 {
+				reg = <2>;
+				mac-type = "UNIMAC";
+				phy-handle = <&phy3>;
+				phy-mode = "gmii";
+				gmii-direct;
+				status = "okay";
+			};
+
+			port_gphy3 {
+				reg = <3>;
+				mac-type = "UNIMAC";
+				phy-handle = <&phy4>;
+				phy-mode = "gmii";
+				gmii-direct;
+				status = "okay";
+			};
+
+			/*
+			 * The 2.5G jack, RTL8221B on MDIO address 7.
+			 *
+			 * Mapping taken from the running stock firmware's own
+			 * port table (`echo list > /proc/driver/enet/cmd`):
+			 *
+			 *   PORT port_0:5  eth4  RUNNER_PORT  sw0
+			 *        PrtID 08  PHY 04  MAC 04  port/index=lan5
+			 *   and the PHY table:
+			 *        Id 4  Up  EXT3  HSGMII  0x07  2.5 Gbps Full  001c:c848
+			 *
+			 * So: switch port 5, mac/phy index 4, bus HSGMII, PHY addr 7.
+			 * This is the vendor dtsi's `port_hsgmii` shape (reg = <5>,
+			 * UNIMAC, phy-mode = "hsgmii") -- in the vendor file its
+			 * phy-handle pointed at the SGMII SerDes, but on this board
+			 * port 5 is the RTL8221B 2.5G jack.
+			 *
+			 * phy-mode "hsgmii" is not a guess: stock reports this PHY's
+			 * Bus as HSGMII and links it at 2.5 Gbps.
+			 */
+			port_2p5g0 {
+				reg = <5>;
+				mac-type = "UNIMAC";
+				phy-handle = <&phy_ext3_7>;
+				phy-mode = "hsgmii";
+				gmii-direct;
+				status = "disabled";
+			};
+		};
+	};
 };
 
 &uart0 {
@@ -54,55 +330,16 @@
 		u-boot,dm-pre-reloc;				
 		spi-max-frequency = <100000000>;
 	};
-};
-
-&leds {
-	status = "okay";
-	#address-cells = <1>;
-	#size-cells = <0>;
-	brcm,serial-led-en-pol;
-	brcm,serial-led-data-ppol;
-
-	led@2 {
-		reg = <2>;
-		label = "green:inet";
-	};
-
-	led@5 {
-		reg = <5>;
-		label = "red:alarm";
-	};
-
-	led@8 {
-		reg = <8>;
-		label = "green:wlan_link";
-	};
-
-	led@11 {
-		reg = <11>;
-		label = "green:fxs1";
-	};
-
-	led@14 {
-		reg = <14>;
-		label = "green:fxs2";
-	};
-
-	led@15 {
-		reg = <15>;
-		label = "green:usb0";
-	};
-
-	led@16 {
-		reg = <16>;
-		label = "green:usb1";
-	};
-
-	led@17 {
-		reg = <17>;
-		label = "green:wps";
+	spi-nor@0 {
+		compatible = "jedec,spi-nor";
+		reg = <0>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+		spi-max-frequency = <50000000>;
+		u-boot,dm-pre-reloc;
 	};
 };
+
 
 &usb0 {
 	status = "okay";

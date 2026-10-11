@@ -7,4 +7,5 @@ EXTRA_CFLAGS += -I$(srctree)/arch/$(ARCH)/mach-bcmbca/pmc
 
 obj-y += mmu_table.o
 obj-y += cpu.o
+obj-y += sercomm_led.o
 

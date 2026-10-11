@@ -17,6 +17,8 @@ LN_TARGS :=
 
 #---------------------------------
 # LN_RULE
+BRCMDRIVERS_DIR ?= $(CURDIR)
+
 # params:
 #   1: config value
 #   2: dir
@@ -25,6 +27,7 @@ LN_TARGS :=
 define LN_RULE
 
 ifneq (,$(strip $(1)))
+ifneq (,$(if $(strip $(4)),$(wildcard $(BRCMDRIVERS_DIR)/$(strip $(2))/impl$(strip $(4))),$(wildcard $(BRCMDRIVERS_DIR)/$(strip $(2))/Makefile)))
 
 obj-$(strip $(1)) += $(strip $(2))/$(strip $(3))/
 
@@ -34,6 +37,7 @@ $(strip $(2))/$(strip $(3)) :
 	@echo "linking $$@ => impl$(strip $(4))";
 	$$(Q)ln -sfn impl$(strip $(4)) $$@;
 
+endif
 endif
 endef
 
@@ -54,6 +58,7 @@ endef
 define LN_RULE_DEP
 
 ifneq (,$(strip $(1)))
+ifneq (,$(if $(strip $(4)),$(wildcard $(BRCMDRIVERS_DIR)/$(strip $(2))/impl$(strip $(4))),$(wildcard $(BRCMDRIVERS_DIR)/$(strip $(2))/Makefile)))
 
 obj-$(strip $(1)) += $(strip $(2))/$(strip $(3))/
 
@@ -63,6 +68,7 @@ $(strip $(2))/$(strip $(3)) : $(5)
 	@echo "linking $$@ => impl$(strip $(4))";
 	$$(Q)ln -sfn impl$(strip $(4)) $$@;
 
+endif
 endif
 endef
 
@@ -95,6 +101,8 @@ _$(strip $(1))_LNNAME:=$(strip $(3))
 
 export $$(_$(strip $(1))_NAME)_IMPL=$$(_$(strip $(1))_IMPL)
 
+ifneq (,$$(if $$(_$$(strip $$(1))_IMPL),$$(wildcard $$(BRCMDRIVERS_DIR)/$$(_$$(strip $$(1))_DIR)/impl$$(_$$(strip $$(1))_IMPL)),$$(wildcard $$(BRCMDRIVERS_DIR)/$$(_$$(strip $$(1))_DIR)/Makefile)))
+
 $$(info LN_RULE_AG (NAME=$$(_$(strip $(1))_NAME),VAL=$$(_$(strip $(1))_VAL),DIR=$$(_$(strip $(1))_DIR),IMPL=$$(_$(strip $(1))_IMPL)))
 $$(info $$(_$(strip $(1))_NAME)_IMPL=$$(_$(strip $(1))_IMPL))
 
@@ -105,6 +113,8 @@ LN_TARGS += $$(_$(strip $(1))_DIR)/$$(_$(strip $(1))_LNNAME)
 $$(_$(strip $(1))_DIR)/$$(_$(strip $(1))_LNNAME) :
 	@echo "linking $$@ => impl$$(_$(strip $(1))_IMPL)";
 	$$(Q)ln -sfn impl$$(_$(strip $(1))_IMPL) $$@;
+
+endif
 
 endif
 endef
@@ -142,8 +152,8 @@ $(eval $(call LN_RULE,$(CONFIG_BCM_NVRAM), broadcom/char/wlcsm_ext,$(LN_NAME), 1
 #ifneq ($(CONFIG_BCM_WLCXC),)
 $(eval $(call LN_RULE,$(CONFIG_BCM_WLCXC), broadcom/char/customer/wlcxc,$(LN_NAME), $(CONFIG_BCM_WLCXC_IMPL)))
 #endif
-$(eval $(call LN_RULE, $(CONFIG_BCM_CHIPINFO), broadcom/char/chipinfo, $(LN_NAME), $(CONFIG_BCM_CHIPINFO_IMPL)))
 $(eval $(call LN_RULE, $(CONFIG_BCM_SERIAL), opensource/char/serial, $(LN_NAME), $(CONFIG_BCM_SERIAL_IMPL)))
+$(eval $(call LN_RULE, $(CONFIG_BCM_HS_UART), opensource/char/hs_uart, $(LN_NAME), $(CONFIG_BCM_HS_UART_IMPL)))
 $(eval $(call LN_RULE, $(CONFIG_BCM_EXT_TIMER), opensource/char/timer, $(LN_NAME), $(CONFIG_BCM_EXT_TIMER_IMPL)))
 $(eval $(call LN_RULE, $(CONFIG_BCM_I2C_BUS), opensource/char/i2c/busses, $(LN_NAME), $(CONFIG_BCM_I2C_BUS_IMPL)))
 $(eval $(call LN_RULE, $(CONFIG_BCM_I2C_CHIP), opensource/char/i2c/chips, $(LN_NAME), $(CONFIG_BCM_I2C_CHIP_IMPL)))

@@ -16,6 +16,7 @@ $c->unset('CONFIG_TPL_NAND_SUPPORT');
 $c->unset('CONFIG_CMD_NAND');
 $c->unset('CONFIG_CMD_UBI');
 $c->unset('CONFIG_NAND_BRCMNAND');
+$c->unset('CONFIG_BCM_THERMAL');
 
 $c->unset('CONFIG_MMC');
 $c->unset('CONFIG_SPL_MMC_SUPPORT');
@@ -42,6 +43,11 @@ $c->set('CONFIG_CMD_SPI','y');
 $c->set('CONFIG_DM_SPI_FLASH','y');
 $c->set('CONFIG_SPI_FLASH','y');
 $c->set('CONFIG_SPI_FLASH_MACRONIX','y');
+$c->set('CONFIG_SPI_FLASH_WINBOND','y');
+$c->set('CONFIG_SPI_FLASH_GIGADEVICE','y');
+$c->set('CONFIG_SPI_FLASH_SPANSION','y');
+$c->set('CONFIG_SPI_FLASH_STMICRO','y');
+$c->set('CONFIG_SPI_FLASH_XMC','y');
 $c->set('CONFIG_SPI_FLASH_MTD','y');
 $c->set('CONFIG_SPL_WATCHDOG_SUPPORT','y');
 

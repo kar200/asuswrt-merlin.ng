@@ -37,6 +37,9 @@ $c->unset('CONFIG_CMD_PART');
 $c->unset('CONFIG_SPL_FS_EXT4');
 
 $c->set('CONFIG_SPL_WATCHDOG_SUPPORT','y');
+$c->set('CONFIG_SUPPORT_EMMC_BOOT','y');
+$c->set('CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR','y');
+$c->set('CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR','0x1000');
 #####   End of config changes #####
 $c->write();
 

@@ -26,9 +26,16 @@ struct cli_job_cb
 static unsigned long        registred_cb_count = 0;
 static struct cli_job_cb    cli_job_cb_arr[CLI_CB_NUM];
 
+#ifdef CONFIG_BCMBCA_XRDP_ETH
+extern int bcmbca_xrdp_eth_init(void);
+#endif
+
 void init_cli_cb_arr(void)
 {
     memset(cli_job_cb_arr, 0, sizeof(struct cli_job_cb)*CLI_CB_NUM);
+#ifdef CONFIG_BCMBCA_XRDP_ETH
+    register_cli_job_cb(0, (void (*)(void))bcmbca_xrdp_eth_init);
+#endif
 }
 
 void register_cli_job_cb(unsigned long time_period, void (*job_cb)(void))

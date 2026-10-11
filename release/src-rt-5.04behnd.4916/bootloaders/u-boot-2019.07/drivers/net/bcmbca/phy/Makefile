@@ -142,20 +142,36 @@ ifeq ($(strip ${BRCM_CHIP}),6858)
     EXTRA_CFLAGS += -DSERDES_LINK_POWER_DOWN -DSERDES_SPEED_DETECT -DSERDES_MODULE_DETECT
 endif
 ifeq ($(strip ${BRCM_CHIP}),6856)
+    # Switched to the 675x (gnuton merlin-ng) module set so that the whole phy
+    # stack uses ONE struct ABI.  bcmbca_xrdp_eth.o is a 675x prebuilt (ABI v1:
+    # bus_drv@8, addr@40, link@56, speed@60, duplex@64, pause_rx@72); the 4916
+    # dt_parsing.o expected ABI v2 (phy_id@8, bus_drv@16, addr@48, ...), and the
+    # two cannot both be satisfied - which showed up as "Bus: Unknown" and
+    # "PHYID 0000:0000" in `xrdpeth_status`.  dt_parsing.o is now the 675x one
+    # (md5 9fa69db9a68f) and all sources/headers come from the 675x tree.
     PHY_MODULES += unimac_drv_impl1
     PHY_MODULES += mdio_drv_common
+    # mdio_drv_impl5 registers compatibles "brcm,mdio5"/"brcm,mdio-sf2" and
+    # needs TWO resources; our DTS node is compatible="brcm,mdio1" with one
+    # reg.  Only mdio_drv_v1 binds to brcm,mdio1, so impl5 left mdio_base NULL
+    # and every MDIO read returned 0 -> "UNIMAC PHY ID 0x0".
     PHY_MODULES += mdio_drv_v1
     PHY_MODULES += bus_drv_mdio_v1
     PHY_MODULES += mac_drv_unimac
-    PHY_MODULES += phy_drv_egphy
+    PHY_MODULES += phy_drv_6846_egphy
+    PHY_MODULES += phy_drv_6856_sgmii
     PHY_MODULES += phy_drv_sgmii_plus2
     PHY_MODULES += phy_drv_ext1
-    PHY_MODULES += phy_drv_ext3
+    # phy_drv_ext3 DISABLED: the RTL8221B 2.5G jacks are the only EXT3 users
+    # on this board and this tree has no Realtek phy_desc[]/firmware_t entry,
+    # so the driver can only ever fail its clause-45 probes.  The DTS nodes
+    # (phy_ext3_5/7, port_2p5g0) are disabled to match.
+    # PHY_MODULES += phy_drv_ext3
     PHY_MODULES += brcm_rgmii
     EXTRA_CFLAGS += -DBUS_MDIO_V1
     EXTRA_CFLAGS += -DBRCM_RGMII
     EXTRA_CFLAGS += -DMAC_UNIMAC
-    EXTRA_CFLAGS += -DPHY_EGPHY -DPHY_SGMII -DPHY_EXT1 -DPHY_EXT3 
+    EXTRA_CFLAGS += -DPHY_6846_EGPHY -DPHY_6856_SGMII -DPHY_EXT1
 endif
 ifeq ($(strip ${BRCM_CHIP}),6855)
     PHY_MODULES += unimac_drv_impl2

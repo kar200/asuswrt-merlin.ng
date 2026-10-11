@@ -57,8 +57,10 @@ extern phy_drv_t phy_drv_6856_sgmii;
 extern phy_drv_t phy_drv_ext1;
 extern phy_drv_t phy_drv_ext2;
 extern phy_drv_t phy_drv_ext3;
+#if defined(CONFIG_BCM94908)
 extern phy_drv_t phy_drv_rtl8226;
 extern phy_drv_t phy_drv_GPY211;
+#endif
 extern phy_drv_t phy_drv_lport_serdes;
 extern phy_drv_t phy_drv_53125_sw;
 extern phy_drv_t phy_drv_sf2_gphy;      //TODO_DSL? create 4 different phy types for 138,148,4908, don't know if above types can be reused ...
@@ -145,8 +147,10 @@ int phy_drivers_set(void)
 #endif
 #ifdef PHY_EXT3
     ret |= phy_driver_set(&phy_drv_ext3);
+#if defined(CONFIG_BCM94908)
     ret |= phy_driver_set(&phy_drv_rtl8226);
     ret |= phy_driver_set(&phy_drv_GPY211);
+#endif
 #endif
 #ifdef PHY_LPORT_SERDES
     ret |= phy_driver_set(&phy_drv_lport_serdes);

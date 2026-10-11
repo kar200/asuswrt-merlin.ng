@@ -1,0 +1,103 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use FindBin qw($Bin);
+use lib "$Bin/../../../hostTools/PerlLib";
+use BRCM::GenConfig;
+
+my $c = new BRCM::GenConfig( shift);
+
+######   Any config changes start here #####
+
+# BCM6856 SPI-NOR U-Boot proper configuration.
+#
+# IMPORTANT: in this SDK the TPL is built out of obj/uboot using the *same*
+# .config as U-Boot proper.  So this arch must both:
+#   * keep the TPL/SPL part small and NAND/MMC-free (loader region), and
+#   * KEEP the full eMMC/MMC stack for U-Boot proper itself, so the SPI-NOR
+#     bootloader can still enumerate and boot the stock eMMC partitions.
+
+# ---- loader (TPL/SPL): no NAND ----
+$c->unset('CONFIG_NAND');
+$c->unset('CONFIG_SPL_NAND_SUPPORT');
+$c->unset('CONFIG_TPL_NAND_SUPPORT');
+$c->unset('CONFIG_CMD_NAND');
+$c->unset('CONFIG_CMD_UBI');
+$c->unset('CONFIG_NAND_BRCMNAND');
+$c->unset('CONFIG_MTD_SPI_NAND');
+$c->unset('CONFIG_BCM_THERMAL');
+
+# ---- loader (TPL/SPL): no MMC in the loader, but leave CONFIG_MMC,
+# ---- CONFIG_DM_MMC and the SDHCI driver enabled for U-Boot proper.
+$c->unset('CONFIG_SPL_MMC_SUPPORT');
+$c->unset('CONFIG_TPL_MMC_SUPPORT');
+$c->unset('CONFIG_SPL_LIBDISK_SUPPORT');
+$c->unset('CONFIG_SPL_FS_EXT4');
+$c->unset('CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION');
+
+# ---- SPI NOR stack (includes the XMC ID table for the XM25QH128D,
+# ---- JEDEC ID 0x204018, same die as XM25QH128C) ----
+#
+# IMPORTANT: the TPL is built from the *U-Boot proper* .config, and
+# board_tpl.c gates both board_boot_order()'s SPINOR->BOOT_DEVICE_NOR
+# mapping and the tpl_spinor_load_image() SPL_LOAD_IMAGE_METHOD on
+# CONFIG_TPL_SPI_FLASH_SUPPORT.  Without it the TPL links NO loaders at all
+# and dies with "TPL: Unsupported Boot Device!".  It is set in the shared
+# spinor.arch too, but that arch only feeds the SPL config - so it must be
+# repeated here.
+$c->set('CONFIG_SPL_SPI_FLASH_SUPPORT','y');
+$c->set('CONFIG_TPL_SPI_FLASH_SUPPORT','y');
+$c->set('CONFIG_DM_SPI_FLASH','y');
+$c->set('CONFIG_SPI_FLASH','y');
+$c->set('CONFIG_SPI_FLASH_MACRONIX','y');
+$c->set('CONFIG_SPI_FLASH_WINBOND','y');
+$c->set('CONFIG_SPI_FLASH_GIGADEVICE','y');
+$c->set('CONFIG_SPI_FLASH_SPANSION','y');
+$c->set('CONFIG_SPI_FLASH_STMICRO','y');
+$c->set('CONFIG_SPI_FLASH_XMC','y');
+$c->set('CONFIG_SPI_FLASH_MTD','y');
+$c->set('CONFIG_CMD_SF','y');
+$c->set('CONFIG_CMD_SF_TEST','y');
+$c->set('CONFIG_CMD_SPI','y');
+$c->set('CONFIG_SPL_WATCHDOG_SUPPORT','y');
+
+# ---- networking: DHCP + TFTP in U-Boot proper ----
+#
+# The Ethernet driver (CONFIG_BCMBCA_XRDP_ETH) was already enabled by the
+# Kconfig default for BCM6856, but with no brcm,enet node in bcm96856.dts it
+# had nothing to bind to and U-Boot printed "Net: No ethernet found.".
+# The DTS now describes the two internal EGPHY ports, so only the userspace
+# side was missing: DHCP/hostname for convenience (TFTP is on already).
+$c->set('CONFIG_CMD_DHCP','y');
+$c->set('CONFIG_CMD_HOSTNAME','y');
+$c->set('CONFIG_CMD_LINK_LOCAL','y');
+$c->set('CONFIG_NETCONSOLE','y');
+$c->set('CONFIG_CONSOLE_MUX','y');
+$c->set('CONFIG_SYS_CONSOLE_IS_IN_ENV','y');
+
+# ---- hash commands, needed to verify eMMC/SPI write-back ----
+#
+# The hash *library* is already built (CONFIG_SHA1/SHA256/MD5 are all y) but
+# none of the hash *commands* were enabled, so there was no `md5sum` and no
+# `hash` in this U-Boot - only `crc32`.  Writing a 4 MiB CFE image back to the
+# eMMC is exactly the operation that must be verified, so enable them.
+$c->set('CONFIG_CMD_HASH','y');
+$c->set('CONFIG_HASH_VERIFY','y');
+
+# ---- ext4 in U-Boot proper ----
+#
+# The last eMMC partition (p15, /mnt/container) is ext4 and holds a copy of
+# every other partition.  Being able to mount it from U-Boot means the rescue
+# path needs NO network and NO USB stick: read the backup straight off the
+# eMMC and write it back with `mmc write`.
+#
+# The SPL already had CONFIG_SPL_FS_EXT4 unset above; the TPL does not pick up
+# ext4 (obj/uboot/tpl/fs/ contains only fs_internal.o) - verify that stays true
+# after this change, because a TPL that pulls in ext4fs is what caused the
+# §8.9 link failure.
+$c->set('CONFIG_CMD_EXT4','y');
+$c->set('CONFIG_CMD_EXT4_WRITE','y');
+$c->set('CONFIG_FAT_WRITE','y');
+
+#####   End of config changes #####
+$c->write();
