@@ -87,8 +87,10 @@ cp -n \${PREBUILT}/ext_timer.o \${BUILD_DIR}/bcmdrivers/opensource/char/timer/im
 cp -n \${PREBUILT}/clk_rst.o \${BUILD_DIR}/shared/opensource/pmc/impl1/ 2>/dev/null || true
 cp -n \${PREBUILT}/bcm_misc_hw_init_impl6.o \${BUILD_DIR}/shared/opensource/drivers/ 2>/dev/null || true
 for f in \${PREBUILT}/pmc_*.o; do
+    [ \"\$(basename \"\$f\")\" = \"pmc_drv.o\" ] && continue
     cp -n \"\$f\" \${BUILD_DIR}/shared/opensource/pmc/impl1/ 2>/dev/null || true
 done
+rm -f \${BUILD_DIR}/shared/opensource/pmc/impl1/pmc_drv.o
 "
 
 echo "[*] Configuring kernel with kernel_4.1_bcm6856.config..."
