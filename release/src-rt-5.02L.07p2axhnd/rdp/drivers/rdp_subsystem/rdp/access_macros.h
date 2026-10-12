@@ -34,7 +34,7 @@
 #define RDP_BLOCK_SIZE          0x1000000
 #define WAN_BLOCK_ADDRESS_MASK  0xFFFF
 
-#if defined(__ARMEL__) || defined(BCM_DSL_RDP)
+#if defined(__ARMEL__) || defined(__arm__) || defined(__aarch64__) || defined(BCM_DSL_RDP)
 #ifndef _BYTE_ORDER_LITTLE_ENDIAN_
 #define _BYTE_ORDER_LITTLE_ENDIAN_
 #endif
@@ -43,7 +43,7 @@
 #endif
 #endif
 
-#if defined(__ARMEL__) || defined(BCM_DSL_RDP)
+#if defined(__ARMEL__) || defined(__arm__) || defined(__aarch64__) || defined(BCM_DSL_RDP)
 #define SOC_BASE_ADDRESS        0x00000000
 #else
 #define SOC_BASE_ADDRESS		0xA0000000
