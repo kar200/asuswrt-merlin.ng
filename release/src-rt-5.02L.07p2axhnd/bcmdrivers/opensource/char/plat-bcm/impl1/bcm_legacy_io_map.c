@@ -63,10 +63,15 @@ int __init brcm_legacy_init(struct device_node *np)
         size_t map_size = PAGE_ALIGN(offset + size);
         void __iomem *vaddr;
 
+        /* Skip unclocked/power-gated coprocessor master port nodes and PCMBUS
+         * to prevent UBUS lockups when booting from U-Boot without CFE XRDP initialization.
+         */
         if (bcm_io_blocks[i].index == PCMBUS_IDX ||
-            bcm_io_blocks[i].index == MST_PORT_NODE_USB_IDX ||
-            bcm_io_blocks[i].address == 0x83038000) {
-            printk(KERN_INFO "Remap block %d: phys %016lx (idx %d) skipped (unused audio/usb bus)\n",
+            (bcm_io_blocks[i].index >= MST_PORT_NODE_PCIE0_IDX &&
+             bcm_io_blocks[i].index <= MST_PORT_NODE_QM_IDX) ||
+            bcm_io_blocks[i].address == 0x83038000 ||
+            bcm_io_blocks[i].address == 0x830a0000) {
+            printk(KERN_INFO "Remap block %d: phys %016lx (idx %d) skipped (unclocked master node/audio bus)\n",
                    i, phys, bcm_io_blocks[i].index);
             bcm_io_block_address[bcm_io_blocks[i].index] = 0;
             continue;
