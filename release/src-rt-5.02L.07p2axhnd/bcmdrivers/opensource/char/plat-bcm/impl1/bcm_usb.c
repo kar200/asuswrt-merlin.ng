@@ -1335,19 +1335,24 @@ static __init int bcm_add_usb_hosts(void)
          bcm_xhci_pdata.usb3_lpm_capable=1;
 
          /* add to platform devices */
+         printk("++++ Adding XHCI platform device (phys 0x%08x)...\n", (uint32_t)USB_XHCI_PHYS_BASE);
          xhci_dev = bcm_add_usb_host(CAP_TYPE_XHCI, 0, USB_XHCI_PHYS_BASE,
                  0x1000, INTERRUPT_ID_USB_XHCI, "xhci-hcd", &bcm_xhci_pdata);
      }
 #endif
+    printk("++++ Adding EHCI0 platform device...\n");
     ehci_dev = bcm_add_usb_host(CAP_TYPE_EHCI, 0, USB_EHCI_PHYS_BASE,
         0x100, INTERRUPT_ID_USB_EHCI, "ehci-platform", &bcm_ehci_pdata);
+    printk("++++ Adding OHCI0 platform device...\n");
     ohci_dev = bcm_add_usb_host(CAP_TYPE_OHCI, 0, USB_OHCI_PHYS_BASE,
         0x100, INTERRUPT_ID_USB_OHCI, "ohci-platform", &bcm_ohci_pdata);
 #if defined(CONFIG_BCM96858) || defined(CONFIG_BCM96846) || defined(CONFIG_BCM963158) || \
 	defined(CONFIG_BCM96856) || defined(CONFIG_BCM963178) || defined(CONFIG_BCM947622) || \
     defined(CONFIG_BCM96878) || defined(CONFIG_BCM96855)
+    printk("++++ Adding EHCI1 platform device...\n");
     ehci1_dev = bcm_add_usb_host(CAP_TYPE_EHCI, 1, USB_EHCI1_PHYS_BASE,
         0x100, INTERRUPT_ID_USB_EHCI1, "ehci-platform", &bcm_ehci1_pdata);
+    printk("++++ Adding OHCI1 platform device...\n");
     ohci1_dev = bcm_add_usb_host(CAP_TYPE_OHCI, 1, USB_OHCI1_PHYS_BASE,
         0x100, INTERRUPT_ID_USB_OHCI1, "ohci-platform", &bcm_ohci1_pdata);
 #endif
@@ -1358,10 +1363,13 @@ static __init int bcm_add_usb_hosts(void)
 #if defined(CONFIG_BCM94908) || defined(CONFIG_BCM96858) || defined(CONFIG_BCM96856) || \
          defined(CONFIG_BCM96846) || defined(CONFIG_BCM963158) || defined(CONFIG_BCM963178) || \
          defined(CONFIG_BCM947622) || defined(CONFIG_BCM96878) || defined(CONFIG_BCM96855)
+         printk("++++ Calling usb3_enable_recovery_pipe_reset...\n");
          usb3_enable_recovery_pipe_reset();
+         printk("++++ usb3_enable_recovery_pipe_reset done\n");
 #endif
      }
 #endif
+    printk("++++ bcm_add_usb_hosts completed successfully\n");
     return 0;
 }
 

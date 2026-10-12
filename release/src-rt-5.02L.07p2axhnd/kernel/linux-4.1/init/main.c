@@ -688,7 +688,7 @@ static void __init do_ctors(void)
 #endif
 }
 
-bool initcall_debug;
+bool initcall_debug = true;
 core_param(initcall_debug, initcall_debug, bool, 0644);
 
 #ifdef CONFIG_KALLSYMS
@@ -761,13 +761,13 @@ static int __init_or_module do_one_initcall_debug(initcall_t fn)
 	unsigned long long duration;
 	int ret;
 
-	printk(KERN_DEBUG "calling  %pF @ %i\n", fn, task_pid_nr(current));
+	printk(KERN_INFO ">> calling initcall %pF\n", fn);
 	calltime = ktime_get();
 	ret = fn();
 	rettime = ktime_get();
 	delta = ktime_sub(rettime, calltime);
 	duration = (unsigned long long) ktime_to_ns(delta) >> 10;
-	printk(KERN_DEBUG "initcall %pF returned %d after %lld usecs\n",
+	printk(KERN_INFO "<< initcall %pF returned %d (%lld usecs)\n",
 		 fn, ret, duration);
 
 	return ret;
@@ -842,6 +842,7 @@ static void __init do_initcall_level(int level)
 {
 	initcall_t *fn;
 
+	printk(KERN_INFO "=== do_initcall_level: level %d (%s) ===\n", level, initcall_level_names[level]);
 	strcpy(initcall_command_line, saved_command_line);
 	parse_args(initcall_level_names[level],
 		   initcall_command_line, __start___param,
