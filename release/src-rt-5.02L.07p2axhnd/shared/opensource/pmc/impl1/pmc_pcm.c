@@ -50,8 +50,12 @@ void pmc_pcm_power_up(void)
 #if defined(CONFIG_BCM96858) || defined(CONFIG_BCM963158) || defined(CONFIG_BCM96846) || defined(CONFIG_BCM96878) || defined(CONFIG_BCM96856) || defined(CONFIG_BCM963178) || defined(CONFIG_BCM947622) || defined(CONFIG_BCM96855)
    printk("Configuring PCM bus mux\n");
    /* This is needed to swap the endianness on the BUS */
-   *(unsigned int*)PCM_BUS_BASE = 0x5;
-   msleep(5);
+   if (bcm_io_block_address[PCMBUS_IDX]) {
+       *(volatile unsigned int*)PCM_BUS_BASE = 0x5;
+       msleep(5);
+   } else {
+       printk("PCM_BUS_BASE not mapped, skipping PCM bus mux config\n");
+   }
 #endif
 
 #if !(defined(CONFIG_BCM963158) || defined(CONFIG_BCM96846) || defined(CONFIG_BCM96878) || defined(CONFIG_BCM96856) || defined(CONFIG_BCM963178) || defined(CONFIG_BCM947622) || defined(CONFIG_BCM96855))
