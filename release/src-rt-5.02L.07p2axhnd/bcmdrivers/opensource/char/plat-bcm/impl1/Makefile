@@ -51,7 +51,9 @@ endif
 
 # mips platforms are still not modified to use these drivers
 ifeq ($(filter-out 63138 63148 4908 6858 63158 6846 6878 47622 47189 6856 63178 47622,${BRCM_CHIP}),)
+ifeq ($(wildcard $(src)/bcm_usb.c),)
 bcm_usb-objs := bcm_usb$(PRBM_EXT).o
+endif
 obj-$(CONFIG_USB_EHCI_HCD) += bcm_usb.o
 obj-$(CONFIG_SATA_AHCI_PLATFORM) += bcm_sata.o
 endif
