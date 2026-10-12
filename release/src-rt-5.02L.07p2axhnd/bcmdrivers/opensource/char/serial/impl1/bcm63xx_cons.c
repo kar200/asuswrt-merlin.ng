@@ -638,6 +638,10 @@ static void bcm63xx_console_putc(struct uart_port *port, int c)
 static void
 bcm63xx_console_write(struct console *co, const char *s, unsigned int count)
 {
+#if !defined(CONFIG_BCM_KF_PRINTK_INT_ENABLED) || !defined(CONFIG_BCM_PRINTK_INT_ENABLED)
+    unsigned long flags;
+    int locked = 0;
+#endif
     int idx = co->index;
     struct uart_port *port;
 
@@ -646,9 +650,6 @@ bcm63xx_console_write(struct console *co, const char *s, unsigned int count)
     port = &bcm63xx_ports[idx];
 
 #if !defined(CONFIG_BCM_KF_PRINTK_INT_ENABLED) || !defined(CONFIG_BCM_PRINTK_INT_ENABLED)
-    unsigned long flags;
-    int locked;
-
     local_irq_save(flags);
 
     if (port->sysrq) 
