@@ -85,7 +85,6 @@ cp -n \${PREBUILT}/bcmsfp_i2c.o \${BUILD_DIR}/bcmdrivers/opensource/char/i2c/chi
 cp -n \${PREBUILT}/opticaldet.o \${BUILD_DIR}/bcmdrivers/opensource/char/opticaldet/impl1/opticaldet_preb.o 2>/dev/null || true
 cp -n \${PREBUILT}/ext_timer.o \${BUILD_DIR}/bcmdrivers/opensource/char/timer/impl1/ext_timer_preb.o 2>/dev/null || true
 cp -n \${PREBUILT}/clk_rst.o \${BUILD_DIR}/shared/opensource/pmc/impl1/ 2>/dev/null || true
-cp -n \${PREBUILT}/bcm_misc_hw_init_impl6.o \${BUILD_DIR}/shared/opensource/drivers/ 2>/dev/null || true
 for f in \${PREBUILT}/pmc_*.o; do
     [ \"\$(basename \"\$f\")\" = \"pmc_drv.o\" ] && continue
     [ \"\$(basename \"\$f\")\" = \"pmc_usb.o\" ] && continue
@@ -93,6 +92,7 @@ for f in \${PREBUILT}/pmc_*.o; do
 done
 rm -f \${BUILD_DIR}/shared/opensource/pmc/impl1/pmc_drv.o
 rm -f \${BUILD_DIR}/shared/opensource/pmc/impl1/pmc_usb.o
+rm -f \${BUILD_DIR}/shared/opensource/drivers/bcm_misc_hw_init_impl6.o
 "
 
 echo "[*] Configuring kernel with kernel_4.1_bcm6856.config..."
