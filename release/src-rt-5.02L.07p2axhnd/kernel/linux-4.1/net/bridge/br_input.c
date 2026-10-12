@@ -416,6 +416,9 @@ drop:
 }
 EXPORT_SYMBOL_GPL(br_handle_frame_finish);
 
+int (*br_igmp_mc_forward)(int mark, struct sk_buff *skb) = NULL;
+EXPORT_SYMBOL(br_igmp_mc_forward);
+
 /* note: already called with rcu_read_lock */
 static int br_handle_local_finish(struct sock *sk, struct sk_buff *skb)
 {

@@ -88,6 +88,21 @@ int eee_enabled = 0;
 #endif
 EXPORT_SYMBOL(eee_enabled);
 
+#ifndef _CFE_
+struct {
+    int phy_index;
+    char link[16];
+    char speed[16];
+    char duplex[16];
+} phy_status = {
+    .phy_index = 0,
+    .link = "Down",
+    .speed = "Unknown",
+    .duplex = "Unknown"
+};
+EXPORT_SYMBOL(phy_status);
+#endif
+
 int phy_driver_set(phy_drv_t *phy_drv)
 {
     if (phy_drivers[phy_drv->phy_type])
@@ -299,10 +314,22 @@ void phy_dev_print_status(phy_dev_t *phy_dev)
             phy_dev->phy_drv->name, phy_dev_mii_type_to_str(phy_dev->mii_type), phy_dev->addr,
             phy_dev_speed_to_str(phy_dev->speed),
             phy_dev_duplex_to_str(phy_dev->duplex));
+#ifndef _CFE_
+        phy_status.phy_index = phy_dev->addr;
+        strlcpy(phy_status.link, "Up", sizeof(phy_status.link));
+        strlcpy(phy_status.speed, phy_dev_speed_to_str(phy_dev->speed), sizeof(phy_status.speed));
+        strlcpy(phy_status.duplex, phy_dev_duplex_to_str(phy_dev->duplex), sizeof(phy_status.duplex));
+#endif
     }
     else
     {
         printk("%s:%s:0x%x - Link Down\n", phy_dev->phy_drv->name, phy_dev_mii_type_to_str(phy_dev->mii_type), phy_dev->addr);
+#ifndef _CFE_
+        phy_status.phy_index = phy_dev->addr;
+        strlcpy(phy_status.link, "Down", sizeof(phy_status.link));
+        strlcpy(phy_status.speed, "Unknown", sizeof(phy_status.speed));
+        strlcpy(phy_status.duplex, "Unknown", sizeof(phy_status.duplex));
+#endif
 	}
 }
 EXPORT_SYMBOL(phy_dev_print_status);
