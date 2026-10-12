@@ -88,9 +88,11 @@ cp -n \${PREBUILT}/clk_rst.o \${BUILD_DIR}/shared/opensource/pmc/impl1/ 2>/dev/n
 cp -n \${PREBUILT}/bcm_misc_hw_init_impl6.o \${BUILD_DIR}/shared/opensource/drivers/ 2>/dev/null || true
 for f in \${PREBUILT}/pmc_*.o; do
     [ \"\$(basename \"\$f\")\" = \"pmc_drv.o\" ] && continue
+    [ \"\$(basename \"\$f\")\" = \"pmc_usb.o\" ] && continue
     cp -n \"\$f\" \${BUILD_DIR}/shared/opensource/pmc/impl1/ 2>/dev/null || true
 done
 rm -f \${BUILD_DIR}/shared/opensource/pmc/impl1/pmc_drv.o
+rm -f \${BUILD_DIR}/shared/opensource/pmc/impl1/pmc_usb.o
 "
 
 echo "[*] Configuring kernel with kernel_4.1_bcm6856.config..."
