@@ -602,6 +602,9 @@ static int _phy_dev_del(phy_dev_t *phy_dev)
 
 static int _phy_drv_init(phy_drv_t *phy_drv)
 {
+    if (!phy_drv->bus_drv)
+        phy_drv->bus_drv = bus_drv_get(BUS_TYPE_6846_INT);
+
     if (_phy_cfg(enabled_ports & 0xf))
     {
         printk("Failed to initialize the egphy driver\n");
@@ -610,8 +613,7 @@ static int _phy_drv_init(phy_drv_t *phy_drv)
 
     if (_phy_afe_all())
     {
-        printk("Failed to initialize the phy AFE settings\n");
-        return -1;
+        printk("Warning: Failed to initialize some phy AFE settings\n");
     }
 
     phy_drv->initialized = 1;
