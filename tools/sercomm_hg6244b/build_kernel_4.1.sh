@@ -70,6 +70,27 @@ if [ ! -f Kconfig.autogen ] || [ ! -f Makefile.autogen ]; then
 fi
 "
 
+echo "[*] Ensuring prebuilt objects and driver symlinks exist..."
+podman exec -u 0 "${CONTAINER}" bash -lc "
+set -e
+BUILD_DIR=/build/asuswrt-merlin/release/src-rt-5.02L.07p2axhnd
+PREBUILT=\${BUILD_DIR}/router-sysdep.rt-ax86u/hnd_extra/prebuilt
+
+ln -sfn impl69 \${BUILD_DIR}/bcmdrivers/broadcom/net/wl/bcm96856
+
+cp -n \${PREBUILT}/unimac_drv_impl1.o \${BUILD_DIR}/shared/opensource/drv/unimac/ 2>/dev/null || true
+cp -n \${PREBUILT}/mac_drv_unimac.o \${BUILD_DIR}/shared/opensource/drv/phys/ 2>/dev/null || true
+cp -n \${PREBUILT}/i2c_bcm6xxx.o \${BUILD_DIR}/bcmdrivers/opensource/char/i2c/busses/impl1/ 2>/dev/null || true
+cp -n \${PREBUILT}/bcmsfp_i2c.o \${BUILD_DIR}/bcmdrivers/opensource/char/i2c/chips/impl1/ 2>/dev/null || true
+cp -n \${PREBUILT}/opticaldet.o \${BUILD_DIR}/bcmdrivers/opensource/char/opticaldet/impl1/opticaldet_preb.o 2>/dev/null || true
+cp -n \${PREBUILT}/ext_timer.o \${BUILD_DIR}/bcmdrivers/opensource/char/timer/impl1/ext_timer_preb.o 2>/dev/null || true
+cp -n \${PREBUILT}/clk_rst.o \${BUILD_DIR}/shared/opensource/pmc/impl1/ 2>/dev/null || true
+cp -n \${PREBUILT}/bcm_misc_hw_init_impl6.o \${BUILD_DIR}/shared/opensource/drivers/ 2>/dev/null || true
+for f in \${PREBUILT}/pmc_*.o; do
+    cp -n \"\$f\" \${BUILD_DIR}/shared/opensource/pmc/impl1/ 2>/dev/null || true
+done
+"
+
 echo "[*] Configuring kernel with kernel_4.1_bcm6856.config..."
 podman exec -u 0 "${CONTAINER}" bash -lc "
 set -e

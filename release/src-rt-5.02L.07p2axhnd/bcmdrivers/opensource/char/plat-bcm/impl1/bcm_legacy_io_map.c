@@ -63,8 +63,12 @@ int __init brcm_legacy_init(struct device_node *np)
         size_t map_size = PAGE_ALIGN(offset + size);
         void __iomem *vaddr;
 
-        if (bcm_io_blocks[i].index == PCMBUS_IDX) {
-            printk(KERN_INFO "Remap block %d: phys %016lx (idx %d) skipped (unused audio bus)\n",
+        if (bcm_io_blocks[i].index == PCMBUS_IDX ||
+#if defined(MST_PORT_NODE_USB_IDX)
+            bcm_io_blocks[i].index == MST_PORT_NODE_USB_IDX ||
+#endif
+            0) {
+            printk(KERN_INFO "Remap block %d: phys %016lx (idx %d) skipped (unused audio/usb bus)\n",
                    i, phys, bcm_io_blocks[i].index);
             bcm_io_block_address[bcm_io_blocks[i].index] = 0;
             continue;
