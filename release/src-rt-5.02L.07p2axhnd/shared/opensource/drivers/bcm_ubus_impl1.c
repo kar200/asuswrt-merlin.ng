@@ -289,7 +289,8 @@ void ubus_cong_threshold_wr(int port_id, unsigned int val)
     {
         if (ub_mst_addr_map_tbl[i].port_id == port_id)
         {
-            ((MstPortNode*) ub_mst_addr_map_tbl[i].base )->port_cfg[DCM_UBUS_CONGESTION_THRESHOLD] = val;
+            if (ub_mst_addr_map_tbl[i].base)
+                ((MstPortNode*) ub_mst_addr_map_tbl[i].base )->port_cfg[DCM_UBUS_CONGESTION_THRESHOLD] = val;
             break;
         }
         i++;
@@ -1362,6 +1363,12 @@ static ssize_t ubus_tokens_get_proc(struct file *file, char *buff, size_t len, l
         volatile MstPortNode *master_reg = bcm_get_ubus_mst_addr(ub_mst_addr_map_tbl[i].port_id);
         int j = 0;
 
+        if (!master_reg)
+        {
+            i++;
+            continue;
+        }
+
         *offset += sprintf(buff + *offset, "\n%9s", enum_val_to_str(ub_mst_addr_map_tbl[i].port_id, ubus_port_id_to_str));
         while (ub_mst_addr_map_tbl[j].port_id != -1)
         {
@@ -1395,6 +1402,12 @@ static ssize_t ubus_decode_get_proc(struct file *file, char *buff, size_t len, l
     {
         MstPortNode *master_reg = bcm_get_ubus_mst_addr(ub_mst_addr_map_tbl[i].port_id);
         int win;
+
+        if (!master_reg)
+        {
+            i++;
+            continue;
+        }
 
         for (win = 0; win < 4; win++)
         {
