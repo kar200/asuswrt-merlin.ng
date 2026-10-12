@@ -1651,28 +1651,52 @@ void ubus_master_rte_cfg(void)
 
 static void write_reg_thr_sm(uint32_t ucbid, uint32_t addr, uint32_t data)
 {
+    int timeout = 50000;
     // check if response fifo is full
-    while( UBUSSYSTOP->ReadUcbStatus & 0x40000000);
+    while((UBUSSYSTOP->ReadUcbStatus & 0x40000000) && --timeout)
+        udelay(1);
+    if (!timeout) {
+        printk(KERN_WARNING "write_reg_thr_sm: ucbid %u status fifo full timeout\n", ucbid);
+        return;
+    }
 
     UBUSSYSTOP->UcbData = data;
     
     UBUSSYSTOP->UcbHdr = (addr/4) | (UCB_CMD_WR<<12) | (ucbid<<16) | (0x1<<24);
     
     // check if resp fifo has data
-    while( !(UBUSSYSTOP->ReadUcbStatus & 0x80000000 ) );
+    timeout = 50000;
+    while((!(UBUSSYSTOP->ReadUcbStatus & 0x80000000 )) && --timeout)
+        udelay(1);
+    if (!timeout) {
+        printk(KERN_WARNING "write_reg_thr_sm: ucbid %u wait response timeout\n", ucbid);
+        return;
+    }
   
     UBUSSYSTOP->ReadUcbHdr;
 }
 
 static uint32_t read_reg_thr_sm(uint32_t ucbid, uint32_t addr)
 {
+    int timeout = 50000;
     // check if response fifo is full
-    while( UBUSSYSTOP->ReadUcbStatus & 0x40000000);    
+    while((UBUSSYSTOP->ReadUcbStatus & 0x40000000) && --timeout)
+        udelay(1);
+    if (!timeout) {
+        printk(KERN_WARNING "read_reg_thr_sm: ucbid %u status fifo full timeout\n", ucbid);
+        return 0;
+    }
 
     UBUSSYSTOP->UcbHdr = (addr/4) | (UCB_CMD_RD<<12) | (ucbid<<16) | (0x1<<24);
 
     // check if resp fifo has data
-    while( !(UBUSSYSTOP->ReadUcbStatus & 0x80000000 ) );
+    timeout = 50000;
+    while((!(UBUSSYSTOP->ReadUcbStatus & 0x80000000 )) && --timeout)
+        udelay(1);
+    if (!timeout) {
+        printk(KERN_WARNING "read_reg_thr_sm: ucbid %u wait response timeout\n", ucbid);
+        return 0;
+    }
 
     UBUSSYSTOP->ReadUcbHdr;
 
@@ -1682,17 +1706,20 @@ static uint32_t read_reg_thr_sm(uint32_t ucbid, uint32_t addr)
 
 void ubus_deregister_port(int ucbid)
 {
+    int timeout = 5000;
     // Never play with invalid ubus id
     if (ucbid < 0) return;
 
     write_reg_thr_sm(ucbid, 0x1c, 0x1);
 
     // poll status bit for port unregistered
-    while ( read_reg_thr_sm(ucbid, 0x1c) != 0x1 );
+    while ((read_reg_thr_sm(ucbid, 0x1c) != 0x1) && --timeout)
+        udelay(10);
 }
 
 void ubus_register_port(int ucbid)
 {
+    int timeout = 5000;
     // Never play with invalid ubus id
     if (ucbid < 0) return;
 
@@ -1704,7 +1731,8 @@ void ubus_register_port(int ucbid)
     {
     write_reg_thr_sm(ucbid, 0x1c, 0x0);
     // poll status bit for port registered
-    while ( read_reg_thr_sm(ucbid, 0x1c) != 0x2 );
+    while ((read_reg_thr_sm(ucbid, 0x1c) != 0x2) && --timeout)
+        udelay(10);
     }
 #endif
 }

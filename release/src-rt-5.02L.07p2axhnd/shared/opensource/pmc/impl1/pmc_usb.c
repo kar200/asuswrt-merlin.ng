@@ -72,9 +72,13 @@ int pmc_usb_power_up(unsigned int usb_block)
 #elif defined(CONFIG_BCM96858) || defined(CONFIG_BCM96836) || defined(CONFIG_BCM96856)
     if( usb_block == PMC_USB_HOST_ALL)
     {
+        printk("pmc_usb_power_up: Powering on device PMB_ADDR_USB30_2X...\n");
         ret = PowerOnDevice(PMB_ADDR_USB30_2X);
+        printk("pmc_usb_power_up: PowerOnDevice ret=%d, registering SLV_USB (%d)...\n", ret, UCB_NODE_ID_SLV_USB);
         ubus_register_port(UCB_NODE_ID_SLV_USB);
+        printk("pmc_usb_power_up: registering MST_USB (%d)...\n", UCB_NODE_ID_MST_USB);
         ubus_register_port(UCB_NODE_ID_MST_USB);
+        printk("pmc_usb_power_up: UBUS registration complete\n");
     }
 #elif defined CONFIG_BCM96846
     if( usb_block == PMC_USB_HOST_ALL)

@@ -714,6 +714,7 @@ static int bcm_usb_host_hw_init_6855(void)
         printk(KERN_ERR "+++ Failed to Power Up USB Host\n");
         return -1;
     }
+    printk("++++ pmc_usb_power_up done\n");
 
     mdelay(1);
 
@@ -742,6 +743,7 @@ static int bcm_usb_host_hw_init_6855(void)
         }
     }
 
+    printk("++++ Configuring USB PHYs (usb3_enable=%d)...\n", usb3_enable);
     /*enable USB PHYs*/
     mdelay(1);
     USBH_CTRL->usb_pm &= ~(USB_PWRDWN);
@@ -749,6 +751,7 @@ static int bcm_usb_host_hw_init_6855(void)
 #if defined(CONFIG_USB_XHCI_PLATFORM) || defined(CONFIG_USB_XHCI_PLATFORM_MODULE)
     if(usb3_enable)
     {
+        printk("++++ Initializing USB3 / XHCI PHY settings...\n");
         /*enable SSC for usb3.0 */
         usb3_ssc_enable();
 
@@ -760,6 +763,7 @@ static int bcm_usb_host_hw_init_6855(void)
 
         USBH_CTRL->usb30_ctl1 |= PHY3_PLL_SEQ_START;
         USBH_CTRL->usb_pm |= XHC_SOFT_RESETB;
+        printk("++++ USB3 / XHCI PHY settings done\n");
     }
     else
 #endif/* defined(CONFIG_USB_XHCI_PLATFORM) */
@@ -769,6 +773,7 @@ static int bcm_usb_host_hw_init_6855(void)
     }
 
     /*adjust the default AFE settings for better eye diagrams */
+    printk("++++ Applying usb2_eye_fix...\n");
     usb2_eye_fix();
 
     /*initialize EHCI & OHCI settings*/
@@ -788,6 +793,7 @@ static int bcm_usb_host_hw_init_6855(void)
     }
 #endif
 
+    printk("++++ bcm_usb_host_hw_init_6856 complete\n");
     return 0;
 }
 
