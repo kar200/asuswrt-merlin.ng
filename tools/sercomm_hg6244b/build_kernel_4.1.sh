@@ -83,7 +83,8 @@ cp -n \${PREBUILT}/mac_drv_unimac.o \${BUILD_DIR}/shared/opensource/drv/phys/ 2>
 cp -n \${PREBUILT}/i2c_bcm6xxx.o \${BUILD_DIR}/bcmdrivers/opensource/char/i2c/busses/impl1/ 2>/dev/null || true
 cp -n \${PREBUILT}/bcmsfp_i2c.o \${BUILD_DIR}/bcmdrivers/opensource/char/i2c/chips/impl1/ 2>/dev/null || true
 cp -n \${PREBUILT}/opticaldet.o \${BUILD_DIR}/bcmdrivers/opensource/char/opticaldet/impl1/opticaldet_preb.o 2>/dev/null || true
-cp -n \${PREBUILT}/ext_timer.o \${BUILD_DIR}/bcmdrivers/opensource/char/timer/impl1/ext_timer_preb.o 2>/dev/null || true
+# ext_timer is compiled from bcm963xx_timer.c source
+rm -f \${BUILD_DIR}/bcmdrivers/opensource/char/timer/impl1/ext_timer_preb.o 2>/dev/null || true
 cp -n \${PREBUILT}/clk_rst.o \${BUILD_DIR}/shared/opensource/pmc/impl1/ 2>/dev/null || true
 for f in \${PREBUILT}/pmc_*.o; do
     [ \"\$(basename \"\$f\")\" = \"pmc_drv.o\" ] && continue
