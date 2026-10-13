@@ -36,6 +36,7 @@
 #include <asm/io.h>
 #include <bcmnetlink.h>
 #include <net/sock.h>
+#include <linux/etherdevice.h>
 
 #include <bcmtypes.h>
 #include <bcm_map_part.h>
@@ -261,7 +262,13 @@ void __init set_mac_info( void )
 
     ulNumMacAddrs=getNvram_ulNumMacAddrs();
 
-    if( ulNumMacAddrs > 0 && ulNumMacAddrs <= NVRAM_MAC_COUNT_MAX )
+    if( ulNumMacAddrs == 0 || ulNumMacAddrs > NVRAM_MAC_COUNT_MAX )
+    {
+        printk("WARNING - Invalid number of MAC addresses (%d) is configured, defaulting to 10.\n",
+               ulNumMacAddrs);
+        ulNumMacAddrs = 10;
+    }
+
     {
         unsigned long ulMacInfoSize =
             sizeof(MAC_INFO) + ((sizeof(MAC_ADDR_INFO)) * (ulNumMacAddrs-1));
@@ -273,13 +280,23 @@ void __init set_mac_info( void )
             memset( g_pMacInfo, 0x00, ulMacInfoSize );
             g_pMacInfo->ulNumMacAddrs = ulNumMacAddrs;
             getNvram_ucaBaseMacAddr( g_pMacInfo->ucaBaseMacAddr, NVRAM_MAC_ADDRESS_LEN);
+            if (is_zero_ether_addr(g_pMacInfo->ucaBaseMacAddr))
+            {
+                g_pMacInfo->ucaBaseMacAddr[0] = 0x02;
+                g_pMacInfo->ucaBaseMacAddr[1] = 0x10;
+                g_pMacInfo->ucaBaseMacAddr[2] = 0x18;
+                g_pMacInfo->ucaBaseMacAddr[3] = 0x00;
+                g_pMacInfo->ucaBaseMacAddr[4] = 0x00;
+                g_pMacInfo->ucaBaseMacAddr[5] = 0x01;
+                printk("Set default fallback base MAC: %02x:%02x:%02x:%02x:%02x:%02x\n",
+                       g_pMacInfo->ucaBaseMacAddr[0], g_pMacInfo->ucaBaseMacAddr[1],
+                       g_pMacInfo->ucaBaseMacAddr[2], g_pMacInfo->ucaBaseMacAddr[3],
+                       g_pMacInfo->ucaBaseMacAddr[4], g_pMacInfo->ucaBaseMacAddr[5]);
+            }
         }
         else
             printk("ERROR - Could not allocate memory for MAC data\n");
     }
-    else
-        printk("ERROR - Invalid number of MAC addresses (%d) is configured.\n",
-        ulNumMacAddrs);
 }
 
 static int does_nvram_data_support_gpon_params(void)
@@ -659,6 +676,18 @@ int kerSysGetMacAddresses( unsigned char *pucaMacAddr, unsigned int num_addresse
     unsigned long i = 0, j = 0, ulIdxId = 0;
 
     spin_lock(&macAddrLock);
+
+    if (!g_pMacInfo) {
+        printk("kerSysGetMacAddresses: WARNING: g_pMacInfo is NULL! Returning fallback MAC for ulId 0x%lx\n", ulId);
+        pucaMacAddr[0] = 0x02;
+        pucaMacAddr[1] = 0x10;
+        pucaMacAddr[2] = 0x18;
+        pucaMacAddr[3] = 0x00;
+        pucaMacAddr[4] = (ulId >> 8) & 0xff;
+        pucaMacAddr[5] = ulId & 0xff;
+        spin_unlock(&macAddrLock);
+        return 0;
+    }
 
     /* Start with the base address */
     memcpy( pucaMacAddr, g_pMacInfo->ucaBaseMacAddr, NVRAM_MAC_ADDRESS_LEN);

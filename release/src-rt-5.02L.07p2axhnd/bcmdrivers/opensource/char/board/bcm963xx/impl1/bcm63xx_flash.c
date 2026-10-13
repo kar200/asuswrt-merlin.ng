@@ -390,6 +390,20 @@ void __init kerSysEarlyFlashInit( void )
         else
             printk("Successfully initialized fallback Board ID: 968360BG\n");
     }
+
+    if (inMemNvramData.ulNumMacAddrs == 0 || inMemNvramData.ulNumMacAddrs > NVRAM_MAC_COUNT_MAX) {
+        inMemNvramData.ulNumMacAddrs = 10;
+        inMemNvramData.ucaBaseMacAddr[0] = 0x02;
+        inMemNvramData.ucaBaseMacAddr[1] = 0x10;
+        inMemNvramData.ucaBaseMacAddr[2] = 0x18;
+        inMemNvramData.ucaBaseMacAddr[3] = 0x00;
+        inMemNvramData.ucaBaseMacAddr[4] = 0x00;
+        inMemNvramData.ucaBaseMacAddr[5] = 0x01;
+        printk("Defaulted NVRAM ulNumMacAddrs to 10, base MAC: %02x:%02x:%02x:%02x:%02x:%02x\n",
+               inMemNvramData.ucaBaseMacAddr[0], inMemNvramData.ucaBaseMacAddr[1],
+               inMemNvramData.ucaBaseMacAddr[2], inMemNvramData.ucaBaseMacAddr[3],
+               inMemNvramData.ucaBaseMacAddr[4], inMemNvramData.ucaBaseMacAddr[5]);
+    }
 #if defined(CONFIG_BCM_VOICE_SUPPORT)
     if ((BpSetVoiceBoardId(inMemNvramData.szVoiceBoardId) != BP_SUCCESS)) {
         printk("\n*** Voice Board id is not initialized properly from '%s', falling back to 'LE9652_ZSI_IB' / '968360BG' ***\n\n",
